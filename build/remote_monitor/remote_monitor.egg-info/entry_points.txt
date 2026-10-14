@@ -1,2 +1,0 @@
-[console_scripts]
-remote_monitor_node = remote_monitor.remote_monitor_node:main

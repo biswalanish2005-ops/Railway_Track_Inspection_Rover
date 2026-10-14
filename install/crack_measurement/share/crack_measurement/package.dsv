@@ -1,9 +1,0 @@
-source;share/crack_measurement/hook/pythonpath.ps1
-source;share/crack_measurement/hook/pythonpath.dsv
-source;share/crack_measurement/hook/pythonpath.sh
-source;share/crack_measurement/hook/ament_prefix_path.ps1
-source;share/crack_measurement/hook/ament_prefix_path.dsv
-source;share/crack_measurement/hook/ament_prefix_path.sh
-source;../../build/crack_measurement/share/crack_measurement/hook/pythonpath_develop.ps1
-source;../../build/crack_measurement/share/crack_measurement/hook/pythonpath_develop.dsv
-source;../../build/crack_measurement/share/crack_measurement/hook/pythonpath_develop.sh

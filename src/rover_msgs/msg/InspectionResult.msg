@@ -9,3 +9,6 @@ float32 apparent_depth_mm
 string severity_rating
 string image_saved_path
 string rover_state
+float32 location_x
+float32 location_y
+string chainage_station

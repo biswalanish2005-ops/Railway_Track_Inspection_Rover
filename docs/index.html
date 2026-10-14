@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Railway Track Inspection Rover — Cloud Inspector Portal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚆</text></svg>">
+    <style>
+        :root {
+            --bg-base: #0a0e17;
+            --bg-card: #131b29;
+            --border: #202d42;
+            --accent: #0284c7;
+            --accent-glow: #38bdf8;
+            --text-main: #f1f5f9;
+            --text-muted: #8da2bb;
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: var(--bg-base); color: var(--text-main); padding: 18px; line-height: 1.5; }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 14px 22px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            border-bottom: 3px solid var(--accent-glow);
+            margin-bottom: 16px;
+        }
+        .header-title { display: flex; align-items: center; gap: 12px; }
+        .header h1 { font-size: 19px; font-weight: 800; color: var(--accent-glow); letter-spacing: 0.5px; }
+        .header-tag { font-size: 12px; background: rgba(56, 189, 248, 0.15); color: var(--accent-glow); padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+        
+        .connection-bar {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .conn-inputs { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 300px; }
+        .conn-inputs label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+        .conn-inputs input {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            flex: 1;
+            outline: none;
+        }
+        .conn-inputs input:focus { border-color: var(--accent-glow); }
+        .btn-conn { background: var(--accent); color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .btn-conn:hover { background: #0369a1; }
+        .btn-demo { background: #334155; color: #cbd5e1; border: 1px solid #475569; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; }
+        .btn-demo:hover { background: #475569; color: #fff; }
+
+        .badge { padding: 6px 14px; border-radius: 4px; font-weight: 700; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-patrolling { background: var(--success); color: #fff; }
+        .badge-holding { background: var(--danger); color: #fff; animation: pulse 1s infinite alternate; }
+        .badge-paused { background: var(--warning); color: #fff; }
+        .badge-demo { background: #6366f1; color: #fff; }
+        @keyframes pulse { from { opacity: 0.7; } to { opacity: 1; } }
+
+        .grid { display: grid; grid-template-columns: 2.3fr 1fr; gap: 18px; }
+        @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+
+        .card { background: var(--bg-card); padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+        .card-title { font-size: 14px; font-weight: 700; color: var(--text-muted); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+
+        .stream-wrap {
+            position: relative;
+            background: #000;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 2px solid #27354a;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .stream-wrap img, .stream-wrap canvas { width: 100%; height: auto; display: block; border-radius: 4px; }
+        
+        .stream-overlay-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(15, 23, 42, 0.88);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+        .stream-controls-corner { position: absolute; top: 14px; right: 14px; display: flex; gap: 6px; }
+        .btn-stream-switch { background: rgba(15, 23, 42, 0.88); color: #cbd5e1; border: 1px solid #334155; padding: 5px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.15s; }
+        .btn-stream-switch:hover { background: #1e293b; color: #fff; }
+
+        .stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1a2536; font-size: 13.5px; }
+        .stat-label { color: var(--text-muted); }
+        .stat-value { font-weight: 700; color: #f8fafc; }
+        .highlight { color: var(--accent-glow); }
+
+        .alert-box { background: #3b1114; border: 2px solid var(--danger); border-radius: 6px; padding: 14px; margin-top: 14px; display: none; }
+        .alert-title { color: #f87171; font-weight: 800; font-size: 14px; margin-bottom: 6px; }
+        .alert-body { font-size: 13px; color: #fca5a5; line-height: 1.45; }
+
+        .btn-group { display: flex; flex-direction: column; gap: 9px; margin-top: 8px; }
+        .btn { padding: 12px 16px; border: none; border-radius: 6px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: 0.15s; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-start { background: var(--success); color: #fff; }
+        .btn-start:hover { background: #15803d; }
+        .btn-stop { background: var(--warning); color: #fff; }
+        .btn-stop:hover { background: #b45309; }
+        .btn-reset { background: var(--accent); color: #fff; }
+        .btn-reset:hover { background: #0369a1; }
+        .btn-snap { background: #475569; color: #fff; }
+        .btn-snap:hover { background: #334155; }
+        .btn:active { transform: scale(0.98); }
+
+        .history-card { margin-top: 18px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #1a2536; }
+        th { color: var(--text-muted); font-size: 12px; font-weight: 700; text-transform: uppercase; background: #0e1522; }
+        .tag-risk-high { background: rgba(220, 38, 38, 0.2); color: #f87171; padding: 2px 8px; border-radius: 4px; font-weight: 700; border: 1px solid rgba(220, 38, 38, 0.4); }
+        .tag-risk-crit { background: rgba(239, 68, 68, 0.3); color: #ef4444; padding: 2px 8px; border-radius: 4px; font-weight: 800; border: 1px solid #ef4444; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-title">
+            <span style="font-size: 26px;">🚆</span>
+            <div>
+                <h1>AUTONOMOUS RAILWAY TRACK INSPECTION ROVER</h1>
+                <div style="font-size: 12px; color: var(--text-muted);">Real-Time ML Defect Detection &bull; Sony IMX708 Camera Module 3 &bull; ROS 2 Jazzy</div>
+            </div>
+        </div>
+        <div id="status-badge" class="badge badge-patrolling">STATE: PATROLLING</div>
+    </div>
+
+    <!-- Rover Connection Configuration Bar -->
+    <div class="connection-bar">
+        <div class="conn-inputs">
+            <label for="rover-url">Rover Target URL:</label>
+            <input type="text" id="rover-url" value="http://172.16.61.192:8080" placeholder="http://<ROVER_IP>:8080">
+            <button class="btn-conn" onclick="connectToRover()">CONNECT TO ROVER</button>
+            <button class="btn-demo" onclick="toggleDemoMode()" id="btn-demo-mode">RUN SIMULATED DEMO</button>
+        </div>
+        <div id="conn-status" style="font-size: 12.5px; font-weight: 700; color: #38bdf8;">
+            Mode: Auto-Detecting Live Rover...
+        </div>
+    </div>
+
+    <div class="grid">
+        <!-- Live Video & ML Defect Display -->
+        <div class="card">
+            <div class="card-title">
+                <span>LIVE CAMERA FEED &amp; CALIBRATED ML CRACK DETECTOR</span>
+                <span id="chainage-header" class="highlight">CH 00+00.00m</span>
+            </div>
+
+            <div class="stream-wrap">
+                <!-- Video Image (for Live Rover Stream) -->
+                <img id="camera-stream" src="" alt="Live Video Feed" style="display: none;">
+                <!-- Canvas Element (for Interactive Simulation & Fallback Stream) -->
+                <canvas id="track-canvas" width="1280" height="720"></canvas>
+
+                <div class="stream-overlay-badge" id="stream-overlay-badge">
+                    <span id="stream-dot" style="display:inline-block; width:8px; height:8px; background:#4ade80; border-radius:50%; animation: pulse 1.2s infinite alternate;"></span>
+                    <span id="stream-status-text">INITIALIZING CAMERA...</span>
+                </div>
+
+                <div class="stream-controls-corner">
+                    <button class="btn-stream-switch" id="btn-feed-mode" onclick="toggleFeedMode()">STREAM (MJPEG)</button>
+                    <button class="btn-stream-switch" onclick="triggerSnapshot()">📸 SNAPSHOT</button>
+                </div>
+            </div>
+
+            <div id="alert-banner" class="alert-box">
+                <div class="alert-title">🚨 REMOTE RAILWAY INSPECTOR DISPATCH</div>
+                <div id="alert-text" class="alert-body">
+                    Defect detected with Risk &gt; MODERATE. Rover holding stationary for 5.0 seconds. Coordinates and metrics transmitted to Remote Inspector.
+                </div>
+            </div>
+        </div>
+
+        <!-- Telemetry & Controls -->
+        <div>
+            <div class="card">
+                <div class="card-title">REMOTE ROVER CONTROLS</div>
+                <div class="btn-group">
+                    <button class="btn btn-start" onclick="sendRoverAction('start')">▶ START / RESUME PATROL</button>
+                    <button class="btn btn-stop" onclick="sendRoverAction('stop')">⏸ PAUSE / STOP ROVER</button>
+                    <button class="btn btn-reset" onclick="sendRoverAction('reset')">🔄 RESET CHAINAGE (0.00m)</button>
+                    <button class="btn btn-snap" onclick="triggerSnapshot()">📸 SAVE DEFECT SCREENSHOT</button>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-title">RAILWAY COORDINATE TELEMETRY</div>
+                <div class="stat-row"><span class="stat-label">Metric Chainage:</span><span id="tele-chainage" class="stat-value highlight">CH 00+00.00m</span></div>
+                <div class="stat-row"><span class="stat-label">Local Coordinates (X, Y):</span><span id="tele-coords" class="stat-value">X: +0.00m, Y: +0.00m</span></div>
+                <div class="stat-row"><span class="stat-label">Track Designation:</span><span class="stat-value">LINE-1 (UP-MAIN)</span></div>
+                <div class="stat-row"><span class="stat-label">Crawl Velocity:</span><span id="tele-speed" class="stat-value">0.20 m/s</span></div>
+                <div class="stat-row"><span class="stat-label">Motor System:</span><span id="tele-motor" class="stat-value">ENABLED</span></div>
+                <div class="stat-row"><span class="stat-label">Processing Rate:</span><span id="tele-fps" class="stat-value">30.0 FPS</span></div>
+            </div>
+
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-title">DEFECT RISK ASSESSMENT</div>
+                <div class="stat-row"><span class="stat-label">Defect Risk Rating:</span><span id="insp-risk" class="stat-value">CLEAR</span></div>
+                <div class="stat-row"><span class="stat-label">Confidence:</span><span id="insp-conf" class="stat-value">0.0%</span></div>
+                <div class="stat-row"><span class="stat-label">Estimated Length:</span><span id="insp-len" class="stat-value">0.0 mm</span></div>
+                <div class="stat-row"><span class="stat-label">Max Width:</span><span id="insp-wid" class="stat-value">0.0 mm</span></div>
+                <div class="stat-row"><span class="stat-label">Apparent Depth:</span><span id="insp-depth" class="stat-value">0.0 mm</span></div>
+                <div class="stat-row"><span class="stat-label">Station Coordinates:</span><span id="insp-loc" class="stat-value highlight">---</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Defect History Log Table -->
+    <div class="card history-card">
+        <div class="card-title">
+            <span>DEFECT INSPECTION EVENT LOG</span>
+            <span style="font-size: 12px; color: var(--accent-glow);">Remote Dispatches</span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Station Chainage</th>
+                    <th>Coordinates</th>
+                    <th>Defect Dimensions</th>
+                    <th>Confidence</th>
+                    <th>Risk Rating</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="defect-log-body">
+                <tr>
+                    <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 16px;">
+                        No critical defects detected yet. Patrol crawling along track at 0.20 m/s.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Configuration & State
+        let roverBaseUrl = window.location.origin.includes(':8080') ? window.location.origin : 'http://172.16.61.192:8080';
+        let isConnectedToRover = false;
+        let isDemoMode = false;
+        let feedMode = 'stream'; // 'stream' or 'poll'
+        let motorEnabled = true;
+        let roverLocationX = 0.0;
+        let speed = 0.20;
+        let isHolding = false;
+        let holdTimer = 0;
+        let fps = 30.0;
+        let defectHistory = [];
+
+        const streamImg = document.getElementById('camera-stream');
+        const trackCanvas = document.getElementById('track-canvas');
+        const ctx = trackCanvas.getContext('2d');
+        const streamStatusText = document.getElementById('stream-status-text');
+        const streamDot = document.getElementById('stream-dot');
+        const connStatus = document.getElementById('conn-status');
+        const btnFeedMode = document.getElementById('btn-feed-mode');
+
+        document.getElementById('rover-url').value = roverBaseUrl;
+
+        // Load Real Track Sample Images for High-Fidelity Simulation / Fallback
+        const trackImg1 = new Image();
+        trackImg1.src = 'images/img1.png';
+        const trackImg3 = new Image();
+        trackImg3.src = 'images/img3.png';
+
+        // Attempt connecting to the live Rover on page load
+        function connectToRover() {
+            const inputUrl = document.getElementById('rover-url').value.trim().replace(/\/+$/, '');
+            roverBaseUrl = inputUrl;
+            connStatus.innerText = 'Connecting to ' + roverBaseUrl + '...';
+            connStatus.style.color = '#38bdf8';
+
+            fetch(roverBaseUrl + '/api/telemetry', { mode: 'cors' })
+                .then(r => r.json())
+                .then(data => {
+                    isConnectedToRover = true;
+                    isDemoMode = false;
+                    connStatus.innerText = '🟢 Connected to Physical Rover (' + roverBaseUrl + ')';
+                    connStatus.style.color = '#4ade80';
+                    document.getElementById('btn-demo-mode').innerText = 'SWITCH TO DEMO';
+                    startLiveRoverFeed();
+                })
+                .catch(err => {
+                    console.warn('Physical rover not reachable at ' + roverBaseUrl + ':', err);
+                    connStatus.innerText = '🟡 Rover unreachable. Running Interactive Track Demo.';
+                    connStatus.style.color = '#fbbf24';
+                    startDemoMode();
+                });
+        }
+
+        function toggleDemoMode() {
+            if (isDemoMode) {
+                connectToRover();
+            } else {
+                startDemoMode();
+            }
+        }
+
+        function startDemoMode() {
+            isConnectedToRover = false;
+            isDemoMode = true;
+            connStatus.innerText = '🟡 Interactive Real-Time Track Inspection Simulation';
+            connStatus.style.color = '#fbbf24';
+            document.getElementById('btn-demo-mode').innerText = 'TRY CONNECT TO ROVER';
+            streamImg.style.display = 'none';
+            trackCanvas.style.display = 'block';
+            streamStatusText.innerText = 'DEMO STREAM (30 FPS)';
+            streamDot.style.background = '#fbbf24';
+        }
+
+        function startLiveRoverFeed() {
+            trackCanvas.style.display = 'none';
+            streamImg.style.display = 'block';
+            if (feedMode === 'stream') {
+                streamImg.src = roverBaseUrl + '/video_feed?t=' + Date.now();
+                streamStatusText.innerText = 'LIVE ROVER MJPEG (30 FPS)';
+                streamDot.style.background = '#4ade80';
+            } else {
+                startPolling();
+            }
+        }
+
+        function toggleFeedMode() {
+            if (feedMode === 'stream') {
+                feedMode = 'poll';
+                btnFeedMode.innerText = 'POLL (FRAME)';
+                if (isConnectedToRover) startPolling();
+            } else {
+                feedMode = 'stream';
+                btnFeedMode.innerText = 'STREAM (MJPEG)';
+                if (isConnectedToRover) startLiveRoverFeed();
+            }
+        }
+
+        function startPolling() {
+            if (!isConnectedToRover) return;
+            function fetchFrame() {
+                if (feedMode !== 'poll' || !isConnectedToRover) return;
+                const nextImg = new Image();
+                nextImg.onload = function() {
+                    streamImg.src = nextImg.src;
+                    streamStatusText.innerText = 'LIVE POLLING (25 FPS)';
+                    streamDot.style.background = '#4ade80';
+                    setTimeout(fetchFrame, 40);
+                };
+                nextImg.onerror = function() {
+                    setTimeout(fetchFrame, 600);
+                };
+                nextImg.src = roverBaseUrl + '/api/frame.jpg?t=' + Date.now();
+            }
+            fetchFrame();
+        }
+
+        streamImg.onerror = function() {
+            if (isConnectedToRover && feedMode === 'stream') {
+                console.warn('MJPEG stream drop. Falling back to high-speed frame polling...');
+                toggleFeedMode();
+            }
+        };
+
+        // Telemetry Update Loop
+        function updateTelemetry() {
+            if (isConnectedToRover) {
+                fetch(roverBaseUrl + '/api/telemetry', { mode: 'cors' })
+                    .then(r => r.json())
+                    .then(data => {
+                        applyTelemetryData(data);
+                    })
+                    .catch(() => {
+                        connStatus.innerText = '🔴 Rover connection dropped. Reconnecting...';
+                        connStatus.style.color = '#f87171';
+                    });
+            } else if (isDemoMode) {
+                simulateRoverStep();
+            }
+        }
+
+        function applyTelemetryData(data) {
+            document.getElementById('tele-chainage').innerText = data.chainage;
+            document.getElementById('chainage-header').innerText = data.chainage;
+            document.getElementById('tele-coords').innerText = data.coordinates;
+            document.getElementById('tele-speed').innerText = data.speed.toFixed(2) + ' m/s';
+            document.getElementById('tele-motor').innerText = data.motor_enabled ? 'ENABLED' : 'PAUSED';
+            document.getElementById('tele-fps').innerText = data.fps.toFixed(1) + ' FPS';
+
+            const badge = document.getElementById('status-badge');
+            badge.innerText = 'STATE: ' + data.state;
+            badge.className = 'badge ' + (data.state.includes('HOLDING') ? 'badge-holding' : (data.motor_enabled ? 'badge-patrolling' : 'badge-paused'));
+
+            const alertBanner = document.getElementById('alert-banner');
+            const alertText = document.getElementById('alert-text');
+            if (data.last_alert) {
+                const a = data.last_alert;
+                document.getElementById('insp-risk').innerText = a.risk + ' DEFECT';
+                document.getElementById('insp-conf').innerText = (a.conf * 100).toFixed(1) + '%';
+                document.getElementById('insp-len').innerText = a.length_mm.toFixed(1) + ' mm';
+                document.getElementById('insp-wid').innerText = a.width_mm.toFixed(1) + ' mm';
+                document.getElementById('insp-depth').innerText = a.depth_mm.toFixed(1) + ' mm';
+                document.getElementById('insp-loc').innerText = a.chainage;
+
+                if (a.active) {
+                    alertBanner.style.display = 'block';
+                    alertText.innerHTML = '<strong>' + a.risk + ' DEFECT AT ' + a.chainage + ' (' + a.coordinates + ')</strong><br>' +
+                        'Dimensions: ' + a.length_mm.toFixed(1) + 'mm L &times; ' + a.width_mm.toFixed(1) + 'mm W. Holding 5.0s for Remote Inspector. Resuming patrol automatically.';
+                    logDefectEvent(a);
+                } else {
+                    alertBanner.style.display = 'none';
+                }
+            }
+        }
+
+        // Send Control Command to Physical Rover or Local State
+        function sendRoverAction(action) {
+            if (isConnectedToRover) {
+                fetch(roverBaseUrl + '/api/control?action=' + action, { method: 'POST', mode: 'cors' })
+                    .then(r => r.json())
+                    .then(res => console.log('Action response:', res));
+            } else {
+                if (action === 'start') motorEnabled = true;
+                if (action === 'stop') motorEnabled = false;
+                if (action === 'reset') roverLocationX = 0.0;
+            }
+        }
+
+        function triggerSnapshot() {
+            if (isConnectedToRover) {
+                sendRoverAction('snapshot');
+                alert('📸 Snapshot capture saved on Rover.');
+            } else {
+                const link = document.createElement('a');
+                link.download = 'rover_defect_snapshot_' + Date.now() + '.png';
+                link.href = trackCanvas.toDataURL();
+                link.click();
+            }
+        }
+
+        function logDefectEvent(defect) {
+            const key = defect.chainage + defect.risk;
+            if (defectHistory.some(d => d.key === key)) return;
+            defectHistory.unshift({
+                key: key,
+                time: new Date().toLocaleTimeString(),
+                chainage: defect.chainage,
+                coords: defect.coordinates,
+                dims: defect.length_mm.toFixed(1) + ' &times; ' + defect.width_mm.toFixed(1) + ' mm',
+                conf: (defect.conf * 100).toFixed(1) + '%',
+                risk: defect.risk
+            });
+            if (defectHistory.length > 8) defectHistory.pop();
+
+            const tbody = document.getElementById('defect-log-body');
+            tbody.innerHTML = defectHistory.map(d => `
+                <tr>
+                    <td>${d.time}</td>
+                    <td class="highlight"><strong>${d.chainage}</strong></td>
+                    <td>${d.coords}</td>
+                    <td>${d.dims}</td>
+                    <td>${d.conf}</td>
+                    <td><span class="${d.risk === 'CRITICAL' ? 'tag-risk-crit' : 'tag-risk-high'}">${d.risk}</span></td>
+                    <td style="color: #4ade80;">TRANSMITTED</td>
+                </tr>
+            `).join('');
+        }
+
+        // Real-Time Canvas Simulation
+        let simFrame = 0;
+        function simulateRoverStep() {
+            if (motorEnabled && !isHolding) {
+                roverLocationX += speed * 0.4;
+            }
+
+            const km = Math.floor(roverLocationX / 1000);
+            const m = (roverLocationX % 1000).toFixed(2);
+            const chainageStr = `CH ${km.toString().padStart(2, '0')}+${m.padStart(5, '0')}m`;
+            const coordStr = `X: +${roverLocationX.toFixed(2)}m, Y: +0.00m`;
+
+            // Trigger simulated slit defect every ~3.5 meters
+            const isNearDefect = (roverLocationX % 3.5) < 0.25 && roverLocationX > 0.5;
+            let currentDefect = null;
+
+            if (isNearDefect && !isHolding) {
+                isHolding = true;
+                holdTimer = 5.0; // 5.0s hold
+                currentDefect = {
+                    risk: 'HIGH',
+                    conf: 0.94,
+                    length_mm: 36.4,
+                    width_mm: 3.2,
+                    depth_mm: 2.8,
+                    chainage: chainageStr,
+                    coordinates: coordStr,
+                    active: true
+                };
+            } else if (isHolding) {
+                holdTimer -= 0.4;
+                if (holdTimer <= 0) {
+                    isHolding = false;
+                } else {
+                    currentDefect = {
+                        risk: 'HIGH',
+                        conf: 0.94,
+                        length_mm: 36.4,
+                        width_mm: 3.2,
+                        depth_mm: 2.8,
+                        chainage: chainageStr,
+                        coordinates: coordStr,
+                        active: true
+                    };
+                }
+            }
+
+            const simData = {
+                state: isHolding ? `HOLDING [${holdTimer.toFixed(1)}s]` : (motorEnabled ? 'PATROLLING' : 'PAUSED'),
+                speed: (motorEnabled && !isHolding) ? speed : 0.0,
+                motor_enabled: motorEnabled,
+                chainage: chainageStr,
+                coordinates: coordStr,
+                location_x: roverLocationX,
+                fps: 30.0,
+                last_alert: currentDefect
+            };
+
+            applyTelemetryData(simData);
+            renderCanvasFrame(simData, isNearDefect || isHolding);
+        }
+
+        function renderCanvasFrame(data, defectActive) {
+            simFrame++;
+            const w = trackCanvas.width;
+            const h = trackCanvas.height;
+
+            // Draw Background Track from image or synthetic rail
+            if (trackImg1.complete && trackImg1.naturalWidth > 0) {
+                ctx.drawImage(trackImg1, 0, 0, w, h);
+            } else {
+                ctx.fillStyle = '#1a1f2c';
+                ctx.fillRect(0, 0, w, h);
+                // Rail lines
+                ctx.fillStyle = '#64748b';
+                ctx.fillRect(w * 0.2, 0, 40, h);
+                ctx.fillRect(w * 0.75, 0, 40, h);
+            }
+
+            // Darken slightly for contrast
+            ctx.fillStyle = 'rgba(10, 15, 25, 0.2)';
+            ctx.fillRect(0, 0, w, h);
+
+            // Rail Lane Search ROI overlay
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([8, 6]);
+            ctx.strokeRect(w * 0.12, h * 0.15, w * 0.76, h * 0.80);
+            ctx.setLineDash([]);
+
+            // Draw Defect Bounding Box if detected
+            if (defectActive) {
+                const boxX = w * 0.42;
+                const boxY = h * 0.48;
+                const boxW = 160;
+                const boxH = 55;
+
+                // Box
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 3;
+                ctx.strokeRect(boxX, boxY, boxW, boxH);
+
+                // Risk Tag
+                ctx.fillStyle = '#ef4444';
+                ctx.fillRect(boxX, boxY - 26, 210, 26);
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 14px monospace';
+                ctx.fillText('HIGH DEFECT: 94.2%', boxX + 6, boxY - 8);
+
+                // Dimension Annotation
+                ctx.fillStyle = '#f87171';
+                ctx.font = '12.5px monospace';
+                ctx.fillText('36.4mm L x 3.2mm W', boxX, boxY + boxH + 18);
+            }
+
+            // Top HUD Banner
+            ctx.fillStyle = 'rgba(12, 16, 25, 0.88)';
+            ctx.fillRect(0, 0, w, 44);
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 15px monospace';
+            ctx.fillText(`RAILWAY INSPECTION | ${data.chainage} | ${data.coordinates}`, 18, 28);
+
+            ctx.fillStyle = data.state.includes('HOLDING') ? '#ef4444' : '#4ade80';
+            ctx.fillText(`[${data.state}]`, w - 240, 28);
+
+            // Bottom Status Bar
+            ctx.fillStyle = 'rgba(12, 16, 25, 0.88)';
+            ctx.fillRect(0, h - 34, w, 34);
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '13px monospace';
+            ctx.fillText(`FPS: 30.0 | Frame: ${simFrame.toString().padStart(5, '0')} | Speed: ${data.speed.toFixed(2)} m/s | Camera: Sony IMX708`, 18, h - 12);
+        }
+
+        // Initialize connection check & telemetry interval
+        connectToRover();
+        setInterval(updateTelemetry, 400);
+    </script>
+</body>
+</html>

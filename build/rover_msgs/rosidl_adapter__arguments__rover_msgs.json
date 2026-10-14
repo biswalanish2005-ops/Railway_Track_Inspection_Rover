@@ -1,9 +1,0 @@
-{
-  "package_name": "rover_msgs",
-  "non_idl_tuples": [
-    "/home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs:msg/RoverState.msg",
-    "/home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs:msg/CrackDetection.msg",
-    "/home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs:msg/InspectionResult.msg",
-    "/home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs:srv/EmergencyStop.srv"
-  ]
-}

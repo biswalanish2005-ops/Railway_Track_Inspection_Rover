@@ -1,1 +1,0 @@
-/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs/rosidl_generator_cpp/rover_msgs/srv/detail/emergency_stop__struct.hpp

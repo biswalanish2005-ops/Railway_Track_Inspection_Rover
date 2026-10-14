@@ -6,3 +6,6 @@ bool emergency_stop_active
 bool motor_enabled
 bool watchdog_active
 string status_message
+float32 location_x
+float32 location_y
+string chainage_station

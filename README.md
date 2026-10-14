@@ -1,5 +1,13 @@
 # Autonomous Railway Track Inspection Rover
 
+[![GitHub Pages](https://img.shields.io/badge/Live%20Web%20Dashboard-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://biswalanish2005-ops.github.io/Railway_Track_Inspection_Rover/)
+[![ROS 2](https://img.shields.io/badge/ROS%202-Jazzy%20Jalisco-22314E?style=for-the-badge&logo=ros)](https://docs.ros.org/en/jazzy/)
+[![Platform](https://img.shields.io/badge/Hardware-Raspberry%20Pi%205-C51A4A?style=for-the-badge&logo=raspberrypi)](https://www.raspberrypi.com/products/raspberry-pi-5/)
+
+> 🌐 **Live Cloud Inspection Portal**: [https://biswalanish2005-ops.github.io/Railway_Track_Inspection_Rover/](https://biswalanish2005-ops.github.io/Railway_Track_Inspection_Rover/)
+>
+> 🚆 **Local Headless Rover IP**: `http://172.16.61.192:8080/` (or `http://student-desktop.local:8080/`)
+
 An autonomous, ROS 2 Jazzy-based robotics software and hardware platform for real-time railway rail crack detection, IPM perspective-calibrated dimension measurement, persistent inspection record logging, and web-based remote monitoring.
 
 ---

@@ -1,2 +1,0 @@
-[console_scripts]
-crack_measurement_node = crack_measurement.crack_measurement_node:main

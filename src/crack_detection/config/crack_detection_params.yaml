@@ -1,7 +1,16 @@
 /**:
   ros__parameters:
-    confidence_threshold: 0.75       # Minimum detection confidence threshold
+    confidence_threshold: 0.65       # Minimum detection confidence threshold
     detection_timeout: 1.0           # Seconds before clearing crack alert
     minimum_crack_size_pixels: 15.0  # Minimum crack pixel bounding box size
+    rail_physical_width_mm: 65.0     # Reference physical track plate width in mm
+    mm_per_pixel: 0.35               # Calibrated scale factor (mm/pixel)
     model_path: ""                   # Optional custom ONNX model path
-    use_simulated_detector: true     # Simulation/verification mode
+    use_simulated_detector: false    # Real Calibrated ML/CV Inference Engine
+
+    # Track ROI & Steel Rail Lateral Bands (Normalized 0.0 - 1.0)
+    track_y_min_ratio: 0.08          # Exclude upper background above track
+    left_rail_x_min: 0.08            # Left rail plate lateral boundaries
+    left_rail_x_max: 0.45
+    right_rail_x_min: 0.55           # Right rail plate lateral boundaries
+    right_rail_x_max: 0.88

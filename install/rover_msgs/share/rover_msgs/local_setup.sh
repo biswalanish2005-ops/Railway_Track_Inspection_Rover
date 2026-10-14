@@ -1,1 +1,0 @@
-/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs/ament_cmake_environment_hooks/local_setup.sh

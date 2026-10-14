@@ -1,0 +1,23 @@
+# Build and ROS 2 install artifacts
+build/
+install/
+log/
+
+# Python bytecode and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+
+# Runtime and inspection logs
+inspection/
+*.log
+.lgd-*
+
+# Local IDE and editor configurations
+.vscode/
+.idea/
+*.swp
+*~

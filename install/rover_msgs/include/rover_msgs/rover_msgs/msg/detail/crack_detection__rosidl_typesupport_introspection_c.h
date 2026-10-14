@@ -1,1 +1,0 @@
-/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs/rosidl_typesupport_introspection_c/rover_msgs/msg/detail/crack_detection__rosidl_typesupport_introspection_c.h

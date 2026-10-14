@@ -43,22 +43,30 @@ class L298NMotorDriver:
         self._initialized = False
 
         if HAS_LGPIO:
-            try:
-                self._chip = lgpio.gpiochip_open(0)
-                # Claim direction output pins
-                for pin in [self._in1, self._in2, self._in3, self._in4]:
-                    lgpio.gpio_claim_output(self._chip, pin, 0)
-                # Claim PWM enable pins
-                lgpio.gpio_claim_output(self._chip, self._ena, 0)
-                lgpio.gpio_claim_output(self._chip, self._enb, 0)
-                self._initialized = True
-                self._logger.info(
-                    f"Successfully initialized L298N GPIO via lgpio on RPi 5 "
-                    f"(ENA={self._ena}, ENB={self._enb}, IN1-4={self._in1},{self._in2},{self._in3},{self._in4})"
-                )
-            except Exception as e:
-                self._logger.warn(f"lgpio initialization deferred: {e}")
-                self._initialized = False
+            for chip_num in [4, 0]:
+                try:
+                    self._chip = lgpio.gpiochip_open(chip_num)
+                    break
+                except Exception:
+                    continue
+            if self._chip is not None:
+                try:
+                    # Claim direction output pins
+                    for pin in [self._in1, self._in2, self._in3, self._in4]:
+                        lgpio.gpio_claim_output(self._chip, pin, 0)
+                    # Claim PWM enable pins
+                    lgpio.gpio_claim_output(self._chip, self._ena, 0)
+                    lgpio.gpio_claim_output(self._chip, self._enb, 0)
+                    self._initialized = True
+                    self._logger.info(
+                        f"Successfully initialized L298N GPIO via lgpio on RPi 5 "
+                        f"(chip={self._chip}, ENA={self._ena}, ENB={self._enb}, IN1-4={self._in1},{self._in2},{self._in3},{self._in4})"
+                    )
+                except Exception as e:
+                    self._logger.warn(f"lgpio pin claiming failed: {e}")
+                    self._initialized = False
+            else:
+                self._logger.warn("Failed to open gpiochip (tried 4 and 0). Running in dry-run mode.")
         else:
             self._logger.warn("lgpio library not found. Running in dry-run hardware mode.")
 
@@ -83,7 +91,12 @@ class L298NMotorDriver:
         if not self._initialized or self._chip is None:
             return
 
-        speed_pct = abs(duty) * 100.0  # 0 to 100%
+        if abs(duty) > 0.001:
+            # Map normalized duty to PWM percentage with starting torque floor (45% - 100%)
+            speed_pct = 45.0 + abs(duty) * 55.0
+            speed_pct = min(100.0, max(0.0, speed_pct))
+        else:
+            speed_pct = 0.0
 
         if duty > 0.001:
             lgpio.gpio_write(self._chip, in_a, 1)

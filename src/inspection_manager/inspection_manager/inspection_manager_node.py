@@ -2,7 +2,9 @@
 Inspection Manager Node for Railway Inspection Rover.
 
 Orchestrates the automatic crack inspection workflow:
-MOVING -> CRACK DETECTED -> CONTROLLED STOP -> STATIONARY CAPTURE & MEASUREMENT -> REPORT & SAVE -> RESUME.
+PATROLLING (SEARCHING) -> CRACK DETECTED (RISK > MODERATE) -> CONTROLLED STOP ->
+STATIONARY INSPECTION & MEASUREMENT -> TRANSMIT LOCATION TO REMOTE INSPECTOR ->
+AUTOMATICALLY RESUME PATROL.
 """
 
 import time
@@ -19,9 +21,10 @@ class InspectionManagerNode(Node):
         super().__init__("inspection_manager_node")
 
         # Declare Parameters
-        self.declare_parameter("inspection_hold_duration_sec", 3.0)
+        self.declare_parameter("inspection_hold_duration_sec", 5.0)
         self.declare_parameter("auto_resume_after_inspection", True)
-        self.declare_parameter("inspection_speed", 0.2)
+        self.declare_parameter("inspection_speed", 0.20)
+        self.declare_parameter("detection_cooldown_sec", 5.0)
 
         # Retrieve Parameters
         self._hold_duration = float(
@@ -31,14 +34,23 @@ class InspectionManagerNode(Node):
             self.get_parameter("auto_resume_after_inspection").value
         )
         self._crawl_speed = float(self.get_parameter("inspection_speed").value)
+        self._cooldown_duration = float(
+            self.get_parameter("detection_cooldown_sec").value
+        )
 
-        # Internal Workflow State
+        # Workflow State
         self._manager_state = "IDLE"  # IDLE, SEARCHING, SLOWING, INSPECTING, RESUMING
-        self._last_detection_time = 0.0
         self._inspection_start_time = 0.0
+        self._last_alert_time = 0.0
         self._is_e_stopped = False
 
-        # ROS 2 Subscribers
+        # Latest Telemetry & Defect Tracking
+        self._current_location_x = 0.0
+        self._current_location_y = 0.0
+        self._current_chainage = "CH 00+00.00m"
+        self._pending_alert = None
+
+        # Subscribers
         self._rover_state_sub = self.create_subscription(
             RoverState, "/rover_state", self._rover_state_callback, 10
         )
@@ -49,37 +61,68 @@ class InspectionManagerNode(Node):
             InspectionResult, "/inspection_result", self._result_callback, 10
         )
 
-        # ROS 2 Motion Publisher
+        # Motion Publisher
         self._cmd_vel_pub = self.create_publisher(Twist, "/cmd_vel", 10)
 
         # Control Loop Timer (10 Hz)
         self.create_timer(0.1, self._workflow_loop)
 
         self.get_logger().info(
-            f"Inspection Manager Node initialized (Crawl speed: {self._crawl_speed}m/s, Hold: {self._hold_duration}s)"
+            f"Inspection Manager initialized (Speed: {self._crawl_speed}m/s, Hold: {self._hold_duration}s, Auto-Resume: {self._auto_resume})"
         )
 
     def _rover_state_callback(self, msg: RoverState) -> None:
-        """Track e-stop safety state."""
+        """Track safety and coordinate state."""
         self._is_e_stopped = msg.emergency_stop_active
+        self._current_location_x = float(msg.location_x)
+        self._current_location_y = float(msg.location_y)
+        if msg.chainage_station:
+            self._current_chainage = msg.chainage_station
 
     def _crack_callback(self, msg: CrackDetection) -> None:
         """Handle incoming crack detection triggers."""
         if self._is_e_stopped:
             return
 
-        if msg.crack_detected and msg.confidence >= 0.75:
-            if self._manager_state == "SEARCHING":
-                self.get_logger().warn(
-                    f"[INSPECTION TRIGGERED] High-confidence crack detected ({msg.confidence*100:.1f}%). Initiating controlled stop..."
+        now = time.time()
+        # Cooldown guard to avoid repeated stops on the same physical crack
+        if (now - self._last_alert_time) < self._cooldown_duration:
+            return
+
+        if msg.crack_detected and msg.confidence >= 0.65:
+            # Check if crack risk calculated is more than moderate (HIGH or CRITICAL)
+            is_more_than_moderate = msg.severity_label in ("HIGH", "CRITICAL")
+
+            if is_more_than_moderate:
+                if self._manager_state == "SEARCHING":
+                    self.get_logger().warn(
+                        f"🚨 [CRACK DETECTED — RISK > MODERATE] "
+                        f"Severity: {msg.severity_label} | Conf: {msg.confidence*100:.1f}% | "
+                        f"Dimensions: {msg.estimated_length_mm:.1f}mm x {msg.estimated_width_mm:.1f}mm. "
+                        f"Initiating controlled stop to transmit coordinates..."
+                    )
+                    self._manager_state = "SLOWING"
+                    self._inspection_start_time = now
+                    self._last_alert_time = now
+                    self._pending_alert = {
+                        "severity": msg.severity_label,
+                        "conf": msg.confidence,
+                        "location_x": self._current_location_x,
+                        "location_y": self._current_location_y,
+                        "chainage": self._current_chainage,
+                        "length_mm": msg.estimated_length_mm,
+                        "width_mm": msg.estimated_width_mm,
+                        "depth_mm": msg.estimated_depth_mm,
+                    }
+            else:
+                self.get_logger().info(
+                    f"ℹ️ [MINOR/MODERATE DEFECT LOGGED] Severity: {msg.severity_label} at {self._current_chainage}. Continuing normal patrol."
                 )
-                self._manager_state = "SLOWING"
-                self._inspection_start_time = time.time()
 
     def _result_callback(self, msg: InspectionResult) -> None:
         """Handle completed inspection measurement payload."""
         self.get_logger().info(
-            f"[INSPECTION RECORDED] ID: {msg.inspection_id} | Rating: {msg.severity_rating} | Length: {msg.crack_length_mm:.1f}mm"
+            f"✅ [INSPECTION LOGGED] ID: {msg.inspection_id} | Location: {msg.chainage_station} | Rating: {msg.severity_rating}"
         )
 
     def _workflow_loop(self) -> None:
@@ -94,7 +137,7 @@ class InspectionManagerNode(Node):
         if self._manager_state == "IDLE":
             # Transition to active searching mode
             self._manager_state = "SEARCHING"
-            self.get_logger().info("Rover entering SEARCHING mode. Crawling at inspection speed.")
+            self.get_logger().info("Rover entering SEARCHING mode. Patrolling track at inspection speed.")
 
         elif self._manager_state == "SEARCHING":
             # Command normal forward movement along track
@@ -107,17 +150,31 @@ class InspectionManagerNode(Node):
             self._cmd_vel_pub.publish(twist)
             if (now - self._inspection_start_time) >= 1.0:
                 self._manager_state = "INSPECTING"
-                self.get_logger().info("Rover stationary. Executing detailed high-resolution inspection & measurement...")
+                # Transmit location and defect data to remote railway inspector
+                if self._pending_alert:
+                    a = self._pending_alert
+                    self.get_logger().error(
+                        f"📡 >>> [LOCATION TRANSMITTED TO REMOTE RAILWAY INSPECTOR] <<<\n"
+                        f"    Station Chainage: {a['chainage']}\n"
+                        f"    Track Coordinates: X: {a['location_x']:+.2f}m, Y: {a['location_y']:+.2f}m\n"
+                        f"    Defect Risk Level: {a['severity']} (CRITICAL/HIGH)\n"
+                        f"    Estimated Size:   Length {a['length_mm']:.1f}mm, Width {a['width_mm']:.1f}mm, Depth {a['depth_mm']:.1f}mm\n"
+                        f"    Confidence:       {a['conf']*100:.1f}%\n"
+                        f"    Action:           Inspection report dispatched to dashboard. Rover pausing for stationary hold."
+                    )
+                    self._pending_alert = None
 
         elif self._manager_state == "INSPECTING":
-            # Keep rover stopped during measurement capture
+            # Hold stationary during inspection and remote dispatch
             twist.linear.x = 0.0
             self._cmd_vel_pub.publish(twist)
 
             if (now - self._inspection_start_time) >= (1.0 + self._hold_duration):
                 if self._auto_resume:
                     self._manager_state = "RESUMING"
-                    self.get_logger().info("Inspection complete. Resuming track inspection...")
+                    self.get_logger().info(
+                        "⏩ [PATROL RESUMED] Remote transmission complete. Rover resuming track patrol..."
+                    )
                 else:
                     self._manager_state = "HOLD"
 

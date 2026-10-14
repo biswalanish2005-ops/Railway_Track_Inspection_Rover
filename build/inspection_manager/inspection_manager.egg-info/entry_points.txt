@@ -1,2 +1,0 @@
-[console_scripts]
-inspection_manager_node = inspection_manager.inspection_manager_node:main

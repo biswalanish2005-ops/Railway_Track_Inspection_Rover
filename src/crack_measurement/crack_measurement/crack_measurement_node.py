@@ -166,6 +166,9 @@ class CrackMeasurementNode(Node):
             "timestamp": datetime.now().isoformat(),
             "inspection_id": folder_name,
             "confidence": float(det.confidence),
+            "location_x": float(det.location_x),
+            "location_y": float(det.location_y),
+            "chainage": str(det.chainage_station),
             "length_mm": round(length_mm, 2),
             "max_width_mm": round(max_width_mm, 2),
             "avg_width_mm": round(avg_width_mm, 2),
@@ -194,6 +197,9 @@ class CrackMeasurementNode(Node):
         res_msg.severity_rating = severity
         res_msg.image_saved_path = save_path
         res_msg.rover_state = "INSPECTING"
+        res_msg.location_x = float(det.location_x)
+        res_msg.location_y = float(det.location_y)
+        res_msg.chainage_station = str(det.chainage_station)
 
         self._result_pub.publish(res_msg)
 

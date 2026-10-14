@@ -8,6 +8,7 @@
     use_simulated_camera: false   # Set false for real Raspberry Pi Camera Module 3 hardware
     publish_camera_info: true
     frame_id: "camera_optical_frame"
+    camera_roi: "0.0,0.25,1.0,0.75"   # Calibrated sensor ROI: focuses on railway track POV (matches img1.png)
 
     # Rail ROI Selection (Normalized coordinates 0.0 - 1.0)
     roi_top_left_x: 0.20

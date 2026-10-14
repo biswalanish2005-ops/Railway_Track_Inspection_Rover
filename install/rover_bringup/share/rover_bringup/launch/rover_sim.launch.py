@@ -1,1 +1,0 @@
-/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/launch/rover_sim.launch.py

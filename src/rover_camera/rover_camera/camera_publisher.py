@@ -31,6 +31,7 @@ class CameraPublisherNode(Node):
         self.declare_parameter("use_simulated_camera", False)
         self.declare_parameter("publish_camera_info", True)
         self.declare_parameter("frame_id", "camera_optical_frame")
+        self.declare_parameter("camera_roi", "0.0,0.25,1.0,0.75")
 
         # Retrieve Parameters
         self._device_id = int(self.get_parameter("device_id").value)
@@ -40,6 +41,7 @@ class CameraPublisherNode(Node):
         self._use_simulated = bool(self.get_parameter("use_simulated_camera").value)
         self._publish_info = bool(self.get_parameter("publish_camera_info").value)
         self._frame_id = str(self.get_parameter("frame_id").value)
+        self._camera_roi = str(self.get_parameter("camera_roi").value).strip()
 
         self._bridge = CvBridge()
         self._cap = None
@@ -48,6 +50,7 @@ class CameraPublisherNode(Node):
         self._frame_lock = threading.Lock()
         self._reader_running = False
         self._sim_frame_count = 0
+        self._ready_to_publish = False  # Gate: becomes True after startup grace period
 
         # ROS Publishers
         self._image_pub = self.create_publisher(Image, "/camera/image_raw", 10)
@@ -62,9 +65,19 @@ class CameraPublisherNode(Node):
                 )
                 raise RuntimeError("Physical Raspberry Pi Camera Module 3 failed to initialize.")
 
-        # Frame Capture Timer
-        timer_period = 1.0 / self._fps
-        self.create_timer(timer_period, self._capture_and_publish)
+        # Startup grace period: wait for rpicam-vid to buffer the first frame
+        startup_grace = 1.5 if not self._use_simulated else 0.0
+        self._grace_timer = None
+        self._capture_timer_started = False
+        if startup_grace > 0.0:
+            self.get_logger().info(
+                f"Camera startup grace period: {startup_grace}s — waiting for first JPEG frame..."
+            )
+            self._grace_timer = self.create_timer(startup_grace, self._on_startup_ready)
+        else:
+            self._ready_to_publish = True
+            timer_period = 1.0 / self._fps
+            self.create_timer(timer_period, self._capture_and_publish)
 
         mode_str = "SIMULATED RAILWAY" if self._use_simulated else "HARDWARE (RPi Cam V3 IMX708)"
         self.get_logger().info(
@@ -99,6 +112,22 @@ class CameraPublisherNode(Node):
             except Exception as e:
                 time.sleep(0.01)
 
+    def _on_startup_ready(self) -> None:
+        """One-shot timer callback: starts the capture timer after grace period."""
+        # Cancel ourselves so this only fires once
+        if self._grace_timer is not None:
+            self._grace_timer.cancel()
+            self._grace_timer = None
+        if self._capture_timer_started:
+            return
+        self._capture_timer_started = True
+        self._ready_to_publish = True
+        timer_period = 1.0 / self._fps
+        self.create_timer(timer_period, self._capture_and_publish)
+        self.get_logger().info(
+            "Camera startup grace period complete. Publishing frames on /camera/image_raw"
+        )
+
     def _init_hardware_camera(self) -> bool:
         """Attempt initialization of physical RPi Camera Module 3 (IMX708) via libcamera/rpicam-vid or V4L2."""
         # Method 1: Try rpicam-vid MJPEG pipe (Native RPi 5 libcamera / PiSP driver)
@@ -111,8 +140,10 @@ class CameraPublisherNode(Node):
                 "--height", str(self._height),
                 "--framerate", str(int(self._fps)),
                 "--nopreview",
-                "-o", "-"
             ]
+            if self._camera_roi:
+                cmd.extend(["--roi", self._camera_roi])
+            cmd.extend(["-o", "-"])
             self._proc = subprocess.Popen(
                 cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, bufsize=1024 * 1024
             )

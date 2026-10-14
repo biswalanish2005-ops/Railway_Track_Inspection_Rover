@@ -30,6 +30,11 @@ class RoverStateManagerNode(Node):
         self._requested_linear_speed: float = 0.0
         self._requested_angular_speed: float = 0.0
 
+        # Odometry / Railway Location Coordinates (Without LIDAR)
+        self._location_x: float = 0.0
+        self._location_y: float = 0.0
+        self._last_odom_time = self.get_clock().now()
+
         # ROS 2 Publisher
         self._state_pub = self.create_publisher(RoverState, "/rover_state", 10)
 
@@ -122,9 +127,22 @@ class RoverStateManagerNode(Node):
                 self._status_message = "Rover resuming movement."
 
     def _publish_state(self) -> None:
-        """Publish current rover state message."""
+        """Publish current rover state message with updated railway chainage coordinates."""
+        now = self.get_clock().now()
+        dt = (now - self._last_odom_time).nanoseconds / 1e9
+        self._last_odom_time = now
+
+        # Integrate forward travel along track (no LIDAR required)
+        if self._current_state in ("MOVING", "SLOWING") and abs(self._actual_linear_speed) > 0.001:
+            self._location_x += self._actual_linear_speed * dt
+
+        km = int(abs(self._location_x) // 1000)
+        m = abs(self._location_x) % 1000
+        sign = "-" if self._location_x < 0 else "+"
+        chainage_str = f"CH {km:02d}+{m:05.2f}m"
+
         msg = RoverState()
-        msg.timestamp = self.get_clock().now().to_msg()
+        msg.timestamp = now.to_msg()
         msg.current_state = self._current_state
         msg.current_linear_speed = float(self._actual_linear_speed)
         msg.current_angular_speed = float(self._actual_angular_speed)
@@ -132,6 +150,9 @@ class RoverStateManagerNode(Node):
         msg.motor_enabled = self._motor_enabled
         msg.watchdog_active = self._watchdog_active
         msg.status_message = self._status_message
+        msg.location_x = float(self._location_x)
+        msg.location_y = float(self._location_y)
+        msg.chainage_station = chainage_str
 
         self._state_pub.publish(msg)
 

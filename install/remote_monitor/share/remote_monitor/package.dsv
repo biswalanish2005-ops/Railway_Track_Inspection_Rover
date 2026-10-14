@@ -1,9 +1,0 @@
-source;share/remote_monitor/hook/pythonpath.ps1
-source;share/remote_monitor/hook/pythonpath.dsv
-source;share/remote_monitor/hook/pythonpath.sh
-source;share/remote_monitor/hook/ament_prefix_path.ps1
-source;share/remote_monitor/hook/ament_prefix_path.dsv
-source;share/remote_monitor/hook/ament_prefix_path.sh
-source;../../build/remote_monitor/share/remote_monitor/hook/pythonpath_develop.ps1
-source;../../build/remote_monitor/share/remote_monitor/hook/pythonpath_develop.dsv
-source;../../build/remote_monitor/share/remote_monitor/hook/pythonpath_develop.sh

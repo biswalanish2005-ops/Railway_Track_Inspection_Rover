@@ -1,4 +1,0 @@
-[console_scripts]
-motor_controller = rover_control.motor_controller:main
-rover_state_manager = rover_control.rover_state_manager:main
-teleop_keyboard = rover_control.teleop_keyboard:main

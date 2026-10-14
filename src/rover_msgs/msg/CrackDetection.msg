@@ -9,4 +9,10 @@ float32 center_x
 float32 center_y
 float32 estimated_pixel_length
 float32 estimated_pixel_width
+float32 estimated_length_mm
+float32 estimated_width_mm
+float32 estimated_depth_mm
 string severity_label
+float32 location_x
+float32 location_y
+string chainage_station

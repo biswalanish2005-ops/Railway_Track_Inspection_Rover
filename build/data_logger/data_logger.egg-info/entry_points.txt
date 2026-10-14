@@ -1,2 +1,0 @@
-[console_scripts]
-data_logger_node = data_logger.data_logger_node:main
