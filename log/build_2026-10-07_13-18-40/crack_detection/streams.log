@@ -1,0 +1,28 @@
+[15.781s] Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/build --no-deps symlink_data
+[19.457s] running develop
+[20.839s] running egg_info
+[20.840s] creating crack_detection.egg-info
+[20.960s] writing crack_detection.egg-info/PKG-INFO
+[20.962s] writing dependency_links to crack_detection.egg-info/dependency_links.txt
+[20.964s] writing entry points to crack_detection.egg-info/entry_points.txt
+[20.965s] writing requirements to crack_detection.egg-info/requires.txt
+[20.982s] writing top-level names to crack_detection.egg-info/top_level.txt
+[20.983s] writing manifest file 'crack_detection.egg-info/SOURCES.txt'
+[21.328s] reading manifest file 'crack_detection.egg-info/SOURCES.txt'
+[21.332s] writing manifest file 'crack_detection.egg-info/SOURCES.txt'
+[21.544s] running build_ext
+[21.562s] Creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/python3.12/site-packages/crack-detection.egg-link (link to .)
+[21.585s] Installing crack_detection_node script to /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/crack_detection
+[21.622s] 
+[21.623s] Installed /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection
+[21.645s] running symlink_data
+[21.646s] creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/ament_index
+[21.646s] creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/ament_index/resource_index
+[21.646s] creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/ament_index/resource_index/packages
+[21.646s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/resource/crack_detection -> /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/ament_index/resource_index/packages
+[21.673s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/package.xml -> /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection
+[21.674s] creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/config
+[21.677s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/config/crack_detection_params.yaml -> /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/config
+[21.677s] creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/launch
+[21.678s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/launch/detection.launch.py -> /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/launch
+[22.419s] Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/build --no-deps symlink_data

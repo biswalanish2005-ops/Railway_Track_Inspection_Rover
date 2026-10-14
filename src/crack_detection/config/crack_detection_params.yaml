@@ -1,0 +1,7 @@
+/**:
+  ros__parameters:
+    confidence_threshold: 0.75       # Minimum detection confidence threshold
+    detection_timeout: 1.0           # Seconds before clearing crack alert
+    minimum_crack_size_pixels: 15.0  # Minimum crack pixel bounding box size
+    model_path: ""                   # Optional custom ONNX model path
+    use_simulated_detector: true     # Simulation/verification mode

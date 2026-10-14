@@ -1,0 +1,5 @@
+bool set_estop
+string reason
+---
+bool success
+string message

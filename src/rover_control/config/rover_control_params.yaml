@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    max_linear_speed: 0.5        # Maximum linear velocity (m/s)
+    max_angular_speed: 1.0       # Maximum angular velocity (rad/s)
+    acceleration_limit: 0.2      # Maximum acceleration limit (m/s^2)
+    deceleration_limit: 0.4      # Maximum deceleration limit (m/s^2)
+    cmd_timeout: 0.5             # Command watchdog timeout (seconds)
+    control_frequency: 20.0      # Controller loop frequency (Hz)

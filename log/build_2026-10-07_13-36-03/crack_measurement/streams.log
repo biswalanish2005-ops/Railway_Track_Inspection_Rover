@@ -1,0 +1,19 @@
+[14.102s] Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/build --no-deps symlink_data
+[18.164s] running develop
+[21.179s] running egg_info
+[21.523s] writing crack_measurement.egg-info/PKG-INFO
+[21.536s] writing dependency_links to crack_measurement.egg-info/dependency_links.txt
+[21.551s] writing entry points to crack_measurement.egg-info/entry_points.txt
+[21.556s] writing requirements to crack_measurement.egg-info/requires.txt
+[21.564s] writing top-level names to crack_measurement.egg-info/top_level.txt
+[22.008s] reading manifest file 'crack_measurement.egg-info/SOURCES.txt'
+[22.017s] writing manifest file 'crack_measurement.egg-info/SOURCES.txt'
+[22.143s] running build_ext
+[22.143s] Creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/lib/python3.12/site-packages/crack-measurement.egg-link (link to .)
+[22.144s] Installing crack_measurement_node script to /home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/lib/crack_measurement
+[22.144s] 
+[22.144s] Installed /home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement
+[22.144s] running symlink_data
+[22.145s] creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/launch
+[22.164s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/launch/measurement.launch.py -> /home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/launch
+[22.418s] Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/build --no-deps symlink_data

@@ -1,0 +1,13 @@
+package.xml
+setup.cfg
+setup.py
+launch/rover_full_system.launch.py
+launch/rover_sim.launch.py
+resource/rover_bringup
+rover_bringup/__init__.py
+rover_bringup.egg-info/PKG-INFO
+rover_bringup.egg-info/SOURCES.txt
+rover_bringup.egg-info/dependency_links.txt
+rover_bringup.egg-info/requires.txt
+rover_bringup.egg-info/top_level.txt
+rover_bringup.egg-info/zip-safe

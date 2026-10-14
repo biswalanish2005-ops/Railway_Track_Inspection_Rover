@@ -1,0 +1,30 @@
+/**:
+  ros__parameters:
+    # Camera hardware / simulation settings
+    device_id: 0
+    frame_width: 1280
+    frame_height: 720
+    fps: 30.0
+    use_simulated_camera: false   # Set false for real Raspberry Pi Camera Module 3 hardware
+    publish_camera_info: true
+    frame_id: "camera_optical_frame"
+
+    # Rail ROI Selection (Normalized coordinates 0.0 - 1.0)
+    roi_top_left_x: 0.20
+    roi_top_left_y: 0.30
+    roi_top_right_x: 0.80
+    roi_top_right_y: 0.30
+    roi_bottom_right_x: 0.90
+    roi_bottom_right_y: 0.95
+    roi_bottom_left_x: 0.10
+    roi_bottom_left_y: 0.95
+
+    # Inverse Perspective Mapping (IPM) Output Dimensions (pixels)
+    ipm_output_width: 400
+    ipm_output_height: 600
+    rail_physical_width_mm: 70.0  # Standard rail head width in mm for physical scale calibration
+
+    # Image Enhancement Parameters
+    clahe_clip_limit: 2.0
+    clahe_tile_grid_size: 8
+    gaussian_blur_kernel: 5

@@ -1,0 +1,84 @@
+[0.000000] (-) TimerEvent: {}
+[0.000911] (rover_description) JobQueued: {'identifier': 'rover_description', 'dependencies': OrderedDict()}
+[0.001073] (rover_msgs) JobQueued: {'identifier': 'rover_msgs', 'dependencies': OrderedDict()}
+[0.001138] (rover_control) JobQueued: {'identifier': 'rover_control', 'dependencies': OrderedDict({'rover_msgs': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs'})}
+[0.001230] (rover_bringup) JobQueued: {'identifier': 'rover_bringup', 'dependencies': OrderedDict({'rover_description': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description', 'rover_msgs': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs', 'rover_control': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control'})}
+[0.003431] (rover_msgs) JobStarted: {'identifier': 'rover_msgs'}
+[0.029397] (rover_description) JobStarted: {'identifier': 'rover_description'}
+[0.062038] (rover_msgs) JobProgress: {'identifier': 'rover_msgs', 'progress': 'cmake'}
+[0.066544] (rover_msgs) Command: {'cmd': ['/usr/bin/cmake', '/home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs'], 'cwd': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CHROME_DEVTOOLS_MCP_JS': '/home/student/Downloads/Antigravity-arm64/resources/app.asar.unpacked/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js', 'USER': 'student', 'ANTIGRAVITY_SOURCE_METADATA': '{"tool":{"conversationId":"70afc0f2-5fe7-4411-b9de-455e062aa5a4","stepIndex":74,"toolCall":{"id":"call_610051","name":"run_command","argumentsJson":"{\\"CommandLine\\":\\"colcon build --symlink-install\\",\\"Cwd\\":\\"/home/student/Desktop/Railway_Inspection_Rover\\",\\"WaitMsBeforeAsync\\":10000,\\"toolAction\\":\\"Building workspace with colcon\\",\\"toolSummary\\":\\"Run colcon build --symlink-install\\"}","thinkingSignature":"EvMDCvADAWkUfRO4lkkrMxduFpYu6eQ/p5wBaAoOphOaOQwMiY7ibBgffE1PSFnfxgZObMT1DUV6ugNYW6LOXM+ctZ7DAHMt4VemmTMj/MUitKdCOSZXhNZRBIkleoP3rp0G3Tcky2xcUSSZn0ZHNGrl0i+ZJPhmaYy6YfFCyx6Ekqv2LUHbjf1s5kuPqrhQU8Yq6wbU2uPMDkf+d8NdV5a5G72dY988PxWXiNskf8uCoJfajjQ4wvF4vad+khhckLB6pdUIzP0gtWvqpzk8gOjs+qiBAk3GwVfDHJ3E0vURxg70j/PQ5FSeGWX1tQh91NBMiqhtUjFmUE+V0+hqHhmh/RRUA0T++5+cMQCB6aFQIF4RLI9l8TE+F2wslu7qjoWLA1ZtAJnTHDmMyFw3+UxIw/HJu3sBY1epCHSTackimFkQXWkdRYyN0gVKrFSYpUqE87AmGv/07vTvclIU02jGavvkeTp6SyyfQMZhHr7G2tL1a7AJmqPtnBMhI7sL5tb2/LEzfjJNZ6IyRf277uSQ+VrNLe1doocWuDqiOrVZQu+VgdU8T3Sm7ULjLSJX18A+0IVAtsJ2rquRQx62/hhj2rdTuo39L9m6U82GAX1z3NJjBg3WcPLDweEM8CW/tiyDVtwc7spVjRB5CEyqxxMnsq4gNQ==","originalName":"run_command"}}}', 'XDG_SESSION_TYPE': 'wayland', 'ANTIGRAVITY_AGENTAPI_EXE': '/home/student/Downloads/Antigravity-arm64/resources/bin/language_server', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/mimick_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/student', 'CHROME_DESKTOP': 'antigravity.desktop', 'DISABLE_AUTO_UPDATE': 'true', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1419', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '1583', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'ANTIGRAVITY_AGENT': '1', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21565', 'AGY_BROWSER_ACTIVE_PORT_FILE': '/home/student/.config/Antigravity/DevToolsActivePort', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'ZSH_TMUX_AUTOSTARTED': 'true', 'LOGNAME': 'student', 'AGY_BROWSER_WS_URL': 'ws://127.0.0.1:38643/devtools/browser/cfba1742-89d2-4cfb-a08e-a0abdc9df4a4', '_': '/usr/bin/colcon', 'JOURNAL_STREAM': '8:15597', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome\\x2dsession\\x2dmanager.slice/gnome-session-manager@ubuntu.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'student', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'ANTIGRAVITY_LS_VERSION': 'hub-2.5.0', 'PATH': '/home/student/.gemini/antigravity/bin:/home/student/.config/Antigravity/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/student-desktop:@/tmp/.ICE-unix/1583,unix/student-desktop:/tmp/.ICE-unix/1583', 'INVOCATION_ID': '8742af1c72264a92bf65d58cc3a2e674', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'ANTIGRAVITY_CONVERSATION_ID': '70afc0f2-5fe7-4411-b9de-455e062aa5a4', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.6SNGW3', 'LS_COLORS': '', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'ANTIGRAVITY_PROJECT_ID': '4c4954c6-7aa6-46d8-b9da-1b356078e122', 'SHELL': '/bin/bash', 'ANTIGRAVITY_LS_ADDRESS': 'localhost:40013', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'ANTIGRAVITY_TRAJECTORY_ID': '7c6e07cd-da54-45de-8278-a2e0d35b651c', 'PWD': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'ZSH_TMUX_AUTOSTART': 'false', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/opt/gz_math_vendor/lib/python:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'ANTIGRAVITY_CSRF_TOKEN': '7e0672cb-5b50-415d-85f7-70246489bfb7', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[0.103085] (-) TimerEvent: {}
+[0.204982] (-) TimerEvent: {}
+[0.306668] (-) TimerEvent: {}
+[0.407336] (-) TimerEvent: {}
+[0.507903] (-) TimerEvent: {}
+[0.608575] (-) TimerEvent: {}
+[0.709364] (-) TimerEvent: {}
+[0.810113] (-) TimerEvent: {}
+[0.910687] (-) TimerEvent: {}
+[0.951109] (rover_msgs) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[1.010912] (-) TimerEvent: {}
+[1.111595] (-) TimerEvent: {}
+[1.212428] (-) TimerEvent: {}
+[1.312779] (-) TimerEvent: {}
+[1.413198] (-) TimerEvent: {}
+[1.513961] (-) TimerEvent: {}
+[1.588592] (rover_msgs) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[1.614274] (-) TimerEvent: {}
+[1.694499] (rover_msgs) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.714375] (-) TimerEvent: {}
+[1.814777] (-) TimerEvent: {}
+[1.915451] (-) TimerEvent: {}
+[2.018058] (-) TimerEvent: {}
+[2.118604] (-) TimerEvent: {}
+[2.219323] (-) TimerEvent: {}
+[2.294140] (rover_msgs) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[2.313046] (rover_msgs) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[2.316637] (rover_msgs) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[2.319455] (-) TimerEvent: {}
+[2.320979] (rover_msgs) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[2.378906] (rover_msgs) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[2.419665] (-) TimerEvent: {}
+[2.520466] (-) TimerEvent: {}
+[2.621162] (-) TimerEvent: {}
+[2.722434] (-) TimerEvent: {}
+[2.823082] (-) TimerEvent: {}
+[2.831794] (rover_msgs) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[2.856503] (rover_msgs) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[2.857461] (rover_msgs) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[2.862714] (rover_msgs) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[2.891631] (rover_msgs) StderrLine: {'line': b'CMake Error at CMakeLists.txt:8 (find_package):\n'}
+[2.892200] (rover_msgs) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[2.892346] (rover_msgs) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[2.892462] (rover_msgs) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[2.892567] (rover_msgs) StderrLine: {'line': b'\n'}
+[2.892672] (rover_msgs) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[2.892794] (rover_msgs) StderrLine: {'line': b'  any of the following names:\n'}
+[2.892952] (rover_msgs) StderrLine: {'line': b'\n'}
+[2.893110] (rover_msgs) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[2.893254] (rover_msgs) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[2.893392] (rover_msgs) StderrLine: {'line': b'\n'}
+[2.893529] (rover_msgs) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[2.893681] (rover_msgs) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[2.893910] (rover_msgs) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[2.894184] (rover_msgs) StderrLine: {'line': b'  has been installed.\n'}
+[2.894405] (rover_msgs) StderrLine: {'line': b'\n'}
+[2.894657] (rover_msgs) StderrLine: {'line': b'\n'}
+[2.894976] (rover_msgs) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[2.904301] (rover_msgs) CommandEnded: {'returncode': 1}
+[2.923259] (-) TimerEvent: {}
+[3.020766] (rover_msgs) JobEnded: {'identifier': 'rover_msgs', 'rc': 1}
+[3.027540] (-) TimerEvent: {}
+[3.128027] (-) TimerEvent: {}
+[3.228514] (-) TimerEvent: {}
+[3.328978] (-) TimerEvent: {}
+[3.429355] (-) TimerEvent: {}
+[3.529888] (-) TimerEvent: {}
+[3.630259] (-) TimerEvent: {}
+[3.730715] (-) TimerEvent: {}
+[3.831136] (-) TimerEvent: {}
+[3.931725] (-) TimerEvent: {}
+[3.977238] (rover_description) JobEnded: {'identifier': 'rover_description', 'rc': 'SIGINT'}
+[3.988709] (rover_control) JobSkipped: {'identifier': 'rover_control'}
+[3.988839] (rover_bringup) JobSkipped: {'identifier': 'rover_bringup'}
+[3.988887] (-) EventReactorShutdown: {}

@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs/rosidl_generator_py/rover_msgs/rover_msgs_s__rosidl_typesupport_c.so" "TARGETS" "rover_msgs_s__rosidl_typesupport_c" "DESTINATION" "lib/python3.12/site-packages/rover_msgs")

@@ -1,0 +1,257 @@
+[0.141s] Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs -DCMAKE_INSTALL_PREFIX=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs
+[0.384s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.541s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.594s] -- Found builtin_interfaces: 2.0.4 (/opt/ros/jazzy/share/builtin_interfaces/cmake)
+[1.704s] -- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.741s] -- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[1.830s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.903s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.994s] -- Found rosidl_default_generators: 1.6.1 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)
+[2.067s] -- Found rosidl_adapter: 4.6.9 (/opt/ros/jazzy/share/rosidl_adapter/cmake)
+[4.583s] -- Found ament_cmake_ros: 0.12.1 (/opt/ros/jazzy/share/ament_cmake_ros/cmake)
+[6.006s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[6.530s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[6.552s] -- Found python_cmake_module: 0.11.1 (/opt/ros/jazzy/share/python_cmake_module/cmake)
+[9.096s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development NumPy Development.Module Development.Embed 
+[9.613s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[9.962s] -- Configuring done (9.7s)
+[10.606s] -- Generating done (0.6s)
+[10.788s] -- Build files have been written to: /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs
+[10.863s] Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs -DCMAKE_INSTALL_PREFIX=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs
+[10.877s] Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs -- -j4 -l4
+[11.381s] [  1%] [34m[1mGenerating type hashes for ROS interfaces[0m
+[14.012s] [  1%] Built target rover_msgs__rosidl_generator_type_description
+[14.374s] [  1%] Built target ament_cmake_python_symlink_rover_msgs
+[14.521s] [  3%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[18.905s] [  3%] Built target rover_msgs__cpp
+[20.347s] running egg_info
+[20.492s] writing rover_msgs.egg-info/PKG-INFO
+[20.500s] writing dependency_links to rover_msgs.egg-info/dependency_links.txt
+[20.501s] writing top-level names to rover_msgs.egg-info/top_level.txt
+[20.870s] reading manifest file 'rover_msgs.egg-info/SOURCES.txt'
+[20.880s] writing manifest file 'rover_msgs.egg-info/SOURCES.txt'
+[21.125s] [  3%] Built target ament_cmake_python_build_rover_msgs_egg
+[21.210s] [  5%] [34m[1mGenerating C code for ROS interfaces[0m
+[26.185s] [  7%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_c.dir/rosidl_generator_c/rover_msgs/msg/detail/rover_state__description.c.o[0m
+[26.462s] [  9%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_c.dir/rosidl_generator_c/rover_msgs/msg/detail/rover_state__type_support.c.o[0m
+[26.849s] [ 10%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_c.dir/rosidl_generator_c/rover_msgs/msg/detail/crack_detection__description.c.o[0m
+[27.541s] [ 12%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_c.dir/rosidl_generator_c/rover_msgs/msg/detail/crack_detection__functions.c.o[0m
+[27.872s] [ 14%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_c.dir/rosidl_generator_c/rover_msgs/msg/detail/crack_detection__type_support.c.o[0m
+[28.095s] [ 16%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_c.dir/rosidl_generator_c/rover_msgs/srv/detail/emergency_stop__description.c.o[0m
+[28.922s] [ 18%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_c.dir/rosidl_generator_c/rover_msgs/srv/detail/emergency_stop__functions.c.o[0m
+[29.384s] [ 20%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_c.dir/rosidl_generator_c/rover_msgs/srv/detail/emergency_stop__type_support.c.o[0m
+[29.649s] [ 21%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_c.dir/rosidl_generator_c/rover_msgs/msg/detail/rover_state__functions.c.o[0m
+[30.297s] [ 23%] [32m[1mLinking C shared library librover_msgs__rosidl_generator_c.so[0m
+[30.692s] [ 23%] Built target rover_msgs__rosidl_generator_c
+[30.932s] [ 25%] [34m[1mGenerating Rust code for ROS interfaces[0m
+[34.308s] [ 25%] Built target rover_msgs__rs
+[34.449s] [ 27%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[37.571s] [ 29%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/rover_msgs/msg/detail/rover_state__type_support.cpp.o[0m
+[40.796s] [ 30%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/rover_msgs/msg/detail/crack_detection__type_support.cpp.o[0m
+[44.675s] [ 32%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/rover_msgs/srv/detail/emergency_stop__type_support.cpp.o[0m
+[49.751s] [ 34%] [32m[1mLinking CXX shared library librover_msgs__rosidl_typesupport_introspection_cpp.so[0m
+[50.535s] [ 34%] Built target rover_msgs__rosidl_typesupport_introspection_cpp
+[50.703s] [ 36%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[53.657s] [ 38%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/rover_msgs/msg/rover_state__type_support.cpp.o[0m
+[56.317s] [ 40%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/rover_msgs/msg/crack_detection__type_support.cpp.o[0m
+[59.669s] [ 41%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/rover_msgs/srv/emergency_stop__type_support.cpp.o[0m
+[63.595s] [ 43%] [32m[1mLinking CXX shared library librover_msgs__rosidl_typesupport_cpp.so[0m
+[64.434s] [ 43%] Built target rover_msgs__rosidl_typesupport_cpp
+[64.520s] [ 45%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[67.974s] [ 47%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/rover_msgs/msg/detail/rover_state__type_support_c.cpp.o[0m
+[72.827s] [ 49%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/rover_msgs/msg/detail/crack_detection__type_support_c.cpp.o[0m
+[76.253s] [ 50%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/rover_msgs/srv/detail/emergency_stop__type_support_c.cpp.o[0m
+[80.016s] [ 52%] [32m[1mLinking CXX shared library librover_msgs__rosidl_typesupport_fastrtps_c.so[0m
+[80.543s] [ 52%] Built target rover_msgs__rosidl_typesupport_fastrtps_c
+[80.691s] [ 54%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[84.233s] [ 56%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/rover_msgs/msg/detail/dds_fastrtps/rover_state__type_support.cpp.o[0m
+[87.972s] [ 58%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/rover_msgs/msg/detail/dds_fastrtps/crack_detection__type_support.cpp.o[0m
+[93.903s] [ 60%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/rover_msgs/srv/detail/dds_fastrtps/emergency_stop__type_support.cpp.o[0m
+[99.283s] [ 61%] [32m[1mLinking CXX shared library librover_msgs__rosidl_typesupport_fastrtps_cpp.so[0m
+[100.085s] [ 61%] Built target rover_msgs__rosidl_typesupport_fastrtps_cpp
+[100.243s] [ 63%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[102.359s] [ 65%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/rover_msgs/msg/rover_state__type_support.cpp.o[0m
+[102.887s] [ 67%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/rover_msgs/srv/emergency_stop__type_support.cpp.o[0m
+[103.202s] [ 69%] [32mBuilding CXX object CMakeFiles/rover_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/rover_msgs/msg/crack_detection__type_support.cpp.o[0m
+[103.742s] [ 70%] [32m[1mLinking CXX shared library librover_msgs__rosidl_typesupport_c.so[0m
+[104.085s] [ 70%] Built target rover_msgs__rosidl_typesupport_c
+[104.243s] [ 72%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[106.726s] [ 74%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/rover_msgs/msg/detail/rover_state__type_support.c.o[0m
+[107.074s] [ 76%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/rover_msgs/srv/detail/emergency_stop__type_support.c.o[0m
+[107.372s] [ 78%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/rover_msgs/msg/detail/crack_detection__type_support.c.o[0m
+[107.661s] [ 80%] [32m[1mLinking C shared library librover_msgs__rosidl_typesupport_introspection_c.so[0m
+[107.957s] [ 80%] Built target rover_msgs__rosidl_typesupport_introspection_c
+[108.109s] [ 80%] Built target rover_msgs
+[108.302s] [ 81%] [34m[1mGenerating Python code for ROS interfaces[0m
+[112.630s] [ 81%] Built target rover_msgs__py
+[112.955s] [ 83%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_py.dir/rosidl_generator_py/rover_msgs/msg/_rover_state_s.c.o[0m
+[114.261s] [ 85%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_py.dir/rosidl_generator_py/rover_msgs/srv/_emergency_stop_s.c.o[0m
+[115.557s] [ 87%] [32mBuilding C object CMakeFiles/rover_msgs__rosidl_generator_py.dir/rosidl_generator_py/rover_msgs/msg/_crack_detection_s.c.o[0m
+[116.372s] [ 89%] [32m[1mLinking C shared library librover_msgs__rosidl_generator_py.so[0m
+[116.733s] [ 89%] Built target rover_msgs__rosidl_generator_py
+[117.081s] [ 90%] [32mBuilding C object CMakeFiles/rover_msgs_s__rosidl_typesupport_fastrtps_c.dir/rosidl_generator_py/rover_msgs/_rover_msgs_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[118.244s] [ 92%] [32m[1mLinking C shared module rosidl_generator_py/rover_msgs/rover_msgs_s__rosidl_typesupport_fastrtps_c.so[0m
+[118.567s] [ 92%] Built target rover_msgs_s__rosidl_typesupport_fastrtps_c
+[118.797s] [ 94%] [32mBuilding C object CMakeFiles/rover_msgs_s__rosidl_typesupport_c.dir/rosidl_generator_py/rover_msgs/_rover_msgs_s.ep.rosidl_typesupport_c.c.o[0m
+[119.347s] [ 96%] [32m[1mLinking C shared module rosidl_generator_py/rover_msgs/rover_msgs_s__rosidl_typesupport_c.so[0m
+[119.528s] [ 96%] Built target rover_msgs_s__rosidl_typesupport_c
+[119.944s] [ 98%] [32mBuilding C object CMakeFiles/rover_msgs_s__rosidl_typesupport_introspection_c.dir/rosidl_generator_py/rover_msgs/_rover_msgs_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[120.802s] [100%] [32m[1mLinking C shared module rosidl_generator_py/rover_msgs/rover_msgs_s__rosidl_typesupport_introspection_c.so[0m
+[121.045s] [100%] Built target rover_msgs_s__rosidl_typesupport_introspection_c
+[121.325s] Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs -- -j4 -l4
+[121.470s] Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs
+[121.535s] -- Install configuration: ""
+[121.542s] -- Execute custom install script
+[121.542s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/ament_index/resource_index/rosidl_interfaces/rover_msgs
+[121.542s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/RoverState.json
+[121.544s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/CrackDetection.json
+[121.606s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/srv/EmergencyStop.json
+[121.611s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/crack_detection.h
+[121.705s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__functions.h
+[121.790s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__struct.h
+[121.864s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__type_support.h
+[121.923s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__functions.h
+[121.925s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__struct.h
+[121.934s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__type_support.h
+[121.940s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_generator_c__visibility_control.h
+[121.941s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rover_state.h
+[121.941s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__functions.h
+[121.947s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__struct.h
+[121.954s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__type_support.h
+[121.954s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/emergency_stop.h
+[121.955s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/library_path.sh
+[121.955s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/library_path.dsv
+[121.961s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__rosidl_typesupport_fastrtps_c.h
+[122.040s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__rosidl_typesupport_fastrtps_c.h
+[122.045s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[122.046s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__rosidl_typesupport_fastrtps_c.h
+[122.053s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/crack_detection.hpp
+[122.109s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__builder.hpp
+[122.170s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__struct.hpp
+[122.246s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__traits.hpp
+[122.303s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__type_support.hpp
+[122.423s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__builder.hpp
+[122.429s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__struct.hpp
+[122.429s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__traits.hpp
+[122.430s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__type_support.hpp
+[122.446s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_generator_cpp__visibility_control.hpp
+[122.463s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rover_state.hpp
+[122.464s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__builder.hpp
+[122.464s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__struct.hpp
+[122.464s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__traits.hpp
+[122.464s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__type_support.hpp
+[122.464s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/emergency_stop.hpp
+[122.465s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__rosidl_typesupport_fastrtps_cpp.hpp
+[122.534s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__rosidl_typesupport_fastrtps_cpp.hpp
+[122.547s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[122.551s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__rosidl_typesupport_fastrtps_cpp.hpp
+[122.558s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__rosidl_typesupport_introspection_c.h
+[122.647s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__rosidl_typesupport_introspection_c.h
+[122.647s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[122.655s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__rosidl_typesupport_introspection_c.h
+[122.670s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__rosidl_typesupport_introspection_cpp.hpp
+[122.798s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__rosidl_typesupport_introspection_cpp.hpp
+[122.801s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__rosidl_typesupport_introspection_cpp.hpp
+[122.801s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/pythonpath.sh
+[122.803s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/pythonpath.dsv
+[122.805s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs-0.1.0-py3.12.egg-info/PKG-INFO
+[122.807s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs-0.1.0-py3.12.egg-info/SOURCES.txt
+[122.812s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs-0.1.0-py3.12.egg-info/dependency_links.txt
+[122.817s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs-0.1.0-py3.12.egg-info/top_level.txt
+[122.831s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/__init__.py
+[122.834s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/_rover_msgs_s.ep.rosidl_typesupport_c.c
+[122.834s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/_rover_msgs_s.ep.rosidl_typesupport_fastrtps_c.c
+[122.837s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/_rover_msgs_s.ep.rosidl_typesupport_introspection_c.c
+[122.841s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/__init__.py
+[122.841s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_crack_detection.py
+[122.983s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_crack_detection_s.c
+[123.052s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_rover_state.py
+[123.053s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_rover_state_s.c
+[123.053s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_c.so
+[123.054s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_fastrtps_c.so
+[123.054s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_introspection_c.so
+[123.054s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv/__init__.py
+[123.058s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv/_emergency_stop.py
+[123.059s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv/_emergency_stop_s.c
+[123.062s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_fastrtps_c.so
+[123.063s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_introspection_c.so
+[123.064s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_c.so
+[123.067s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/Cargo.toml
+[123.070s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/build.rs
+[123.070s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/lib.rs
+[123.074s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/msg.rs
+[123.077s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/msg/rmw.rs
+[123.078s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/srv.rs
+[123.078s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/srv/rmw.rs
+[123.078s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/RoverState.idl
+[123.082s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/CrackDetection.idl
+[123.224s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/srv/EmergencyStop.idl
+[123.225s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/RoverState.msg
+[123.237s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/CrackDetection.msg
+[123.383s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/srv/EmergencyStop.srv
+[123.384s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/ament_index/resource_index/package_run_dependencies/rover_msgs
+[123.384s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/ament_index/resource_index/parent_prefix_path/rover_msgs
+[123.384s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/ament_prefix_path.sh
+[123.384s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/ament_prefix_path.dsv
+[123.385s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/path.sh
+[123.385s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/path.dsv
+[123.385s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/local_setup.bash
+[123.389s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/local_setup.sh
+[123.389s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/local_setup.zsh
+[123.390s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/local_setup.dsv
+[123.390s] -- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.dsv
+[123.448s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/ament_index/resource_index/packages/rover_msgs
+[123.452s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rosidl_cmake-extras.cmake
+[123.453s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/ament_cmake_export_dependencies-extras.cmake
+[123.453s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/ament_cmake_export_include_directories-extras.cmake
+[123.453s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/ament_cmake_export_libraries-extras.cmake
+[123.459s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/ament_cmake_export_targets-extras.cmake
+[123.459s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[123.477s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[123.477s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rosidl_cmake_aggregate_target-extras.cmake
+[123.483s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgsConfig.cmake
+[123.484s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgsConfig-version.cmake
+[123.485s] -- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.xml
+[123.485s] -- Installing: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_generator_c.so
+[123.489s] -- Set non-toolchain portion of runtime path of "/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_generator_c.so" to ""
+[123.490s] -- Installing: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_fastrtps_c.so
+[123.490s] -- Set non-toolchain portion of runtime path of "/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_fastrtps_c.so" to ""
+[123.490s] -- Installing: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_fastrtps_cpp.so
+[123.490s] -- Set non-toolchain portion of runtime path of "/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_fastrtps_cpp.so" to ""
+[123.491s] -- Installing: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_introspection_c.so
+[123.491s] -- Set non-toolchain portion of runtime path of "/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_introspection_c.so" to ""
+[123.491s] -- Installing: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_c.so
+[123.494s] -- Set non-toolchain portion of runtime path of "/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_c.so" to ""
+[123.496s] -- Installing: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_introspection_cpp.so
+[123.496s] -- Set non-toolchain portion of runtime path of "/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_introspection_cpp.so" to ""
+[123.497s] -- Installing: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_cpp.so
+[123.497s] -- Set non-toolchain portion of runtime path of "/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_cpp.so" to ""
+[123.807s] Listing '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs'...
+[123.811s] Compiling '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/__init__.py'...
+[123.812s] Listing '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg'...
+[123.817s] Compiling '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/__init__.py'...
+[123.818s] Compiling '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_crack_detection.py'...
+[123.818s] Compiling '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_rover_state.py'...
+[123.818s] Listing '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv'...
+[123.822s] Compiling '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv/__init__.py'...
+[123.822s] Compiling '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv/_emergency_stop.py'...
+[123.910s] -- Installing: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_generator_py.so
+[123.924s] -- Set non-toolchain portion of runtime path of "/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_generator_py.so" to ""
+[123.932s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_cExport.cmake
+[123.944s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_cExport-noconfig.cmake
+[123.945s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_typesupport_fastrtps_cExport.cmake
+[123.949s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[123.949s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_cppExport.cmake
+[123.950s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_typesupport_fastrtps_cppExport.cmake
+[123.950s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[123.961s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_introspection_cExport.cmake
+[123.964s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[123.964s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_cExport.cmake
+[123.964s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_cExport-noconfig.cmake
+[123.966s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_introspection_cppExport.cmake
+[123.967s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[123.973s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_cppExport.cmake
+[123.980s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_cppExport-noconfig.cmake
+[123.980s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_pyExport.cmake
+[123.980s] -- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_pyExport-noconfig.cmake
+[124.007s] Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs

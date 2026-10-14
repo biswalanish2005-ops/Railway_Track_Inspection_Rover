@@ -1,0 +1,26 @@
+[26.731s] Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/build --no-deps symlink_data
+[29.512s] running develop
+[32.744s] running egg_info
+[32.748s] creating inspection_manager.egg-info
+[32.871s] writing inspection_manager.egg-info/PKG-INFO
+[32.876s] writing dependency_links to inspection_manager.egg-info/dependency_links.txt
+[32.877s] writing entry points to inspection_manager.egg-info/entry_points.txt
+[32.877s] writing requirements to inspection_manager.egg-info/requires.txt
+[32.877s] writing top-level names to inspection_manager.egg-info/top_level.txt
+[32.877s] writing manifest file 'inspection_manager.egg-info/SOURCES.txt'
+[33.077s] reading manifest file 'inspection_manager.egg-info/SOURCES.txt'
+[33.081s] writing manifest file 'inspection_manager.egg-info/SOURCES.txt'
+[33.356s] running build_ext
+[33.365s] Creating /home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/lib/python3.12/site-packages/inspection-manager.egg-link (link to .)
+[33.365s] Installing inspection_manager_node script to /home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/lib/inspection_manager
+[33.369s] 
+[33.385s] Installed /home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager
+[33.386s] running symlink_data
+[33.387s] creating /home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/ament_index
+[33.387s] creating /home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/ament_index/resource_index
+[33.387s] creating /home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/ament_index/resource_index/packages
+[33.401s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/resource/inspection_manager -> /home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/ament_index/resource_index/packages
+[33.402s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/package.xml -> /home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager
+[33.419s] creating /home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/config
+[33.427s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/config/inspection_manager_params.yaml -> /home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/config
+[33.727s] Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/build --no-deps symlink_data

@@ -1,0 +1,15 @@
+[21.627s] Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_description/build --no-deps symlink_data
+[28.105s] running develop
+[32.275s] running egg_info
+[32.821s] writing rover_description.egg-info/PKG-INFO
+[32.821s] writing dependency_links to rover_description.egg-info/dependency_links.txt
+[32.832s] writing requirements to rover_description.egg-info/requires.txt
+[32.832s] writing top-level names to rover_description.egg-info/top_level.txt
+[33.104s] reading manifest file 'rover_description.egg-info/SOURCES.txt'
+[33.107s] writing manifest file 'rover_description.egg-info/SOURCES.txt'
+[33.218s] running build_ext
+[33.236s] Creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages/rover-description.egg-link (link to .)
+[33.258s] 
+[33.259s] Installed /home/student/Desktop/Railway_Inspection_Rover/build/rover_description
+[33.259s] running symlink_data
+[34.541s] Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_description/build --no-deps symlink_data

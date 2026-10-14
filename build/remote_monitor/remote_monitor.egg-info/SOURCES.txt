@@ -1,0 +1,13 @@
+package.xml
+setup.cfg
+setup.py
+remote_monitor/__init__.py
+remote_monitor/remote_monitor_node.py
+remote_monitor.egg-info/PKG-INFO
+remote_monitor.egg-info/SOURCES.txt
+remote_monitor.egg-info/dependency_links.txt
+remote_monitor.egg-info/entry_points.txt
+remote_monitor.egg-info/requires.txt
+remote_monitor.egg-info/top_level.txt
+remote_monitor.egg-info/zip-safe
+resource/remote_monitor

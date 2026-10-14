@@ -1,0 +1,19 @@
+[7.076s] Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_control/build --no-deps symlink_data
+[9.036s] running develop
+[9.827s] running egg_info
+[9.890s] writing rover_control.egg-info/PKG-INFO
+[9.894s] writing dependency_links to rover_control.egg-info/dependency_links.txt
+[9.895s] writing entry points to rover_control.egg-info/entry_points.txt
+[9.895s] writing requirements to rover_control.egg-info/requires.txt
+[9.895s] writing top-level names to rover_control.egg-info/top_level.txt
+[10.014s] reading manifest file 'rover_control.egg-info/SOURCES.txt'
+[10.038s] writing manifest file 'rover_control.egg-info/SOURCES.txt'
+[10.154s] running build_ext
+[10.155s] Creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages/rover-control.egg-link (link to .)
+[10.183s] Installing motor_controller script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/rover_control
+[10.183s] Installing rover_state_manager script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/rover_control
+[10.184s] Installing teleop_keyboard script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/rover_control
+[10.185s] 
+[10.185s] Installed /home/student/Desktop/Railway_Inspection_Rover/build/rover_control
+[10.204s] running symlink_data
+[10.434s] Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_control/build --no-deps symlink_data

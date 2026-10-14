@@ -1,0 +1,2 @@
+[console_scripts]
+crack_detection_node = crack_detection.crack_detection_node:main

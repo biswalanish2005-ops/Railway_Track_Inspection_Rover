@@ -1,0 +1,674 @@
+[0.910s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.919s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=4, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0xffff96aa9430>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffff96c69cd0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffff96c69cd0>>, mixin_verb=('build',))
+[1.312s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.314s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.315s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.315s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.316s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[1.316s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.317s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/student/Desktop/Railway_Inspection_Rover'
+[1.319s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[1.320s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[1.321s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[1.321s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[1.321s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[1.322s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[1.322s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[1.322s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[1.322s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[1.505s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[1.506s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[1.506s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[1.506s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[1.506s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[1.507s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[1.508s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[1.508s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[1.508s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extensions ['ignore', 'ignore_ament_install']
+[1.509s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extension 'ignore'
+[1.509s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extension 'ignore_ament_install'
+[1.510s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extensions ['colcon_pkg']
+[1.511s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extension 'colcon_pkg'
+[1.514s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extensions ['colcon_meta']
+[1.514s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extension 'colcon_meta'
+[1.514s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extensions ['ros']
+[1.514s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extension 'ros'
+[1.517s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extensions ['cmake', 'python']
+[1.518s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extension 'cmake'
+[1.519s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extension 'python'
+[1.519s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extensions ['python_setup_py']
+[1.519s] Level 1:colcon.colcon_core.package_identification:_identify(dataset) by extension 'python_setup_py'
+[1.519s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extensions ['ignore', 'ignore_ament_install']
+[1.522s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extension 'ignore'
+[1.524s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extension 'ignore_ament_install'
+[1.525s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extensions ['colcon_pkg']
+[1.525s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extension 'colcon_pkg'
+[1.525s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extensions ['colcon_meta']
+[1.525s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extension 'colcon_meta'
+[1.526s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extensions ['ros']
+[1.526s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extension 'ros'
+[1.526s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extensions ['cmake', 'python']
+[1.526s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extension 'cmake'
+[1.527s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extension 'python'
+[1.527s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extensions ['python_setup_py']
+[1.527s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images) by extension 'python_setup_py'
+[1.527s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extensions ['ignore', 'ignore_ament_install']
+[1.528s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extension 'ignore'
+[1.528s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extension 'ignore_ament_install'
+[1.529s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extensions ['colcon_pkg']
+[1.529s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extension 'colcon_pkg'
+[1.530s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extensions ['colcon_meta']
+[1.530s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extension 'colcon_meta'
+[1.530s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extensions ['ros']
+[1.530s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extension 'ros'
+[1.530s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extensions ['cmake', 'python']
+[1.530s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extension 'cmake'
+[1.530s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extension 'python'
+[1.531s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extensions ['python_setup_py']
+[1.531s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/test) by extension 'python_setup_py'
+[1.531s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extensions ['ignore', 'ignore_ament_install']
+[1.531s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extension 'ignore'
+[1.531s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extension 'ignore_ament_install'
+[1.532s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extensions ['colcon_pkg']
+[1.532s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extension 'colcon_pkg'
+[1.532s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extensions ['colcon_meta']
+[1.532s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extension 'colcon_meta'
+[1.532s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extensions ['ros']
+[1.532s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extension 'ros'
+[1.533s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extensions ['cmake', 'python']
+[1.533s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extension 'cmake'
+[1.533s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extension 'python'
+[1.533s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extensions ['python_setup_py']
+[1.533s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/train) by extension 'python_setup_py'
+[1.534s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extensions ['ignore', 'ignore_ament_install']
+[1.534s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extension 'ignore'
+[1.534s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extension 'ignore_ament_install'
+[1.535s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extensions ['colcon_pkg']
+[1.535s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extension 'colcon_pkg'
+[1.535s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extensions ['colcon_meta']
+[1.535s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extension 'colcon_meta'
+[1.535s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extensions ['ros']
+[1.535s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extension 'ros'
+[1.536s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extensions ['cmake', 'python']
+[1.536s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extension 'cmake'
+[1.536s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extension 'python'
+[1.536s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extensions ['python_setup_py']
+[1.536s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/images/val) by extension 'python_setup_py'
+[1.536s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extensions ['ignore', 'ignore_ament_install']
+[1.537s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extension 'ignore'
+[1.537s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extension 'ignore_ament_install'
+[1.537s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extensions ['colcon_pkg']
+[1.537s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extension 'colcon_pkg'
+[1.538s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extensions ['colcon_meta']
+[1.538s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extension 'colcon_meta'
+[1.538s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extensions ['ros']
+[1.538s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extension 'ros'
+[1.539s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extensions ['cmake', 'python']
+[1.539s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extension 'cmake'
+[1.539s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extension 'python'
+[1.539s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extensions ['python_setup_py']
+[1.540s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels) by extension 'python_setup_py'
+[1.540s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extensions ['ignore', 'ignore_ament_install']
+[1.541s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extension 'ignore'
+[1.541s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extension 'ignore_ament_install'
+[1.542s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extensions ['colcon_pkg']
+[1.542s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extension 'colcon_pkg'
+[1.542s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extensions ['colcon_meta']
+[1.543s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extension 'colcon_meta'
+[1.543s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extensions ['ros']
+[1.543s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extension 'ros'
+[1.543s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extensions ['cmake', 'python']
+[1.543s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extension 'cmake'
+[1.543s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extension 'python'
+[1.544s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extensions ['python_setup_py']
+[1.544s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/test) by extension 'python_setup_py'
+[1.544s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extensions ['ignore', 'ignore_ament_install']
+[1.544s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extension 'ignore'
+[1.545s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extension 'ignore_ament_install'
+[1.545s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extensions ['colcon_pkg']
+[1.545s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extension 'colcon_pkg'
+[1.545s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extensions ['colcon_meta']
+[1.546s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extension 'colcon_meta'
+[1.546s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extensions ['ros']
+[1.546s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extension 'ros'
+[1.547s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extensions ['cmake', 'python']
+[1.547s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extension 'cmake'
+[1.547s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extension 'python'
+[1.547s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extensions ['python_setup_py']
+[1.548s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/train) by extension 'python_setup_py'
+[1.548s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extensions ['ignore', 'ignore_ament_install']
+[1.548s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extension 'ignore'
+[1.548s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extension 'ignore_ament_install'
+[1.549s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extensions ['colcon_pkg']
+[1.549s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extension 'colcon_pkg'
+[1.549s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extensions ['colcon_meta']
+[1.549s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extension 'colcon_meta'
+[1.549s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extensions ['ros']
+[1.549s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extension 'ros'
+[1.550s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extensions ['cmake', 'python']
+[1.550s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extension 'cmake'
+[1.551s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extension 'python'
+[1.551s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extensions ['python_setup_py']
+[1.552s] Level 1:colcon.colcon_core.package_identification:_identify(dataset/labels/val) by extension 'python_setup_py'
+[1.552s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[1.553s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[1.553s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[1.553s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[1.554s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[1.554s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[1.554s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[1.555s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[1.555s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[1.555s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[1.555s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[1.555s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[1.555s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[1.555s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[1.556s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[1.556s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[1.556s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[1.556s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[1.556s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[1.557s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[1.557s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_detection) by extensions ['ignore', 'ignore_ament_install']
+[1.557s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_detection) by extension 'ignore'
+[1.558s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_detection) by extension 'ignore_ament_install'
+[1.558s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_detection) by extensions ['colcon_pkg']
+[1.558s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_detection) by extension 'colcon_pkg'
+[1.558s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_detection) by extensions ['colcon_meta']
+[1.558s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_detection) by extension 'colcon_meta'
+[1.558s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_detection) by extensions ['ros']
+[1.558s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_detection) by extension 'ros'
+[1.581s] DEBUG:colcon.colcon_core.package_identification:Package 'src/crack_detection' with type 'ros.ament_python' and name 'crack_detection'
+[1.583s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_measurement) by extensions ['ignore', 'ignore_ament_install']
+[1.584s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_measurement) by extension 'ignore'
+[1.586s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_measurement) by extension 'ignore_ament_install'
+[1.588s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_measurement) by extensions ['colcon_pkg']
+[1.589s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_measurement) by extension 'colcon_pkg'
+[1.589s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_measurement) by extensions ['colcon_meta']
+[1.590s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_measurement) by extension 'colcon_meta'
+[1.590s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_measurement) by extensions ['ros']
+[1.590s] Level 1:colcon.colcon_core.package_identification:_identify(src/crack_measurement) by extension 'ros'
+[1.595s] DEBUG:colcon.colcon_core.package_identification:Package 'src/crack_measurement' with type 'ros.ament_python' and name 'crack_measurement'
+[1.597s] Level 1:colcon.colcon_core.package_identification:_identify(src/inspection_manager) by extensions ['ignore', 'ignore_ament_install']
+[1.598s] Level 1:colcon.colcon_core.package_identification:_identify(src/inspection_manager) by extension 'ignore'
+[1.599s] Level 1:colcon.colcon_core.package_identification:_identify(src/inspection_manager) by extension 'ignore_ament_install'
+[1.600s] Level 1:colcon.colcon_core.package_identification:_identify(src/inspection_manager) by extensions ['colcon_pkg']
+[1.600s] Level 1:colcon.colcon_core.package_identification:_identify(src/inspection_manager) by extension 'colcon_pkg'
+[1.601s] Level 1:colcon.colcon_core.package_identification:_identify(src/inspection_manager) by extensions ['colcon_meta']
+[1.601s] Level 1:colcon.colcon_core.package_identification:_identify(src/inspection_manager) by extension 'colcon_meta'
+[1.601s] Level 1:colcon.colcon_core.package_identification:_identify(src/inspection_manager) by extensions ['ros']
+[1.601s] Level 1:colcon.colcon_core.package_identification:_identify(src/inspection_manager) by extension 'ros'
+[1.603s] DEBUG:colcon.colcon_core.package_identification:Package 'src/inspection_manager' with type 'ros.ament_python' and name 'inspection_manager'
+[1.604s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_bringup) by extensions ['ignore', 'ignore_ament_install']
+[1.604s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_bringup) by extension 'ignore'
+[1.604s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_bringup) by extension 'ignore_ament_install'
+[1.605s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_bringup) by extensions ['colcon_pkg']
+[1.605s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_bringup) by extension 'colcon_pkg'
+[1.605s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_bringup) by extensions ['colcon_meta']
+[1.605s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_bringup) by extension 'colcon_meta'
+[1.605s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_bringup) by extensions ['ros']
+[1.605s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_bringup) by extension 'ros'
+[1.608s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rover_bringup' with type 'ros.ament_python' and name 'rover_bringup'
+[1.609s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_camera) by extensions ['ignore', 'ignore_ament_install']
+[1.609s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_camera) by extension 'ignore'
+[1.609s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_camera) by extension 'ignore_ament_install'
+[1.612s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_camera) by extensions ['colcon_pkg']
+[1.612s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_camera) by extension 'colcon_pkg'
+[1.612s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_camera) by extensions ['colcon_meta']
+[1.613s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_camera) by extension 'colcon_meta'
+[1.613s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_camera) by extensions ['ros']
+[1.613s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_camera) by extension 'ros'
+[1.618s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rover_camera' with type 'ros.ament_python' and name 'rover_camera'
+[1.620s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_control) by extensions ['ignore', 'ignore_ament_install']
+[1.620s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_control) by extension 'ignore'
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_control) by extension 'ignore_ament_install'
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_control) by extensions ['colcon_pkg']
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_control) by extension 'colcon_pkg'
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_control) by extensions ['colcon_meta']
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_control) by extension 'colcon_meta'
+[1.622s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_control) by extensions ['ros']
+[1.622s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_control) by extension 'ros'
+[1.624s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rover_control' with type 'ros.ament_python' and name 'rover_control'
+[1.624s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_description) by extensions ['ignore', 'ignore_ament_install']
+[1.624s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_description) by extension 'ignore'
+[1.624s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_description) by extension 'ignore_ament_install'
+[1.624s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_description) by extensions ['colcon_pkg']
+[1.625s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_description) by extension 'colcon_pkg'
+[1.625s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_description) by extensions ['colcon_meta']
+[1.625s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_description) by extension 'colcon_meta'
+[1.625s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_description) by extensions ['ros']
+[1.625s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_description) by extension 'ros'
+[1.627s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rover_description' with type 'ros.ament_python' and name 'rover_description'
+[1.628s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_msgs) by extensions ['ignore', 'ignore_ament_install']
+[1.629s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_msgs) by extension 'ignore'
+[1.629s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_msgs) by extension 'ignore_ament_install'
+[1.629s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_msgs) by extensions ['colcon_pkg']
+[1.630s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_msgs) by extension 'colcon_pkg'
+[1.630s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_msgs) by extensions ['colcon_meta']
+[1.630s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_msgs) by extension 'colcon_meta'
+[1.630s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_msgs) by extensions ['ros']
+[1.630s] Level 1:colcon.colcon_core.package_identification:_identify(src/rover_msgs) by extension 'ros'
+[1.634s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rover_msgs' with type 'ros.ament_cmake' and name 'rover_msgs'
+[1.635s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[1.636s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[1.639s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[1.639s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[1.640s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[1.826s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[1.827s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[1.869s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 311 installed packages in /opt/ros/jazzy
+[1.899s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[2.193s] Level 5:colcon.colcon_core.verb:set package 'rover_camera' build argument 'cmake_args' from command line to 'None'
+[2.194s] Level 5:colcon.colcon_core.verb:set package 'rover_camera' build argument 'cmake_target' from command line to 'None'
+[2.194s] Level 5:colcon.colcon_core.verb:set package 'rover_camera' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.194s] Level 5:colcon.colcon_core.verb:set package 'rover_camera' build argument 'cmake_clean_cache' from command line to 'False'
+[2.194s] Level 5:colcon.colcon_core.verb:set package 'rover_camera' build argument 'cmake_clean_first' from command line to 'False'
+[2.194s] Level 5:colcon.colcon_core.verb:set package 'rover_camera' build argument 'cmake_force_configure' from command line to 'False'
+[2.194s] Level 5:colcon.colcon_core.verb:set package 'rover_camera' build argument 'ament_cmake_args' from command line to 'None'
+[2.194s] Level 5:colcon.colcon_core.verb:set package 'rover_camera' build argument 'catkin_cmake_args' from command line to 'None'
+[2.194s] Level 5:colcon.colcon_core.verb:set package 'rover_camera' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.194s] DEBUG:colcon.colcon_core.verb:Building package 'rover_camera' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera', 'merge_install': False, 'path': '/home/student/Desktop/Railway_Inspection_Rover/src/rover_camera', 'symlink_install': True, 'test_result_base': None}
+[2.195s] Level 5:colcon.colcon_core.verb:set package 'rover_description' build argument 'cmake_args' from command line to 'None'
+[2.196s] Level 5:colcon.colcon_core.verb:set package 'rover_description' build argument 'cmake_target' from command line to 'None'
+[2.196s] Level 5:colcon.colcon_core.verb:set package 'rover_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.196s] Level 5:colcon.colcon_core.verb:set package 'rover_description' build argument 'cmake_clean_cache' from command line to 'False'
+[2.196s] Level 5:colcon.colcon_core.verb:set package 'rover_description' build argument 'cmake_clean_first' from command line to 'False'
+[2.196s] Level 5:colcon.colcon_core.verb:set package 'rover_description' build argument 'cmake_force_configure' from command line to 'False'
+[2.196s] Level 5:colcon.colcon_core.verb:set package 'rover_description' build argument 'ament_cmake_args' from command line to 'None'
+[2.196s] Level 5:colcon.colcon_core.verb:set package 'rover_description' build argument 'catkin_cmake_args' from command line to 'None'
+[2.196s] Level 5:colcon.colcon_core.verb:set package 'rover_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.196s] DEBUG:colcon.colcon_core.verb:Building package 'rover_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description', 'merge_install': False, 'path': '/home/student/Desktop/Railway_Inspection_Rover/src/rover_description', 'symlink_install': True, 'test_result_base': None}
+[2.197s] Level 5:colcon.colcon_core.verb:set package 'rover_msgs' build argument 'cmake_args' from command line to 'None'
+[2.197s] Level 5:colcon.colcon_core.verb:set package 'rover_msgs' build argument 'cmake_target' from command line to 'None'
+[2.198s] Level 5:colcon.colcon_core.verb:set package 'rover_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.198s] Level 5:colcon.colcon_core.verb:set package 'rover_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[2.198s] Level 5:colcon.colcon_core.verb:set package 'rover_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[2.198s] Level 5:colcon.colcon_core.verb:set package 'rover_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[2.198s] Level 5:colcon.colcon_core.verb:set package 'rover_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[2.198s] Level 5:colcon.colcon_core.verb:set package 'rover_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[2.198s] Level 5:colcon.colcon_core.verb:set package 'rover_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.198s] DEBUG:colcon.colcon_core.verb:Building package 'rover_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs', 'merge_install': False, 'path': '/home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs', 'symlink_install': True, 'test_result_base': None}
+[2.199s] Level 5:colcon.colcon_core.verb:set package 'crack_detection' build argument 'cmake_args' from command line to 'None'
+[2.199s] Level 5:colcon.colcon_core.verb:set package 'crack_detection' build argument 'cmake_target' from command line to 'None'
+[2.199s] Level 5:colcon.colcon_core.verb:set package 'crack_detection' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.200s] Level 5:colcon.colcon_core.verb:set package 'crack_detection' build argument 'cmake_clean_cache' from command line to 'False'
+[2.200s] Level 5:colcon.colcon_core.verb:set package 'crack_detection' build argument 'cmake_clean_first' from command line to 'False'
+[2.200s] Level 5:colcon.colcon_core.verb:set package 'crack_detection' build argument 'cmake_force_configure' from command line to 'False'
+[2.200s] Level 5:colcon.colcon_core.verb:set package 'crack_detection' build argument 'ament_cmake_args' from command line to 'None'
+[2.200s] Level 5:colcon.colcon_core.verb:set package 'crack_detection' build argument 'catkin_cmake_args' from command line to 'None'
+[2.200s] Level 5:colcon.colcon_core.verb:set package 'crack_detection' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.200s] DEBUG:colcon.colcon_core.verb:Building package 'crack_detection' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection', 'merge_install': False, 'path': '/home/student/Desktop/Railway_Inspection_Rover/src/crack_detection', 'symlink_install': True, 'test_result_base': None}
+[2.201s] Level 5:colcon.colcon_core.verb:set package 'crack_measurement' build argument 'cmake_args' from command line to 'None'
+[2.201s] Level 5:colcon.colcon_core.verb:set package 'crack_measurement' build argument 'cmake_target' from command line to 'None'
+[2.202s] Level 5:colcon.colcon_core.verb:set package 'crack_measurement' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.202s] Level 5:colcon.colcon_core.verb:set package 'crack_measurement' build argument 'cmake_clean_cache' from command line to 'False'
+[2.202s] Level 5:colcon.colcon_core.verb:set package 'crack_measurement' build argument 'cmake_clean_first' from command line to 'False'
+[2.202s] Level 5:colcon.colcon_core.verb:set package 'crack_measurement' build argument 'cmake_force_configure' from command line to 'False'
+[2.202s] Level 5:colcon.colcon_core.verb:set package 'crack_measurement' build argument 'ament_cmake_args' from command line to 'None'
+[2.202s] Level 5:colcon.colcon_core.verb:set package 'crack_measurement' build argument 'catkin_cmake_args' from command line to 'None'
+[2.202s] Level 5:colcon.colcon_core.verb:set package 'crack_measurement' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.202s] DEBUG:colcon.colcon_core.verb:Building package 'crack_measurement' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement', 'merge_install': False, 'path': '/home/student/Desktop/Railway_Inspection_Rover/src/crack_measurement', 'symlink_install': True, 'test_result_base': None}
+[2.203s] Level 5:colcon.colcon_core.verb:set package 'inspection_manager' build argument 'cmake_args' from command line to 'None'
+[2.203s] Level 5:colcon.colcon_core.verb:set package 'inspection_manager' build argument 'cmake_target' from command line to 'None'
+[2.203s] Level 5:colcon.colcon_core.verb:set package 'inspection_manager' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.204s] Level 5:colcon.colcon_core.verb:set package 'inspection_manager' build argument 'cmake_clean_cache' from command line to 'False'
+[2.204s] Level 5:colcon.colcon_core.verb:set package 'inspection_manager' build argument 'cmake_clean_first' from command line to 'False'
+[2.204s] Level 5:colcon.colcon_core.verb:set package 'inspection_manager' build argument 'cmake_force_configure' from command line to 'False'
+[2.204s] Level 5:colcon.colcon_core.verb:set package 'inspection_manager' build argument 'ament_cmake_args' from command line to 'None'
+[2.204s] Level 5:colcon.colcon_core.verb:set package 'inspection_manager' build argument 'catkin_cmake_args' from command line to 'None'
+[2.204s] Level 5:colcon.colcon_core.verb:set package 'inspection_manager' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.204s] DEBUG:colcon.colcon_core.verb:Building package 'inspection_manager' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager', 'merge_install': False, 'path': '/home/student/Desktop/Railway_Inspection_Rover/src/inspection_manager', 'symlink_install': True, 'test_result_base': None}
+[2.206s] Level 5:colcon.colcon_core.verb:set package 'rover_control' build argument 'cmake_args' from command line to 'None'
+[2.206s] Level 5:colcon.colcon_core.verb:set package 'rover_control' build argument 'cmake_target' from command line to 'None'
+[2.206s] Level 5:colcon.colcon_core.verb:set package 'rover_control' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.206s] Level 5:colcon.colcon_core.verb:set package 'rover_control' build argument 'cmake_clean_cache' from command line to 'False'
+[2.206s] Level 5:colcon.colcon_core.verb:set package 'rover_control' build argument 'cmake_clean_first' from command line to 'False'
+[2.206s] Level 5:colcon.colcon_core.verb:set package 'rover_control' build argument 'cmake_force_configure' from command line to 'False'
+[2.206s] Level 5:colcon.colcon_core.verb:set package 'rover_control' build argument 'ament_cmake_args' from command line to 'None'
+[2.206s] Level 5:colcon.colcon_core.verb:set package 'rover_control' build argument 'catkin_cmake_args' from command line to 'None'
+[2.206s] Level 5:colcon.colcon_core.verb:set package 'rover_control' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.206s] DEBUG:colcon.colcon_core.verb:Building package 'rover_control' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control', 'merge_install': False, 'path': '/home/student/Desktop/Railway_Inspection_Rover/src/rover_control', 'symlink_install': True, 'test_result_base': None}
+[2.207s] Level 5:colcon.colcon_core.verb:set package 'rover_bringup' build argument 'cmake_args' from command line to 'None'
+[2.207s] Level 5:colcon.colcon_core.verb:set package 'rover_bringup' build argument 'cmake_target' from command line to 'None'
+[2.207s] Level 5:colcon.colcon_core.verb:set package 'rover_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.208s] Level 5:colcon.colcon_core.verb:set package 'rover_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[2.208s] Level 5:colcon.colcon_core.verb:set package 'rover_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[2.208s] Level 5:colcon.colcon_core.verb:set package 'rover_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[2.208s] Level 5:colcon.colcon_core.verb:set package 'rover_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[2.208s] Level 5:colcon.colcon_core.verb:set package 'rover_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[2.208s] Level 5:colcon.colcon_core.verb:set package 'rover_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.208s] DEBUG:colcon.colcon_core.verb:Building package 'rover_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup', 'merge_install': False, 'path': '/home/student/Desktop/Railway_Inspection_Rover/src/rover_bringup', 'symlink_install': True, 'test_result_base': None}
+[2.209s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[2.217s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[2.221s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs' with build type 'ament_cmake'
+[2.222s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs'
+[2.235s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[2.236s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.236s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.247s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_description' with build type 'ament_python'
+[2.248s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_description', 'ament_prefix_path')
+[2.249s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/hook/ament_prefix_path.ps1'
+[2.258s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/hook/ament_prefix_path.dsv'
+[2.266s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/hook/ament_prefix_path.sh'
+[2.271s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.272s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.300s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_camera' with build type 'ament_python'
+[2.300s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_camera', 'ament_prefix_path')
+[2.305s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/hook/ament_prefix_path.ps1'
+[2.323s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/hook/ament_prefix_path.dsv'
+[2.334s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/hook/ament_prefix_path.sh'
+[2.345s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.345s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.422s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs -- -j4 -l4
+[5.207s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_description'
+[5.208s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[5.209s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[8.540s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_camera'
+[8.541s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[8.542s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[16.156s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_wheel, setopt, update_catalog, build, install_lib, editable_wheel, easy_install, rotate, init_catalog, extract_messages, install_egg_info, clean, build_py, check, symlink_data, install_headers, develop, build_clib, bdist_egg, install, saveopts, bdist, build_scripts, upload_docs, sdist, install_scripts, bdist_rpm, upload, register, install_data, dist_info, egg_info, compile_catalog, test, build_ext, alias, bdist_dumb
+[16.323s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_wheel, setopt, update_catalog, build, install_lib, editable_wheel, easy_install, rotate, init_catalog, extract_messages, install_egg_info, clean, build_py, check, symlink_data, install_headers, develop, build_clib, bdist_egg, install, saveopts, bdist, build_scripts, upload_docs, sdist, install_scripts, bdist_rpm, upload, register, install_data, dist_info, egg_info, compile_catalog, test, build_ext, alias, bdist_dumb
+[20.933s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools 'develop' options: --quiet, --install-dir, --uninstall, --editable, --find-links, --optimize, --record, --zip-ok, --site-dirs, --version, --always-copy, --verbose, --user, --help, --allow-hosts, --script-dir, --multi-version, --force-installation-into-system-dir, --exclude-scripts, --always-unzip, --egg-path, --dry-run, --prefix, --no-find-links, --install-layout, --no-deps, --no-user-cfg, --build-directory, --upgrade, --local-snapshots-ok, --index-url
+[20.959s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/build --no-deps symlink_data
+[21.215s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools 'develop' options: --quiet, --install-dir, --uninstall, --editable, --find-links, --optimize, --record, --zip-ok, --site-dirs, --version, --always-copy, --verbose, --user, --help, --allow-hosts, --script-dir, --multi-version, --force-installation-into-system-dir, --exclude-scripts, --always-unzip, --egg-path, --dry-run, --prefix, --no-find-links, --install-layout, --no-deps, --no-user-cfg, --build-directory, --upgrade, --local-snapshots-ok, --index-url
+[21.246s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_description/build --no-deps symlink_data
+[29.331s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_camera', 'pythonpath_develop')
+[29.333s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/share/rover_camera/hook/pythonpath_develop.ps1'
+[29.342s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/build --no-deps symlink_data
+[29.397s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/share/rover_camera/hook/pythonpath_develop.dsv'
+[29.407s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/share/rover_camera/hook/pythonpath_develop.sh'
+[29.445s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera' for CMake module files
+[29.449s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera' for CMake config files
+[29.455s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib'
+[29.456s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/bin'
+[29.456s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/pkgconfig/rover_camera.pc'
+[29.463s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/python3.12/site-packages'
+[29.465s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_camera', 'pythonpath')
+[29.466s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/hook/pythonpath.ps1'
+[29.484s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/hook/pythonpath.dsv'
+[29.494s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/hook/pythonpath.sh'
+[29.534s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/bin'
+[29.537s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rover_camera)
+[29.560s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/package.ps1'
+[29.599s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/package.dsv'
+[29.620s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/package.sh'
+[29.646s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/package.bash'
+[29.659s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/package.zsh'
+[29.670s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/colcon-core/packages/rover_camera)
+[31.859s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_description', 'pythonpath_develop')
+[31.865s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description/share/rover_description/hook/pythonpath_develop.ps1'
+[31.885s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_description/build --no-deps symlink_data
+[31.889s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description/share/rover_description/hook/pythonpath_develop.dsv'
+[31.899s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description/share/rover_description/hook/pythonpath_develop.sh'
+[31.923s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description' for CMake module files
+[31.932s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description' for CMake config files
+[31.938s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib'
+[31.938s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/bin'
+[31.939s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/pkgconfig/rover_description.pc'
+[31.943s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages'
+[31.944s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_description', 'pythonpath')
+[31.949s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/hook/pythonpath.ps1'
+[31.957s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/hook/pythonpath.dsv'
+[31.966s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/hook/pythonpath.sh'
+[31.988s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/bin'
+[31.998s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rover_description)
+[31.999s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/package.ps1'
+[32.026s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/package.dsv'
+[32.031s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/package.sh'
+[32.043s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/package.bash'
+[32.057s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/rover_description/package.zsh'
+[32.069s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/share/colcon-core/packages/rover_description)
+[162.047s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs -- -j4 -l4
+[162.177s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs
+[165.661s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rover_msgs)
+[165.662s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs' for CMake module files
+[165.672s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs' for CMake config files
+[165.673s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs
+[165.731s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_msgs', 'cmake_prefix_path')
+[165.733s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/cmake_prefix_path.ps1'
+[165.768s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/cmake_prefix_path.dsv'
+[165.799s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/cmake_prefix_path.sh'
+[165.831s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib'
+[165.833s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_msgs', 'ld_library_path_lib')
+[165.854s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/ld_library_path_lib.ps1'
+[165.863s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/ld_library_path_lib.dsv'
+[165.887s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/ld_library_path_lib.sh'
+[165.905s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/bin'
+[165.909s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/pkgconfig/rover_msgs.pc'
+[165.915s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages'
+[165.932s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_msgs', 'pythonpath')
+[165.939s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/pythonpath.ps1'
+[165.973s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/pythonpath.dsv'
+[165.996s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/pythonpath.sh'
+[166.022s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/bin'
+[166.034s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.ps1'
+[166.056s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.dsv'
+[166.072s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.sh'
+[166.094s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.bash'
+[166.117s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.zsh'
+[166.119s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/colcon-core/packages/rover_msgs)
+[166.137s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rover_msgs)
+[166.138s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs' for CMake module files
+[166.153s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs' for CMake config files
+[166.198s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_msgs', 'cmake_prefix_path')
+[166.203s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/cmake_prefix_path.ps1'
+[166.215s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/cmake_prefix_path.dsv'
+[166.224s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/cmake_prefix_path.sh'
+[166.250s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib'
+[166.251s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_msgs', 'ld_library_path_lib')
+[166.269s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/ld_library_path_lib.ps1'
+[166.295s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/ld_library_path_lib.dsv'
+[166.307s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/ld_library_path_lib.sh'
+[166.309s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/bin'
+[166.320s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/pkgconfig/rover_msgs.pc'
+[166.327s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages'
+[166.339s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_msgs', 'pythonpath')
+[166.340s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/pythonpath.ps1'
+[166.461s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/pythonpath.dsv'
+[166.476s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/hook/pythonpath.sh'
+[166.493s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/bin'
+[166.499s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.ps1'
+[166.517s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.dsv'
+[166.543s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.sh'
+[166.628s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.bash'
+[166.641s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.zsh'
+[166.651s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/colcon-core/packages/rover_msgs)
+[166.662s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_control' with build type 'ament_python'
+[166.662s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_control', 'ament_prefix_path')
+[166.664s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/hook/ament_prefix_path.ps1'
+[166.683s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/hook/ament_prefix_path.dsv'
+[166.724s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/hook/ament_prefix_path.sh'
+[166.740s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[166.740s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[166.836s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/student/Desktop/Railway_Inspection_Rover/src/crack_detection' with build type 'ament_python'
+[166.837s] Level 1:colcon.colcon_core.shell:create_environment_hook('crack_detection', 'ament_prefix_path')
+[166.843s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/hook/ament_prefix_path.ps1'
+[166.852s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/hook/ament_prefix_path.dsv'
+[166.860s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/hook/ament_prefix_path.sh'
+[166.875s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[166.875s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[166.924s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/student/Desktop/Railway_Inspection_Rover/src/crack_measurement' with build type 'ament_python'
+[166.925s] Level 1:colcon.colcon_core.shell:create_environment_hook('crack_measurement', 'ament_prefix_path')
+[166.931s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/hook/ament_prefix_path.ps1'
+[166.950s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/hook/ament_prefix_path.dsv'
+[166.962s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/hook/ament_prefix_path.sh'
+[166.978s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[166.979s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[167.059s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/student/Desktop/Railway_Inspection_Rover/src/inspection_manager' with build type 'ament_python'
+[167.072s] Level 1:colcon.colcon_core.shell:create_environment_hook('inspection_manager', 'ament_prefix_path')
+[167.073s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/hook/ament_prefix_path.ps1'
+[167.098s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/hook/ament_prefix_path.dsv'
+[167.117s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/hook/ament_prefix_path.sh'
+[167.128s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[167.129s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[168.692s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_control'
+[168.693s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[168.693s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[171.145s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/student/Desktop/Railway_Inspection_Rover/src/crack_detection'
+[171.147s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[171.148s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[173.299s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/student/Desktop/Railway_Inspection_Rover/src/crack_measurement'
+[173.300s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[173.303s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[175.909s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/student/Desktop/Railway_Inspection_Rover/src/inspection_manager'
+[175.912s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[175.912s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[182.556s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_wheel, setopt, update_catalog, build, install_lib, editable_wheel, easy_install, rotate, init_catalog, extract_messages, install_egg_info, clean, build_py, check, symlink_data, install_headers, develop, build_clib, bdist_egg, install, saveopts, bdist, build_scripts, upload_docs, sdist, install_scripts, bdist_rpm, upload, register, install_data, dist_info, egg_info, compile_catalog, test, build_ext, alias, bdist_dumb
+[187.125s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools 'develop' options: --quiet, --install-dir, --uninstall, --editable, --find-links, --optimize, --record, --zip-ok, --site-dirs, --version, --always-copy, --verbose, --user, --help, --allow-hosts, --script-dir, --multi-version, --force-installation-into-system-dir, --exclude-scripts, --always-unzip, --egg-path, --dry-run, --prefix, --no-find-links, --install-layout, --no-deps, --no-user-cfg, --build-directory, --upgrade, --local-snapshots-ok, --index-url
+[187.157s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/build --no-deps symlink_data
+[187.473s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_wheel, setopt, update_catalog, build, install_lib, editable_wheel, easy_install, rotate, init_catalog, extract_messages, install_egg_info, clean, build_py, check, symlink_data, install_headers, develop, build_clib, bdist_egg, install, saveopts, bdist, build_scripts, upload_docs, sdist, install_scripts, bdist_rpm, upload, register, install_data, dist_info, egg_info, compile_catalog, test, build_ext, alias, bdist_dumb
+[187.626s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_wheel, setopt, update_catalog, build, install_lib, editable_wheel, easy_install, rotate, init_catalog, extract_messages, install_egg_info, clean, build_py, check, symlink_data, install_headers, develop, build_clib, bdist_egg, install, saveopts, bdist, build_scripts, upload_docs, sdist, install_scripts, bdist_rpm, upload, register, install_data, dist_info, egg_info, compile_catalog, test, build_ext, alias, bdist_dumb
+[189.059s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_wheel, setopt, update_catalog, build, install_lib, editable_wheel, easy_install, rotate, init_catalog, extract_messages, install_egg_info, clean, build_py, check, symlink_data, install_headers, develop, build_clib, bdist_egg, install, saveopts, bdist, build_scripts, upload_docs, sdist, install_scripts, bdist_rpm, upload, register, install_data, dist_info, egg_info, compile_catalog, test, build_ext, alias, bdist_dumb
+[192.298s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools 'develop' options: --quiet, --install-dir, --uninstall, --editable, --find-links, --optimize, --record, --zip-ok, --site-dirs, --version, --always-copy, --verbose, --user, --help, --allow-hosts, --script-dir, --multi-version, --force-installation-into-system-dir, --exclude-scripts, --always-unzip, --egg-path, --dry-run, --prefix, --no-find-links, --install-layout, --no-deps, --no-user-cfg, --build-directory, --upgrade, --local-snapshots-ok, --index-url
+[192.321s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/build --no-deps symlink_data
+[193.188s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools 'develop' options: --quiet, --install-dir, --uninstall, --editable, --find-links, --optimize, --record, --zip-ok, --site-dirs, --version, --always-copy, --verbose, --user, --help, --allow-hosts, --script-dir, --multi-version, --force-installation-into-system-dir, --exclude-scripts, --always-unzip, --egg-path, --dry-run, --prefix, --no-find-links, --install-layout, --no-deps, --no-user-cfg, --build-directory, --upgrade, --local-snapshots-ok, --index-url
+[193.207s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_control/build --no-deps symlink_data
+[193.793s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools 'develop' options: --quiet, --install-dir, --uninstall, --editable, --find-links, --optimize, --record, --zip-ok, --site-dirs, --version, --always-copy, --verbose, --user, --help, --allow-hosts, --script-dir, --multi-version, --force-installation-into-system-dir, --exclude-scripts, --always-unzip, --egg-path, --dry-run, --prefix, --no-find-links, --install-layout, --no-deps, --no-user-cfg, --build-directory, --upgrade, --local-snapshots-ok, --index-url
+[193.802s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/build --no-deps symlink_data
+[200.191s] Level 1:colcon.colcon_core.shell:create_environment_hook('crack_detection', 'pythonpath_develop')
+[200.195s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/share/crack_detection/hook/pythonpath_develop.ps1'
+[200.204s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/build --no-deps symlink_data
+[200.322s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/share/crack_detection/hook/pythonpath_develop.dsv'
+[200.330s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/share/crack_detection/hook/pythonpath_develop.sh'
+[200.339s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection' for CMake module files
+[200.361s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection' for CMake config files
+[200.376s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib'
+[200.388s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/bin'
+[200.389s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/pkgconfig/crack_detection.pc'
+[200.391s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/python3.12/site-packages'
+[200.392s] Level 1:colcon.colcon_core.shell:create_environment_hook('crack_detection', 'pythonpath')
+[200.405s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/hook/pythonpath.ps1'
+[200.419s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/hook/pythonpath.dsv'
+[200.452s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/hook/pythonpath.sh'
+[200.476s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/bin'
+[200.487s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(crack_detection)
+[200.513s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/package.ps1'
+[200.556s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/package.dsv'
+[200.588s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/package.sh'
+[200.592s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/package.bash'
+[200.607s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/package.zsh'
+[200.615s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/colcon-core/packages/crack_detection)
+[200.782s] Level 1:colcon.colcon_core.shell:create_environment_hook('inspection_manager', 'pythonpath_develop')
+[200.783s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/share/inspection_manager/hook/pythonpath_develop.ps1'
+[200.798s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/build --no-deps symlink_data
+[200.815s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/share/inspection_manager/hook/pythonpath_develop.dsv'
+[200.839s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/inspection_manager/share/inspection_manager/hook/pythonpath_develop.sh'
+[200.863s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager' for CMake module files
+[200.889s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager' for CMake config files
+[200.918s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/lib'
+[200.920s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/bin'
+[200.945s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/lib/pkgconfig/inspection_manager.pc'
+[200.948s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/lib/python3.12/site-packages'
+[200.948s] Level 1:colcon.colcon_core.shell:create_environment_hook('inspection_manager', 'pythonpath')
+[200.949s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/hook/pythonpath.ps1'
+[200.969s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/hook/pythonpath.dsv'
+[200.999s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/hook/pythonpath.sh'
+[201.026s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/bin'
+[201.026s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(inspection_manager)
+[201.027s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/package.ps1'
+[201.076s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/package.dsv'
+[201.078s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/package.sh'
+[201.080s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/package.bash'
+[201.082s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/inspection_manager/package.zsh'
+[201.083s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/student/Desktop/Railway_Inspection_Rover/install/inspection_manager/share/colcon-core/packages/inspection_manager)
+[203.490s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_control', 'pythonpath_develop')
+[203.493s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control/share/rover_control/hook/pythonpath_develop.ps1'
+[203.507s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control/share/rover_control/hook/pythonpath_develop.dsv'
+[203.509s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control/share/rover_control/hook/pythonpath_develop.sh'
+[203.518s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_control/build --no-deps symlink_data
+[203.523s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control' for CMake module files
+[203.536s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control' for CMake config files
+[203.550s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib'
+[203.551s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/bin'
+[203.553s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/pkgconfig/rover_control.pc'
+[203.564s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages'
+[203.564s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_control', 'pythonpath')
+[203.565s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/hook/pythonpath.ps1'
+[203.586s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/hook/pythonpath.dsv'
+[203.599s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/hook/pythonpath.sh'
+[203.609s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/bin'
+[203.610s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rover_control)
+[203.611s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/package.ps1'
+[203.615s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/package.dsv'
+[203.639s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/package.sh'
+[203.678s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/package.bash'
+[203.701s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/rover_control/package.zsh'
+[203.722s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/share/colcon-core/packages/rover_control)
+[203.730s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_bringup' with build type 'ament_python'
+[203.732s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_bringup', 'ament_prefix_path')
+[203.736s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/hook/ament_prefix_path.ps1'
+[203.776s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/hook/ament_prefix_path.dsv'
+[203.794s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/hook/ament_prefix_path.sh'
+[203.799s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[203.799s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[205.825s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/student/Desktop/Railway_Inspection_Rover/src/rover_bringup'
+[205.826s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[205.827s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[205.864s] Level 1:colcon.colcon_core.shell:create_environment_hook('crack_measurement', 'pythonpath_develop')
+[205.865s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/share/crack_measurement/hook/pythonpath_develop.ps1'
+[205.874s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/build --no-deps symlink_data
+[205.877s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/share/crack_measurement/hook/pythonpath_develop.dsv'
+[205.893s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/crack_measurement/share/crack_measurement/hook/pythonpath_develop.sh'
+[205.928s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement' for CMake module files
+[205.940s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement' for CMake config files
+[205.941s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/lib'
+[205.942s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/bin'
+[205.942s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/lib/pkgconfig/crack_measurement.pc'
+[205.942s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/lib/python3.12/site-packages'
+[205.944s] Level 1:colcon.colcon_core.shell:create_environment_hook('crack_measurement', 'pythonpath')
+[205.945s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/hook/pythonpath.ps1'
+[205.948s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/hook/pythonpath.dsv'
+[205.953s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/hook/pythonpath.sh'
+[205.961s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/bin'
+[205.961s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(crack_measurement)
+[205.966s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/package.ps1'
+[205.978s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/package.dsv'
+[205.985s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/package.sh'
+[205.990s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/package.bash'
+[205.993s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/crack_measurement/package.zsh'
+[205.994s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/student/Desktop/Railway_Inspection_Rover/install/crack_measurement/share/colcon-core/packages/crack_measurement)
+[212.467s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_wheel, setopt, update_catalog, build, install_lib, editable_wheel, easy_install, rotate, init_catalog, extract_messages, install_egg_info, clean, build_py, check, symlink_data, install_headers, develop, build_clib, bdist_egg, install, saveopts, bdist, build_scripts, upload_docs, sdist, install_scripts, bdist_rpm, upload, register, install_data, dist_info, egg_info, compile_catalog, test, build_ext, alias, bdist_dumb
+[214.639s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools 'develop' options: --quiet, --install-dir, --uninstall, --editable, --find-links, --optimize, --record, --zip-ok, --site-dirs, --version, --always-copy, --verbose, --user, --help, --allow-hosts, --script-dir, --multi-version, --force-installation-into-system-dir, --exclude-scripts, --always-unzip, --egg-path, --dry-run, --prefix, --no-find-links, --install-layout, --no-deps, --no-user-cfg, --build-directory, --upgrade, --local-snapshots-ok, --index-url
+[214.686s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_control:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/build/rover_control:/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/build/rover_description:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/build --no-deps symlink_data
+[222.560s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_bringup', 'pythonpath_develop')
+[222.560s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/share/rover_bringup/hook/pythonpath_develop.ps1'
+[222.575s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_control:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/build/rover_control:/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/build/rover_description:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/build --no-deps symlink_data
+[222.582s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/share/rover_bringup/hook/pythonpath_develop.dsv'
+[222.617s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/share/rover_bringup/hook/pythonpath_develop.sh'
+[222.633s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup' for CMake module files
+[222.645s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup' for CMake config files
+[222.650s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/lib'
+[222.651s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/bin'
+[222.651s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/lib/pkgconfig/rover_bringup.pc'
+[222.652s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/lib/python3.12/site-packages'
+[222.653s] Level 1:colcon.colcon_core.shell:create_environment_hook('rover_bringup', 'pythonpath')
+[222.655s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/hook/pythonpath.ps1'
+[222.664s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/hook/pythonpath.dsv'
+[222.667s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/hook/pythonpath.sh'
+[222.671s] Level 1:colcon.colcon_core.environment:checking '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/bin'
+[222.672s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rover_bringup)
+[222.673s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/package.ps1'
+[222.676s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/package.dsv'
+[222.680s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/package.sh'
+[222.682s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/package.bash'
+[222.686s] INFO:colcon.colcon_core.shell:Creating package script '/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/rover_bringup/package.zsh'
+[222.689s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/share/colcon-core/packages/rover_bringup)
+[222.692s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[222.693s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[222.693s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[222.696s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[222.905s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[222.906s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[222.906s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[223.054s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[223.056s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/student/Desktop/Railway_Inspection_Rover/install/local_setup.ps1'
+[223.063s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/student/Desktop/Railway_Inspection_Rover/install/_local_setup_util_ps1.py'
+[223.069s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/student/Desktop/Railway_Inspection_Rover/install/setup.ps1'
+[223.094s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/student/Desktop/Railway_Inspection_Rover/install/local_setup.sh'
+[223.102s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/student/Desktop/Railway_Inspection_Rover/install/_local_setup_util_sh.py'
+[223.116s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/student/Desktop/Railway_Inspection_Rover/install/setup.sh'
+[223.142s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/student/Desktop/Railway_Inspection_Rover/install/local_setup.bash'
+[223.149s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/student/Desktop/Railway_Inspection_Rover/install/setup.bash'
+[223.178s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/student/Desktop/Railway_Inspection_Rover/install/local_setup.zsh'
+[223.193s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/student/Desktop/Railway_Inspection_Rover/install/setup.zsh'

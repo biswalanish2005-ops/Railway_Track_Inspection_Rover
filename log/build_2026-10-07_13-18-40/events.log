@@ -1,0 +1,921 @@
+[0.000000] (-) TimerEvent: {}
+[0.000969] (rover_camera) JobQueued: {'identifier': 'rover_camera', 'dependencies': OrderedDict()}
+[0.001203] (rover_description) JobQueued: {'identifier': 'rover_description', 'dependencies': OrderedDict()}
+[0.001293] (rover_msgs) JobQueued: {'identifier': 'rover_msgs', 'dependencies': OrderedDict()}
+[0.001376] (crack_detection) JobQueued: {'identifier': 'crack_detection', 'dependencies': OrderedDict({'rover_msgs': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs'})}
+[0.001497] (rover_control) JobQueued: {'identifier': 'rover_control', 'dependencies': OrderedDict({'rover_msgs': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs'})}
+[0.001583] (rover_bringup) JobQueued: {'identifier': 'rover_bringup', 'dependencies': OrderedDict({'rover_description': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_description', 'rover_msgs': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs', 'rover_control': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control'})}
+[0.005131] (rover_msgs) JobStarted: {'identifier': 'rover_msgs'}
+[0.034734] (rover_description) JobStarted: {'identifier': 'rover_description'}
+[0.058144] (rover_camera) JobStarted: {'identifier': 'rover_camera'}
+[0.093149] (rover_msgs) JobProgress: {'identifier': 'rover_msgs', 'progress': 'cmake'}
+[0.096612] (-) TimerEvent: {}
+[0.117562] (rover_msgs) Command: {'cmd': ['/usr/bin/cmake', '/home/student/Desktop/Railway_Inspection_Rover/src/rover_msgs', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs'], 'cwd': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CHROME_DEVTOOLS_MCP_JS': '/home/student/Downloads/Antigravity-arm64/resources/app.asar.unpacked/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js', 'USER': 'student', 'ANTIGRAVITY_SOURCE_METADATA': '{"tool":{"conversationId":"70afc0f2-5fe7-4411-b9de-455e062aa5a4","stepIndex":235,"toolCall":{"id":"call_780777","name":"run_command","argumentsJson":"{\\"BypassSandbox\\":true,\\"CommandLine\\":\\"colcon build --symlink-install\\",\\"Cwd\\":\\"/home/student/Desktop/Railway_Inspection_Rover\\",\\"WaitMsBeforeAsync\\":10000,\\"toolAction\\":\\"Building workspace with crack_detection\\",\\"toolSummary\\":\\"Run colcon build --symlink-install\\"}","thinkingSignature":"EoQCCoECAWkUfRNwVkqxPkBeBFZn/eRKwRU7/0J1m+P08hLkRDBwhu8v8JamS0FRvU4XX0jbZCaq62UybolXEe1t55ostzYKayBut36ks1jN2M97FzX044+mmFPrbjqsr4m0Wvom4FQo36LGM8eAYaOSOsX/iJ/nkHVlMlG+05KIe0s/O5LXKcba0lFZMW/lbQf8l37u/0u7z5ZIJ7hsTyVeK2PytmInoO6p4/5b+oKKnjIAt0m8LtrKgsbUGR9OY3n2rou1uFT15PJO2qjtzCZyTx+VmXwhSCobERDBie4SZD+S1DRjEm2jRoO6Ffo9tX/lyHu30YVHv+p/4aah0l5bmqR9eaM=","originalName":"run_command"}}}', 'XDG_SESSION_TYPE': 'wayland', 'ANTIGRAVITY_AGENTAPI_EXE': '/home/student/Downloads/Antigravity-arm64/resources/bin/language_server', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/mimick_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/student', 'CHROME_DESKTOP': 'antigravity.desktop', 'DISABLE_AUTO_UPDATE': 'true', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1419', 'ANTIGRAVITY_SAFECLIS_SOURCE': '/home/student/.gemini/antigravity/bin/safeclis/src', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '1583', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'ANTIGRAVITY_AGENT': '1', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21565', 'AGY_BROWSER_ACTIVE_PORT_FILE': '/home/student/.config/Antigravity/DevToolsActivePort', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'ZSH_TMUX_AUTOSTARTED': 'true', 'LOGNAME': 'student', 'AGY_BROWSER_WS_URL': 'ws://127.0.0.1:38643/devtools/browser/cfba1742-89d2-4cfb-a08e-a0abdc9df4a4', '_': '/usr/bin/colcon', 'JOURNAL_STREAM': '8:15597', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome\\x2dsession\\x2dmanager.slice/gnome-session-manager@ubuntu.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'student', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'ANTIGRAVITY_LS_VERSION': 'hub-2.5.0', 'PATH': '/home/student/.gemini/antigravity/bin:/home/student/.config/Antigravity/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/student-desktop:@/tmp/.ICE-unix/1583,unix/student-desktop:/tmp/.ICE-unix/1583', 'INVOCATION_ID': '8742af1c72264a92bf65d58cc3a2e674', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'ANTIGRAVITY_CONVERSATION_ID': '70afc0f2-5fe7-4411-b9de-455e062aa5a4', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.6SNGW3', 'LS_COLORS': '', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'ANTIGRAVITY_PROJECT_ID': '4c4954c6-7aa6-46d8-b9da-1b356078e122', 'SHELL': '/bin/bash', 'ANTIGRAVITY_LS_ADDRESS': 'localhost:40013', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'ANTIGRAVITY_TRAJECTORY_ID': '7c6e07cd-da54-45de-8278-a2e0d35b651c', 'PWD': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'ZSH_TMUX_AUTOSTART': 'false', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/opt/gz_math_vendor/lib/python:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'ANTIGRAVITY_CSRF_TOKEN': '7e0672cb-5b50-415d-85f7-70246489bfb7', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[0.198510] (-) TimerEvent: {}
+[0.299284] (-) TimerEvent: {}
+[0.400091] (-) TimerEvent: {}
+[0.507524] (-) TimerEvent: {}
+[0.609108] (-) TimerEvent: {}
+[0.714523] (-) TimerEvent: {}
+[0.821305] (-) TimerEvent: {}
+[0.928390] (-) TimerEvent: {}
+[1.032083] (-) TimerEvent: {}
+[1.136245] (-) TimerEvent: {}
+[1.242473] (-) TimerEvent: {}
+[1.344027] (-) TimerEvent: {}
+[1.447502] (-) TimerEvent: {}
+[1.548257] (-) TimerEvent: {}
+[1.650432] (-) TimerEvent: {}
+[1.756007] (-) TimerEvent: {}
+[1.857850] (-) TimerEvent: {}
+[1.959883] (-) TimerEvent: {}
+[2.064451] (-) TimerEvent: {}
+[2.172173] (-) TimerEvent: {}
+[2.287868] (-) TimerEvent: {}
+[2.395621] (-) TimerEvent: {}
+[2.500690] (-) TimerEvent: {}
+[2.602616] (-) TimerEvent: {}
+[2.706595] (-) TimerEvent: {}
+[2.813447] (-) TimerEvent: {}
+[2.917776] (-) TimerEvent: {}
+[3.018523] (-) TimerEvent: {}
+[3.119303] (-) TimerEvent: {}
+[3.234517] (-) TimerEvent: {}
+[3.289471] (rover_msgs) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[3.292740] (rover_msgs) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[3.302995] (rover_msgs) StdoutLine: {'line': b'-- Found builtin_interfaces: 2.0.4 (/opt/ros/jazzy/share/builtin_interfaces/cmake)\n'}
+[3.303905] (rover_msgs) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[3.304195] (rover_msgs) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[3.304433] (rover_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[3.304719] (rover_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[3.304963] (rover_msgs) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.6.1 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)\n'}
+[3.305208] (rover_msgs) StdoutLine: {'line': b'-- Found rosidl_adapter: 4.6.9 (/opt/ros/jazzy/share/rosidl_adapter/cmake)\n'}
+[3.342976] (-) TimerEvent: {}
+[3.447612] (-) TimerEvent: {}
+[3.559390] (-) TimerEvent: {}
+[3.661172] (-) TimerEvent: {}
+[3.762533] (-) TimerEvent: {}
+[3.864561] (rover_msgs) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.12.1 (/opt/ros/jazzy/share/ament_cmake_ros/cmake)\n'}
+[3.865577] (-) TimerEvent: {}
+[3.970529] (-) TimerEvent: {}
+[4.076779] (-) TimerEvent: {}
+[4.178504] (-) TimerEvent: {}
+[4.279219] (-) TimerEvent: {}
+[4.388486] (-) TimerEvent: {}
+[4.494800] (-) TimerEvent: {}
+[4.596924] (-) TimerEvent: {}
+[4.700523] (-) TimerEvent: {}
+[4.801532] (-) TimerEvent: {}
+[4.910627] (-) TimerEvent: {}
+[5.020818] (-) TimerEvent: {}
+[5.126547] (-) TimerEvent: {}
+[5.196912] (rover_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[5.230724] (-) TimerEvent: {}
+[5.333669] (-) TimerEvent: {}
+[5.434383] (-) TimerEvent: {}
+[5.535928] (-) TimerEvent: {}
+[5.645807] (-) TimerEvent: {}
+[5.751914] (-) TimerEvent: {}
+[5.868489] (-) TimerEvent: {}
+[5.972414] (-) TimerEvent: {}
+[6.084509] (-) TimerEvent: {}
+[6.117408] (rover_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[6.133692] (rover_msgs) StdoutLine: {'line': b'-- Found python_cmake_module: 0.11.1 (/opt/ros/jazzy/share/python_cmake_module/cmake)\n'}
+[6.186554] (-) TimerEvent: {}
+[6.287778] (-) TimerEvent: {}
+[6.390442] (-) TimerEvent: {}
+[6.501781] (-) TimerEvent: {}
+[6.605477] (-) TimerEvent: {}
+[6.706161] (-) TimerEvent: {}
+[6.809706] (-) TimerEvent: {}
+[6.910755] (-) TimerEvent: {}
+[7.013485] (-) TimerEvent: {}
+[7.115562] (-) TimerEvent: {}
+[7.218492] (-) TimerEvent: {}
+[7.319209] (-) TimerEvent: {}
+[7.425027] (-) TimerEvent: {}
+[7.530607] (-) TimerEvent: {}
+[7.633822] (-) TimerEvent: {}
+[7.743798] (-) TimerEvent: {}
+[7.850168] (-) TimerEvent: {}
+[7.952563] (-) TimerEvent: {}
+[8.053208] (-) TimerEvent: {}
+[8.156742] (-) TimerEvent: {}
+[8.257478] (-) TimerEvent: {}
+[8.362481] (-) TimerEvent: {}
+[8.465618] (-) TimerEvent: {}
+[8.566318] (-) TimerEvent: {}
+[8.670182] (-) TimerEvent: {}
+[8.771064] (-) TimerEvent: {}
+[8.873881] (-) TimerEvent: {}
+[8.883899] (rover_msgs) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development NumPy Development.Module Development.Embed \n'}
+[8.979494] (-) TimerEvent: {}
+[9.080206] (-) TimerEvent: {}
+[9.181119] (-) TimerEvent: {}
+[9.282771] (-) TimerEvent: {}
+[9.385322] (-) TimerEvent: {}
+[9.490532] (-) TimerEvent: {}
+[9.591406] (-) TimerEvent: {}
+[9.695644] (-) TimerEvent: {}
+[9.710179] (rover_msgs) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[9.797441] (-) TimerEvent: {}
+[9.874506] (rover_msgs) StdoutLine: {'line': b'-- Configuring done (9.7s)\n'}
+[9.897786] (-) TimerEvent: {}
+[10.003798] (-) TimerEvent: {}
+[10.113507] (-) TimerEvent: {}
+[10.225595] (-) TimerEvent: {}
+[10.329036] (-) TimerEvent: {}
+[10.440130] (-) TimerEvent: {}
+[10.546892] (-) TimerEvent: {}
+[10.655739] (-) TimerEvent: {}
+[10.672869] (rover_msgs) StdoutLine: {'line': b'-- Generating done (0.8s)\n'}
+[10.758006] (-) TimerEvent: {}
+[10.806824] (rover_msgs) StdoutLine: {'line': b'-- Build files have been written to: /home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs\n'}
+[10.859646] (-) TimerEvent: {}
+[10.873195] (rover_msgs) CommandEnded: {'returncode': 0}
+[10.875414] (rover_msgs) JobProgress: {'identifier': 'rover_msgs', 'progress': 'build'}
+[10.875538] (rover_msgs) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', '--', '-j4', '-l4'], 'cwd': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CHROME_DEVTOOLS_MCP_JS': '/home/student/Downloads/Antigravity-arm64/resources/app.asar.unpacked/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js', 'USER': 'student', 'ANTIGRAVITY_SOURCE_METADATA': '{"tool":{"conversationId":"70afc0f2-5fe7-4411-b9de-455e062aa5a4","stepIndex":235,"toolCall":{"id":"call_780777","name":"run_command","argumentsJson":"{\\"BypassSandbox\\":true,\\"CommandLine\\":\\"colcon build --symlink-install\\",\\"Cwd\\":\\"/home/student/Desktop/Railway_Inspection_Rover\\",\\"WaitMsBeforeAsync\\":10000,\\"toolAction\\":\\"Building workspace with crack_detection\\",\\"toolSummary\\":\\"Run colcon build --symlink-install\\"}","thinkingSignature":"EoQCCoECAWkUfRNwVkqxPkBeBFZn/eRKwRU7/0J1m+P08hLkRDBwhu8v8JamS0FRvU4XX0jbZCaq62UybolXEe1t55ostzYKayBut36ks1jN2M97FzX044+mmFPrbjqsr4m0Wvom4FQo36LGM8eAYaOSOsX/iJ/nkHVlMlG+05KIe0s/O5LXKcba0lFZMW/lbQf8l37u/0u7z5ZIJ7hsTyVeK2PytmInoO6p4/5b+oKKnjIAt0m8LtrKgsbUGR9OY3n2rou1uFT15PJO2qjtzCZyTx+VmXwhSCobERDBie4SZD+S1DRjEm2jRoO6Ffo9tX/lyHu30YVHv+p/4aah0l5bmqR9eaM=","originalName":"run_command"}}}', 'XDG_SESSION_TYPE': 'wayland', 'ANTIGRAVITY_AGENTAPI_EXE': '/home/student/Downloads/Antigravity-arm64/resources/bin/language_server', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/mimick_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/student', 'CHROME_DESKTOP': 'antigravity.desktop', 'DISABLE_AUTO_UPDATE': 'true', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1419', 'ANTIGRAVITY_SAFECLIS_SOURCE': '/home/student/.gemini/antigravity/bin/safeclis/src', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '1583', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'ANTIGRAVITY_AGENT': '1', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21565', 'AGY_BROWSER_ACTIVE_PORT_FILE': '/home/student/.config/Antigravity/DevToolsActivePort', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'ZSH_TMUX_AUTOSTARTED': 'true', 'LOGNAME': 'student', 'AGY_BROWSER_WS_URL': 'ws://127.0.0.1:38643/devtools/browser/cfba1742-89d2-4cfb-a08e-a0abdc9df4a4', '_': '/usr/bin/colcon', 'JOURNAL_STREAM': '8:15597', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome\\x2dsession\\x2dmanager.slice/gnome-session-manager@ubuntu.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'student', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'ANTIGRAVITY_LS_VERSION': 'hub-2.5.0', 'PATH': '/home/student/.gemini/antigravity/bin:/home/student/.config/Antigravity/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/student-desktop:@/tmp/.ICE-unix/1583,unix/student-desktop:/tmp/.ICE-unix/1583', 'INVOCATION_ID': '8742af1c72264a92bf65d58cc3a2e674', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'ANTIGRAVITY_CONVERSATION_ID': '70afc0f2-5fe7-4411-b9de-455e062aa5a4', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.6SNGW3', 'LS_COLORS': '', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'ANTIGRAVITY_PROJECT_ID': '4c4954c6-7aa6-46d8-b9da-1b356078e122', 'SHELL': '/bin/bash', 'ANTIGRAVITY_LS_ADDRESS': 'localhost:40013', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'ANTIGRAVITY_TRAJECTORY_ID': '7c6e07cd-da54-45de-8278-a2e0d35b651c', 'PWD': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'ZSH_TMUX_AUTOSTART': 'false', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/opt/gz_math_vendor/lib/python:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'ANTIGRAVITY_CSRF_TOKEN': '7e0672cb-5b50-415d-85f7-70246489bfb7', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[10.960028] (-) TimerEvent: {}
+[11.061834] (-) TimerEvent: {}
+[11.176469] (-) TimerEvent: {}
+[11.277516] (-) TimerEvent: {}
+[11.381126] (-) TimerEvent: {}
+[11.482509] (-) TimerEvent: {}
+[11.559418] (rover_msgs) StdoutLine: {'line': b'[  1%] Built target rover_msgs__rosidl_generator_type_description\n'}
+[11.583704] (-) TimerEvent: {}
+[11.687531] (-) TimerEvent: {}
+[11.790258] (-) TimerEvent: {}
+[11.893314] (-) TimerEvent: {}
+[11.972105] (rover_msgs) StdoutLine: {'line': b'[  1%] Built target ament_cmake_python_symlink_rover_msgs\n'}
+[11.994876] (-) TimerEvent: {}
+[12.096839] (-) TimerEvent: {}
+[12.197506] (-) TimerEvent: {}
+[12.310521] (-) TimerEvent: {}
+[12.402289] (rover_msgs) StdoutLine: {'line': b'[  3%] Built target rover_msgs__cpp\n'}
+[12.419570] (-) TimerEvent: {}
+[12.524475] (-) TimerEvent: {}
+[12.625180] (-) TimerEvent: {}
+[12.725966] (-) TimerEvent: {}
+[12.847506] (-) TimerEvent: {}
+[12.951930] (-) TimerEvent: {}
+[13.052840] (-) TimerEvent: {}
+[13.159090] (-) TimerEvent: {}
+[13.259855] (-) TimerEvent: {}
+[13.364957] (-) TimerEvent: {}
+[13.465629] (-) TimerEvent: {}
+[13.566281] (-) TimerEvent: {}
+[13.669556] (-) TimerEvent: {}
+[13.771551] (-) TimerEvent: {}
+[13.874136] (-) TimerEvent: {}
+[13.974921] (-) TimerEvent: {}
+[14.077178] (-) TimerEvent: {}
+[14.177945] (-) TimerEvent: {}
+[14.278722] (-) TimerEvent: {}
+[14.337607] (rover_msgs) StdoutLine: {'line': b'running egg_info\n'}
+[14.384428] (-) TimerEvent: {}
+[14.422597] (rover_msgs) StdoutLine: {'line': b'writing rover_msgs.egg-info/PKG-INFO\n'}
+[14.423568] (rover_msgs) StdoutLine: {'line': b'writing dependency_links to rover_msgs.egg-info/dependency_links.txt\n'}
+[14.447686] (rover_msgs) StdoutLine: {'line': b'writing top-level names to rover_msgs.egg-info/top_level.txt\n'}
+[14.486657] (-) TimerEvent: {}
+[14.588007] (-) TimerEvent: {}
+[14.693206] (-) TimerEvent: {}
+[14.798232] (-) TimerEvent: {}
+[14.903576] (-) TimerEvent: {}
+[15.007807] (-) TimerEvent: {}
+[15.108981] (-) TimerEvent: {}
+[15.212527] (-) TimerEvent: {}
+[15.313366] (-) TimerEvent: {}
+[15.416504] (-) TimerEvent: {}
+[15.518572] (-) TimerEvent: {}
+[15.623445] (-) TimerEvent: {}
+[15.724567] (-) TimerEvent: {}
+[15.830157] (-) TimerEvent: {}
+[15.937398] (-) TimerEvent: {}
+[15.949639] (rover_msgs) StdoutLine: {'line': b"reading manifest file 'rover_msgs.egg-info/SOURCES.txt'\n"}
+[15.966508] (rover_msgs) StdoutLine: {'line': b"writing manifest file 'rover_msgs.egg-info/SOURCES.txt'\n"}
+[16.042502] (-) TimerEvent: {}
+[16.144577] (-) TimerEvent: {}
+[16.252744] (-) TimerEvent: {}
+[16.356814] (-) TimerEvent: {}
+[16.445756] (rover_msgs) StdoutLine: {'line': b'[  3%] Built target ament_cmake_python_build_rover_msgs_egg\n'}
+[16.461577] (-) TimerEvent: {}
+[16.562785] (-) TimerEvent: {}
+[16.664571] (-) TimerEvent: {}
+[16.766675] (-) TimerEvent: {}
+[16.805525] (rover_msgs) StdoutLine: {'line': b'[ 23%] Built target rover_msgs__rosidl_generator_c\n'}
+[16.866824] (-) TimerEvent: {}
+[16.967500] (-) TimerEvent: {}
+[17.068696] (-) TimerEvent: {}
+[17.172101] (-) TimerEvent: {}
+[17.280494] (-) TimerEvent: {}
+[17.383663] (-) TimerEvent: {}
+[17.408528] (rover_msgs) StdoutLine: {'line': b'[ 25%] Built target rover_msgs__rs\n'}
+[17.489641] (-) TimerEvent: {}
+[17.591281] (-) TimerEvent: {}
+[17.656492] (rover_msgs) StdoutLine: {'line': b'[ 34%] Built target rover_msgs__rosidl_typesupport_introspection_c\n'}
+[17.701694] (-) TimerEvent: {}
+[17.806487] (-) TimerEvent: {}
+[17.907203] (-) TimerEvent: {}
+[18.008144] (-) TimerEvent: {}
+[18.119008] (-) TimerEvent: {}
+[18.147612] (rover_msgs) StdoutLine: {'line': b'[ 43%] Built target rover_msgs__rosidl_typesupport_c\n'}
+[18.222575] (-) TimerEvent: {}
+[18.328053] (-) TimerEvent: {}
+[18.428753] (-) TimerEvent: {}
+[18.531634] (-) TimerEvent: {}
+[18.583339] (rover_msgs) StdoutLine: {'line': b'[ 52%] Built target rover_msgs__rosidl_typesupport_introspection_cpp\n'}
+[18.636800] (-) TimerEvent: {}
+[18.748070] (-) TimerEvent: {}
+[18.868656] (-) TimerEvent: {}
+[18.874392] (rover_msgs) StdoutLine: {'line': b'[ 61%] Built target rover_msgs__rosidl_typesupport_cpp\n'}
+[18.977144] (-) TimerEvent: {}
+[19.083170] (-) TimerEvent: {}
+[19.149521] (rover_msgs) StdoutLine: {'line': b'[ 70%] Built target rover_msgs__rosidl_typesupport_fastrtps_cpp\n'}
+[19.189290] (-) TimerEvent: {}
+[19.290253] (-) TimerEvent: {}
+[19.390952] (-) TimerEvent: {}
+[19.495025] (-) TimerEvent: {}
+[19.577627] (rover_msgs) StdoutLine: {'line': b'[ 80%] Built target rover_msgs__rosidl_typesupport_fastrtps_c\n'}
+[19.595983] (-) TimerEvent: {}
+[19.702677] (-) TimerEvent: {}
+[19.807861] (-) TimerEvent: {}
+[19.895551] (rover_msgs) StdoutLine: {'line': b'[ 80%] Built target rover_msgs\n'}
+[19.910494] (-) TimerEvent: {}
+[20.016934] (-) TimerEvent: {}
+[20.119063] (-) TimerEvent: {}
+[20.224704] (-) TimerEvent: {}
+[20.326779] (-) TimerEvent: {}
+[20.357923] (rover_msgs) StdoutLine: {'line': b'[ 81%] Built target rover_msgs__py\n'}
+[20.429818] (-) TimerEvent: {}
+[20.530657] (-) TimerEvent: {}
+[20.640626] (-) TimerEvent: {}
+[20.660821] (rover_msgs) StdoutLine: {'line': b'[ 89%] Built target rover_msgs__rosidl_generator_py\n'}
+[20.744558] (-) TimerEvent: {}
+[20.853331] (-) TimerEvent: {}
+[20.966944] (-) TimerEvent: {}
+[21.075215] (-) TimerEvent: {}
+[21.149881] (rover_description) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description/build', '--no-deps', 'symlink_data'], 'cwd': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CHROME_DEVTOOLS_MCP_JS': '/home/student/Downloads/Antigravity-arm64/resources/app.asar.unpacked/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js', 'USER': 'student', 'ANTIGRAVITY_SOURCE_METADATA': '{"tool":{"conversationId":"70afc0f2-5fe7-4411-b9de-455e062aa5a4","stepIndex":235,"toolCall":{"id":"call_780777","name":"run_command","argumentsJson":"{\\"BypassSandbox\\":true,\\"CommandLine\\":\\"colcon build --symlink-install\\",\\"Cwd\\":\\"/home/student/Desktop/Railway_Inspection_Rover\\",\\"WaitMsBeforeAsync\\":10000,\\"toolAction\\":\\"Building workspace with crack_detection\\",\\"toolSummary\\":\\"Run colcon build --symlink-install\\"}","thinkingSignature":"EoQCCoECAWkUfRNwVkqxPkBeBFZn/eRKwRU7/0J1m+P08hLkRDBwhu8v8JamS0FRvU4XX0jbZCaq62UybolXEe1t55ostzYKayBut36ks1jN2M97FzX044+mmFPrbjqsr4m0Wvom4FQo36LGM8eAYaOSOsX/iJ/nkHVlMlG+05KIe0s/O5LXKcba0lFZMW/lbQf8l37u/0u7z5ZIJ7hsTyVeK2PytmInoO6p4/5b+oKKnjIAt0m8LtrKgsbUGR9OY3n2rou1uFT15PJO2qjtzCZyTx+VmXwhSCobERDBie4SZD+S1DRjEm2jRoO6Ffo9tX/lyHu30YVHv+p/4aah0l5bmqR9eaM=","originalName":"run_command"}}}', 'XDG_SESSION_TYPE': 'wayland', 'ANTIGRAVITY_AGENTAPI_EXE': '/home/student/Downloads/Antigravity-arm64/resources/bin/language_server', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/mimick_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/student', 'CHROME_DESKTOP': 'antigravity.desktop', 'DISABLE_AUTO_UPDATE': 'true', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1419', 'ANTIGRAVITY_SAFECLIS_SOURCE': '/home/student/.gemini/antigravity/bin/safeclis/src', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '1583', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'ANTIGRAVITY_AGENT': '1', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21565', 'AGY_BROWSER_ACTIVE_PORT_FILE': '/home/student/.config/Antigravity/DevToolsActivePort', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'ZSH_TMUX_AUTOSTARTED': 'true', 'LOGNAME': 'student', 'AGY_BROWSER_WS_URL': 'ws://127.0.0.1:38643/devtools/browser/cfba1742-89d2-4cfb-a08e-a0abdc9df4a4', '_': '/usr/bin/colcon', 'JOURNAL_STREAM': '8:15597', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome\\x2dsession\\x2dmanager.slice/gnome-session-manager@ubuntu.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'student', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'ANTIGRAVITY_LS_VERSION': 'hub-2.5.0', 'PATH': '/home/student/.gemini/antigravity/bin:/home/student/.config/Antigravity/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/student-desktop:@/tmp/.ICE-unix/1583,unix/student-desktop:/tmp/.ICE-unix/1583', 'INVOCATION_ID': '8742af1c72264a92bf65d58cc3a2e674', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'ANTIGRAVITY_CONVERSATION_ID': '70afc0f2-5fe7-4411-b9de-455e062aa5a4', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.6SNGW3', 'LS_COLORS': '', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'ANTIGRAVITY_PROJECT_ID': '4c4954c6-7aa6-46d8-b9da-1b356078e122', 'SHELL': '/bin/bash', 'ANTIGRAVITY_LS_ADDRESS': 'localhost:40013', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'ANTIGRAVITY_TRAJECTORY_ID': '7c6e07cd-da54-45de-8278-a2e0d35b651c', 'PWD': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'ZSH_TMUX_AUTOSTART': 'false', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages:/opt/ros/jazzy/opt/gz_math_vendor/lib/python:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'ANTIGRAVITY_CSRF_TOKEN': '7e0672cb-5b50-415d-85f7-70246489bfb7', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}), 'shell': False}
+[21.175563] (-) TimerEvent: {}
+[21.223419] (rover_camera) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/build', '--no-deps', 'symlink_data'], 'cwd': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CHROME_DEVTOOLS_MCP_JS': '/home/student/Downloads/Antigravity-arm64/resources/app.asar.unpacked/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js', 'USER': 'student', 'ANTIGRAVITY_SOURCE_METADATA': '{"tool":{"conversationId":"70afc0f2-5fe7-4411-b9de-455e062aa5a4","stepIndex":235,"toolCall":{"id":"call_780777","name":"run_command","argumentsJson":"{\\"BypassSandbox\\":true,\\"CommandLine\\":\\"colcon build --symlink-install\\",\\"Cwd\\":\\"/home/student/Desktop/Railway_Inspection_Rover\\",\\"WaitMsBeforeAsync\\":10000,\\"toolAction\\":\\"Building workspace with crack_detection\\",\\"toolSummary\\":\\"Run colcon build --symlink-install\\"}","thinkingSignature":"EoQCCoECAWkUfRNwVkqxPkBeBFZn/eRKwRU7/0J1m+P08hLkRDBwhu8v8JamS0FRvU4XX0jbZCaq62UybolXEe1t55ostzYKayBut36ks1jN2M97FzX044+mmFPrbjqsr4m0Wvom4FQo36LGM8eAYaOSOsX/iJ/nkHVlMlG+05KIe0s/O5LXKcba0lFZMW/lbQf8l37u/0u7z5ZIJ7hsTyVeK2PytmInoO6p4/5b+oKKnjIAt0m8LtrKgsbUGR9OY3n2rou1uFT15PJO2qjtzCZyTx+VmXwhSCobERDBie4SZD+S1DRjEm2jRoO6Ffo9tX/lyHu30YVHv+p/4aah0l5bmqR9eaM=","originalName":"run_command"}}}', 'XDG_SESSION_TYPE': 'wayland', 'ANTIGRAVITY_AGENTAPI_EXE': '/home/student/Downloads/Antigravity-arm64/resources/bin/language_server', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/mimick_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/student', 'CHROME_DESKTOP': 'antigravity.desktop', 'DISABLE_AUTO_UPDATE': 'true', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1419', 'ANTIGRAVITY_SAFECLIS_SOURCE': '/home/student/.gemini/antigravity/bin/safeclis/src', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '1583', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'ANTIGRAVITY_AGENT': '1', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21565', 'AGY_BROWSER_ACTIVE_PORT_FILE': '/home/student/.config/Antigravity/DevToolsActivePort', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'ZSH_TMUX_AUTOSTARTED': 'true', 'LOGNAME': 'student', 'AGY_BROWSER_WS_URL': 'ws://127.0.0.1:38643/devtools/browser/cfba1742-89d2-4cfb-a08e-a0abdc9df4a4', '_': '/usr/bin/colcon', 'JOURNAL_STREAM': '8:15597', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome\\x2dsession\\x2dmanager.slice/gnome-session-manager@ubuntu.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'student', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'ANTIGRAVITY_LS_VERSION': 'hub-2.5.0', 'PATH': '/home/student/.gemini/antigravity/bin:/home/student/.config/Antigravity/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/student-desktop:@/tmp/.ICE-unix/1583,unix/student-desktop:/tmp/.ICE-unix/1583', 'INVOCATION_ID': '8742af1c72264a92bf65d58cc3a2e674', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'ANTIGRAVITY_CONVERSATION_ID': '70afc0f2-5fe7-4411-b9de-455e062aa5a4', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.6SNGW3', 'LS_COLORS': '', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'ANTIGRAVITY_PROJECT_ID': '4c4954c6-7aa6-46d8-b9da-1b356078e122', 'SHELL': '/bin/bash', 'ANTIGRAVITY_LS_ADDRESS': 'localhost:40013', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'ANTIGRAVITY_TRAJECTORY_ID': '7c6e07cd-da54-45de-8278-a2e0d35b651c', 'PWD': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'ZSH_TMUX_AUTOSTART': 'false', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/python3.12/site-packages:/opt/ros/jazzy/opt/gz_math_vendor/lib/python:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'ANTIGRAVITY_CSRF_TOKEN': '7e0672cb-5b50-415d-85f7-70246489bfb7', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}), 'shell': False}
+[21.279177] (rover_msgs) StdoutLine: {'line': b'[ 92%] Built target rover_msgs_s__rosidl_typesupport_fastrtps_c\n'}
+[21.279849] (-) TimerEvent: {}
+[21.384475] (-) TimerEvent: {}
+[21.485400] (-) TimerEvent: {}
+[21.555692] (rover_msgs) StdoutLine: {'line': b'[ 96%] Built target rover_msgs_s__rosidl_typesupport_c\n'}
+[21.587533] (-) TimerEvent: {}
+[21.691845] (-) TimerEvent: {}
+[21.800769] (-) TimerEvent: {}
+[21.903283] (-) TimerEvent: {}
+[22.020835] (-) TimerEvent: {}
+[22.081780] (rover_msgs) StdoutLine: {'line': b'[100%] Built target rover_msgs_s__rosidl_typesupport_introspection_c\n'}
+[22.121940] (-) TimerEvent: {}
+[22.233154] (-) TimerEvent: {}
+[22.340151] (-) TimerEvent: {}
+[22.367159] (rover_msgs) CommandEnded: {'returncode': 0}
+[22.371724] (rover_msgs) JobProgress: {'identifier': 'rover_msgs', 'progress': 'install'}
+[22.445816] (-) TimerEvent: {}
+[22.506560] (rover_msgs) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs'], 'cwd': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CHROME_DEVTOOLS_MCP_JS': '/home/student/Downloads/Antigravity-arm64/resources/app.asar.unpacked/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js', 'USER': 'student', 'ANTIGRAVITY_SOURCE_METADATA': '{"tool":{"conversationId":"70afc0f2-5fe7-4411-b9de-455e062aa5a4","stepIndex":235,"toolCall":{"id":"call_780777","name":"run_command","argumentsJson":"{\\"BypassSandbox\\":true,\\"CommandLine\\":\\"colcon build --symlink-install\\",\\"Cwd\\":\\"/home/student/Desktop/Railway_Inspection_Rover\\",\\"WaitMsBeforeAsync\\":10000,\\"toolAction\\":\\"Building workspace with crack_detection\\",\\"toolSummary\\":\\"Run colcon build --symlink-install\\"}","thinkingSignature":"EoQCCoECAWkUfRNwVkqxPkBeBFZn/eRKwRU7/0J1m+P08hLkRDBwhu8v8JamS0FRvU4XX0jbZCaq62UybolXEe1t55ostzYKayBut36ks1jN2M97FzX044+mmFPrbjqsr4m0Wvom4FQo36LGM8eAYaOSOsX/iJ/nkHVlMlG+05KIe0s/O5LXKcba0lFZMW/lbQf8l37u/0u7z5ZIJ7hsTyVeK2PytmInoO6p4/5b+oKKnjIAt0m8LtrKgsbUGR9OY3n2rou1uFT15PJO2qjtzCZyTx+VmXwhSCobERDBie4SZD+S1DRjEm2jRoO6Ffo9tX/lyHu30YVHv+p/4aah0l5bmqR9eaM=","originalName":"run_command"}}}', 'XDG_SESSION_TYPE': 'wayland', 'ANTIGRAVITY_AGENTAPI_EXE': '/home/student/Downloads/Antigravity-arm64/resources/bin/language_server', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/mimick_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/student', 'CHROME_DESKTOP': 'antigravity.desktop', 'DISABLE_AUTO_UPDATE': 'true', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1419', 'ANTIGRAVITY_SAFECLIS_SOURCE': '/home/student/.gemini/antigravity/bin/safeclis/src', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '1583', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'ANTIGRAVITY_AGENT': '1', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21565', 'AGY_BROWSER_ACTIVE_PORT_FILE': '/home/student/.config/Antigravity/DevToolsActivePort', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'ZSH_TMUX_AUTOSTARTED': 'true', 'LOGNAME': 'student', 'AGY_BROWSER_WS_URL': 'ws://127.0.0.1:38643/devtools/browser/cfba1742-89d2-4cfb-a08e-a0abdc9df4a4', '_': '/usr/bin/colcon', 'JOURNAL_STREAM': '8:15597', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome\\x2dsession\\x2dmanager.slice/gnome-session-manager@ubuntu.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'student', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'ANTIGRAVITY_LS_VERSION': 'hub-2.5.0', 'PATH': '/home/student/.gemini/antigravity/bin:/home/student/.config/Antigravity/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/student-desktop:@/tmp/.ICE-unix/1583,unix/student-desktop:/tmp/.ICE-unix/1583', 'INVOCATION_ID': '8742af1c72264a92bf65d58cc3a2e674', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'ANTIGRAVITY_CONVERSATION_ID': '70afc0f2-5fe7-4411-b9de-455e062aa5a4', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.6SNGW3', 'LS_COLORS': '', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'ANTIGRAVITY_PROJECT_ID': '4c4954c6-7aa6-46d8-b9da-1b356078e122', 'SHELL': '/bin/bash', 'ANTIGRAVITY_LS_ADDRESS': 'localhost:40013', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'ANTIGRAVITY_TRAJECTORY_ID': '7c6e07cd-da54-45de-8278-a2e0d35b651c', 'PWD': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_msgs', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'ZSH_TMUX_AUTOSTART': 'false', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/opt/gz_math_vendor/lib/python:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'ANTIGRAVITY_CSRF_TOKEN': '7e0672cb-5b50-415d-85f7-70246489bfb7', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[22.548682] (-) TimerEvent: {}
+[22.609601] (rover_msgs) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[22.617663] (rover_msgs) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[22.623462] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/ament_index/resource_index/rosidl_interfaces/rover_msgs\n'}
+[22.630563] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/RoverState.json\n'}
+[22.638548] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/CrackDetection.json\n'}
+[22.642890] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/srv/EmergencyStop.json\n'}
+[22.649499] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/crack_detection.h\n'}
+[22.650067] (-) TimerEvent: {}
+[22.661482] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__functions.h\n'}
+[22.675933] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__struct.h\n'}
+[22.688110] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__type_support.h\n'}
+[22.689289] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__functions.h\n'}
+[22.689770] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__struct.h\n'}
+[22.689998] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__type_support.h\n'}
+[22.702550] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_generator_c__visibility_control.h\n'}
+[22.703232] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rover_state.h\n'}
+[22.703559] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__functions.h\n'}
+[22.703806] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__struct.h\n'}
+[22.704052] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__type_support.h\n'}
+[22.705522] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/emergency_stop.h\n'}
+[22.706914] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/library_path.sh\n'}
+[22.707214] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/library_path.dsv\n'}
+[22.717192] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__rosidl_typesupport_fastrtps_c.h\n'}
+[22.717904] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__rosidl_typesupport_fastrtps_c.h\n'}
+[22.718214] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[22.720516] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__rosidl_typesupport_fastrtps_c.h\n'}
+[22.727464] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/crack_detection.hpp\n'}
+[22.734479] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__builder.hpp\n'}
+[22.742000] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__struct.hpp\n'}
+[22.742751] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__traits.hpp\n'}
+[22.745436] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__type_support.hpp\n'}
+[22.748585] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__builder.hpp\n'}
+[22.755196] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__struct.hpp\n'}
+[22.755814] (-) TimerEvent: {}
+[22.765415] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__traits.hpp\n'}
+[22.774337] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__type_support.hpp\n'}
+[22.774774] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_generator_cpp__visibility_control.hpp\n'}
+[22.780235] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rover_state.hpp\n'}
+[22.780855] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__builder.hpp\n'}
+[22.783328] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__struct.hpp\n'}
+[22.784076] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__traits.hpp\n'}
+[22.784312] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__type_support.hpp\n'}
+[22.788406] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/emergency_stop.hpp\n'}
+[22.792307] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[22.799894] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[22.803099] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[22.805551] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[22.808309] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__rosidl_typesupport_introspection_c.h\n'}
+[22.812022] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__rosidl_typesupport_introspection_c.h\n'}
+[22.815057] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[22.818470] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__rosidl_typesupport_introspection_c.h\n'}
+[22.821207] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/crack_detection__rosidl_typesupport_introspection_cpp.hpp\n'}
+[22.824764] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/msg/detail/rover_state__rosidl_typesupport_introspection_cpp.hpp\n'}
+[22.828956] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/include/rover_msgs/rover_msgs/srv/detail/emergency_stop__rosidl_typesupport_introspection_cpp.hpp\n'}
+[22.832682] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/pythonpath.sh\n'}
+[22.840952] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/pythonpath.dsv\n'}
+[22.844586] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs-0.1.0-py3.12.egg-info/PKG-INFO\n'}
+[22.858091] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs-0.1.0-py3.12.egg-info/SOURCES.txt\n'}
+[22.858842] (-) TimerEvent: {}
+[22.863617] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs-0.1.0-py3.12.egg-info/dependency_links.txt\n'}
+[22.864233] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs-0.1.0-py3.12.egg-info/top_level.txt\n'}
+[22.878618] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/__init__.py\n'}
+[22.879759] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/_rover_msgs_s.ep.rosidl_typesupport_c.c\n'}
+[22.880158] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/_rover_msgs_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[22.880612] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/_rover_msgs_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[22.893516] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/__init__.py\n'}
+[22.894184] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_crack_detection.py\n'}
+[22.894458] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_crack_detection_s.c\n'}
+[22.896716] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_rover_state.py\n'}
+[22.907464] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg/_rover_state_s.c\n'}
+[22.908180] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_c.so\n'}
+[22.921906] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_fastrtps_c.so\n'}
+[22.923534] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_introspection_c.so\n'}
+[22.923966] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv/__init__.py\n'}
+[22.939088] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv/_emergency_stop.py\n'}
+[22.939762] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv/_emergency_stop_s.c\n'}
+[22.954983] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_fastrtps_c.so\n'}
+[22.955663] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_introspection_c.so\n'}
+[22.955949] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/rover_msgs_s__rosidl_typesupport_c.so\n'}
+[22.966488] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/Cargo.toml\n'}
+[22.967185] (-) TimerEvent: {}
+[22.968328] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/build.rs\n'}
+[22.968818] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/lib.rs\n'}
+[22.984750] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/msg.rs\n'}
+[22.985401] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/msg/rmw.rs\n'}
+[22.985718] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/srv.rs\n'}
+[22.985968] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/rust/src/srv/rmw.rs\n'}
+[23.015310] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/RoverState.idl\n'}
+[23.016409] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/CrackDetection.idl\n'}
+[23.016732] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/srv/EmergencyStop.idl\n'}
+[23.016944] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/RoverState.msg\n'}
+[23.026069] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/msg/CrackDetection.msg\n'}
+[23.026849] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/srv/EmergencyStop.srv\n'}
+[23.034374] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/ament_index/resource_index/package_run_dependencies/rover_msgs\n'}
+[23.040558] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/ament_index/resource_index/parent_prefix_path/rover_msgs\n'}
+[23.046497] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/ament_prefix_path.sh\n'}
+[23.047053] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/ament_prefix_path.dsv\n'}
+[23.050467] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/path.sh\n'}
+[23.054730] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/environment/path.dsv\n'}
+[23.066057] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/local_setup.bash\n'}
+[23.068888] (-) TimerEvent: {}
+[23.069277] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/local_setup.sh\n'}
+[23.073927] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/local_setup.zsh\n'}
+[23.076179] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/local_setup.dsv\n'}
+[23.076668] (rover_msgs) StdoutLine: {'line': b'-- Symlinking: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.dsv\n'}
+[23.178512] (-) TimerEvent: {}
+[23.279722] (-) TimerEvent: {}
+[23.352492] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/ament_index/resource_index/packages/rover_msgs\n'}
+[23.353836] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rosidl_cmake-extras.cmake\n'}
+[23.354132] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[23.361198] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[23.364664] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[23.365738] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[23.371412] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[23.371995] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[23.384482] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rosidl_cmake_aggregate_target-extras.cmake\n'}
+[23.385001] (-) TimerEvent: {}
+[23.385292] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgsConfig.cmake\n'}
+[23.392722] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgsConfig-version.cmake\n'}
+[23.402039] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/package.xml\n'}
+[23.410076] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_generator_c.so\n'}
+[23.412686] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_fastrtps_c.so\n'}
+[23.423059] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_fastrtps_cpp.so\n'}
+[23.433438] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_introspection_c.so\n'}
+[23.433953] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_c.so\n'}
+[23.435245] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_introspection_cpp.so\n'}
+[23.453482] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_typesupport_cpp.so\n'}
+[23.485529] (-) TimerEvent: {}
+[23.588118] (-) TimerEvent: {}
+[23.690088] (-) TimerEvent: {}
+[23.795016] (-) TimerEvent: {}
+[23.899386] (-) TimerEvent: {}
+[23.929446] (rover_msgs) StdoutLine: {'line': b"Listing '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs'...\n"}
+[23.940652] (rover_msgs) StdoutLine: {'line': b"Compiling '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/__init__.py'...\n"}
+[23.941437] (rover_msgs) StdoutLine: {'line': b"Listing '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/msg'...\n"}
+[23.941992] (rover_msgs) StdoutLine: {'line': b"Listing '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages/rover_msgs/srv'...\n"}
+[23.979672] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/librover_msgs__rosidl_generator_py.so\n'}
+[23.982579] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_cExport.cmake\n'}
+[23.995094] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_cExport-noconfig.cmake\n'}
+[23.996355] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[23.999580] (-) TimerEvent: {}
+[24.000757] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[24.008747] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_cppExport.cmake\n'}
+[24.015190] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[24.016755] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[24.018980] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_introspection_cExport.cmake\n'}
+[24.022286] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[24.033103] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_cExport.cmake\n'}
+[24.047029] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[24.049468] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[24.049921] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[24.050120] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_cppExport.cmake\n'}
+[24.050289] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/rover_msgs__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[24.077939] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_pyExport.cmake\n'}
+[24.078597] (rover_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/share/rover_msgs/cmake/export_rover_msgs__rosidl_generator_pyExport-noconfig.cmake\n'}
+[24.104928] (rover_msgs) CommandEnded: {'returncode': 0}
+[24.105945] (-) TimerEvent: {}
+[24.240260] (-) TimerEvent: {}
+[24.255411] (rover_description) StdoutLine: {'line': b'running develop\n'}
+[24.343615] (-) TimerEvent: {}
+[24.451690] (-) TimerEvent: {}
+[24.518618] (rover_msgs) JobEnded: {'identifier': 'rover_msgs', 'rc': 0}
+[24.566405] (-) TimerEvent: {}
+[24.584730] (rover_control) JobStarted: {'identifier': 'rover_control'}
+[24.646326] (crack_detection) JobStarted: {'identifier': 'crack_detection'}
+[24.671993] (-) TimerEvent: {}
+[24.772937] (-) TimerEvent: {}
+[24.876548] (-) TimerEvent: {}
+[24.977445] (-) TimerEvent: {}
+[25.083492] (-) TimerEvent: {}
+[25.191588] (-) TimerEvent: {}
+[25.295502] (-) TimerEvent: {}
+[25.401152] (-) TimerEvent: {}
+[25.509154] (-) TimerEvent: {}
+[25.610047] (-) TimerEvent: {}
+[25.714522] (-) TimerEvent: {}
+[25.753460] (rover_camera) StdoutLine: {'line': b'running develop\n'}
+[25.819517] (-) TimerEvent: {}
+[25.921518] (-) TimerEvent: {}
+[26.024135] (-) TimerEvent: {}
+[26.129518] (-) TimerEvent: {}
+[26.237682] (-) TimerEvent: {}
+[26.343564] (-) TimerEvent: {}
+[26.445181] (-) TimerEvent: {}
+[26.505472] (rover_description) StdoutLine: {'line': b'running egg_info\n'}
+[26.549615] (-) TimerEvent: {}
+[26.652493] (-) TimerEvent: {}
+[26.696078] (rover_description) StdoutLine: {'line': b'writing rover_description.egg-info/PKG-INFO\n'}
+[26.700197] (rover_description) StdoutLine: {'line': b'writing dependency_links to rover_description.egg-info/dependency_links.txt\n'}
+[26.700623] (rover_description) StdoutLine: {'line': b'writing requirements to rover_description.egg-info/requires.txt\n'}
+[26.700880] (rover_description) StdoutLine: {'line': b'writing top-level names to rover_description.egg-info/top_level.txt\n'}
+[26.759548] (-) TimerEvent: {}
+[26.861898] (-) TimerEvent: {}
+[26.962753] (rover_description) StdoutLine: {'line': b"reading manifest file 'rover_description.egg-info/SOURCES.txt'\n"}
+[26.971475] (-) TimerEvent: {}
+[26.986587] (rover_description) StdoutLine: {'line': b"writing manifest file 'rover_description.egg-info/SOURCES.txt'\n"}
+[27.070107] (rover_description) StdoutLine: {'line': b'running build_ext\n'}
+[27.073060] (-) TimerEvent: {}
+[27.079221] (rover_description) StdoutLine: {'line': b'Creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages/rover-description.egg-link (link to .)\n'}
+[27.102409] (rover_description) StdoutLine: {'line': b'\n'}
+[27.117577] (rover_description) StdoutLine: {'line': b'Installed /home/student/Desktop/Railway_Inspection_Rover/build/rover_description\n'}
+[27.124807] (rover_description) StdoutLine: {'line': b'running symlink_data\n'}
+[27.177495] (-) TimerEvent: {}
+[27.278213] (-) TimerEvent: {}
+[27.378978] (-) TimerEvent: {}
+[27.479866] (-) TimerEvent: {}
+[27.585503] (-) TimerEvent: {}
+[27.691500] (-) TimerEvent: {}
+[27.792525] (-) TimerEvent: {}
+[27.860592] (rover_camera) StdoutLine: {'line': b'running egg_info\n'}
+[27.897547] (-) TimerEvent: {}
+[27.950376] (rover_camera) StdoutLine: {'line': b'writing rover_camera.egg-info/PKG-INFO\n'}
+[27.951364] (rover_camera) StdoutLine: {'line': b'writing dependency_links to rover_camera.egg-info/dependency_links.txt\n'}
+[27.959882] (rover_camera) StdoutLine: {'line': b'writing entry points to rover_camera.egg-info/entry_points.txt\n'}
+[27.964570] (rover_camera) StdoutLine: {'line': b'writing requirements to rover_camera.egg-info/requires.txt\n'}
+[27.965054] (rover_camera) StdoutLine: {'line': b'writing top-level names to rover_camera.egg-info/top_level.txt\n'}
+[27.999493] (-) TimerEvent: {}
+[28.100200] (-) TimerEvent: {}
+[28.200984] (-) TimerEvent: {}
+[28.301961] (-) TimerEvent: {}
+[28.407041] (-) TimerEvent: {}
+[28.507837] (-) TimerEvent: {}
+[28.613119] (-) TimerEvent: {}
+[28.714434] (-) TimerEvent: {}
+[28.729673] (rover_camera) StdoutLine: {'line': b"reading manifest file 'rover_camera.egg-info/SOURCES.txt'\n"}
+[28.747486] (rover_camera) StdoutLine: {'line': b"writing manifest file 'rover_camera.egg-info/SOURCES.txt'\n"}
+[28.785535] (rover_description) CommandEnded: {'returncode': 0}
+[28.816232] (-) TimerEvent: {}
+[28.860951] (rover_description) JobEnded: {'identifier': 'rover_description', 'rc': 0}
+[28.916441] (-) TimerEvent: {}
+[29.017045] (-) TimerEvent: {}
+[29.117840] (-) TimerEvent: {}
+[29.218482] (-) TimerEvent: {}
+[29.319175] (-) TimerEvent: {}
+[29.419811] (-) TimerEvent: {}
+[29.516034] (rover_camera) StdoutLine: {'line': b'running build_ext\n'}
+[29.516938] (rover_camera) StdoutLine: {'line': b'Creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/python3.12/site-packages/rover-camera.egg-link (link to .)\n'}
+[29.519985] (-) TimerEvent: {}
+[29.522640] (rover_camera) StdoutLine: {'line': b'Installing camera_calibration script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/rover_camera\n'}
+[29.530537] (rover_camera) StdoutLine: {'line': b'Installing camera_publisher script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/rover_camera\n'}
+[29.532594] (rover_camera) StdoutLine: {'line': b'Installing image_processor script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/rover_camera\n'}
+[29.536365] (rover_camera) StdoutLine: {'line': b'\n'}
+[29.536981] (rover_camera) StdoutLine: {'line': b'Installed /home/student/Desktop/Railway_Inspection_Rover/build/rover_camera\n'}
+[29.541701] (rover_camera) StdoutLine: {'line': b'running symlink_data\n'}
+[29.620450] (-) TimerEvent: {}
+[29.723499] (-) TimerEvent: {}
+[29.828181] (-) TimerEvent: {}
+[29.930430] (-) TimerEvent: {}
+[29.999483] (rover_camera) CommandEnded: {'returncode': 0}
+[30.030585] (-) TimerEvent: {}
+[30.135544] (-) TimerEvent: {}
+[30.251150] (-) TimerEvent: {}
+[30.378950] (-) TimerEvent: {}
+[30.432439] (rover_camera) JobEnded: {'identifier': 'rover_camera', 'rc': 0}
+[30.480482] (-) TimerEvent: {}
+[30.582083] (-) TimerEvent: {}
+[30.686471] (-) TimerEvent: {}
+[30.788484] (-) TimerEvent: {}
+[30.889587] (-) TimerEvent: {}
+[30.992931] (-) TimerEvent: {}
+[31.096890] (-) TimerEvent: {}
+[31.197933] (-) TimerEvent: {}
+[31.302893] (-) TimerEvent: {}
+[31.405914] (-) TimerEvent: {}
+[31.507248] (-) TimerEvent: {}
+[31.608042] (-) TimerEvent: {}
+[31.711469] (-) TimerEvent: {}
+[31.812638] (-) TimerEvent: {}
+[31.917480] (-) TimerEvent: {}
+[32.018212] (-) TimerEvent: {}
+[32.119304] (-) TimerEvent: {}
+[32.222565] (-) TimerEvent: {}
+[32.327506] (-) TimerEvent: {}
+[32.429681] (-) TimerEvent: {}
+[32.530517] (-) TimerEvent: {}
+[32.633988] (-) TimerEvent: {}
+[32.737609] (-) TimerEvent: {}
+[32.839015] (-) TimerEvent: {}
+[32.947248] (-) TimerEvent: {}
+[33.051739] (-) TimerEvent: {}
+[33.152547] (-) TimerEvent: {}
+[33.253489] (-) TimerEvent: {}
+[33.354888] (-) TimerEvent: {}
+[33.456007] (-) TimerEvent: {}
+[33.558661] (-) TimerEvent: {}
+[33.662039] (-) TimerEvent: {}
+[33.764997] (-) TimerEvent: {}
+[33.865707] (-) TimerEvent: {}
+[33.968721] (-) TimerEvent: {}
+[34.076176] (-) TimerEvent: {}
+[34.177538] (-) TimerEvent: {}
+[34.279599] (-) TimerEvent: {}
+[34.380298] (-) TimerEvent: {}
+[34.483769] (-) TimerEvent: {}
+[34.586546] (-) TimerEvent: {}
+[34.690529] (-) TimerEvent: {}
+[34.791974] (-) TimerEvent: {}
+[34.893122] (-) TimerEvent: {}
+[34.996644] (-) TimerEvent: {}
+[35.099042] (-) TimerEvent: {}
+[35.201092] (-) TimerEvent: {}
+[35.304524] (-) TimerEvent: {}
+[35.405195] (-) TimerEvent: {}
+[35.505840] (-) TimerEvent: {}
+[35.606609] (-) TimerEvent: {}
+[35.708828] (-) TimerEvent: {}
+[35.811930] (-) TimerEvent: {}
+[35.915524] (-) TimerEvent: {}
+[36.032933] (-) TimerEvent: {}
+[36.133456] (-) TimerEvent: {}
+[36.236879] (-) TimerEvent: {}
+[36.349631] (-) TimerEvent: {}
+[36.454615] (-) TimerEvent: {}
+[36.565295] (-) TimerEvent: {}
+[36.667088] (-) TimerEvent: {}
+[36.777930] (-) TimerEvent: {}
+[36.880488] (-) TimerEvent: {}
+[36.985534] (-) TimerEvent: {}
+[37.088664] (-) TimerEvent: {}
+[37.189307] (-) TimerEvent: {}
+[37.291851] (-) TimerEvent: {}
+[37.396020] (-) TimerEvent: {}
+[37.497466] (-) TimerEvent: {}
+[37.599908] (-) TimerEvent: {}
+[37.701310] (-) TimerEvent: {}
+[37.815480] (-) TimerEvent: {}
+[37.909090] (rover_control) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control/build', '--no-deps', 'symlink_data'], 'cwd': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CHROME_DEVTOOLS_MCP_JS': '/home/student/Downloads/Antigravity-arm64/resources/app.asar.unpacked/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js', 'USER': 'student', 'ANTIGRAVITY_SOURCE_METADATA': '{"tool":{"conversationId":"70afc0f2-5fe7-4411-b9de-455e062aa5a4","stepIndex":235,"toolCall":{"id":"call_780777","name":"run_command","argumentsJson":"{\\"BypassSandbox\\":true,\\"CommandLine\\":\\"colcon build --symlink-install\\",\\"Cwd\\":\\"/home/student/Desktop/Railway_Inspection_Rover\\",\\"WaitMsBeforeAsync\\":10000,\\"toolAction\\":\\"Building workspace with crack_detection\\",\\"toolSummary\\":\\"Run colcon build --symlink-install\\"}","thinkingSignature":"EoQCCoECAWkUfRNwVkqxPkBeBFZn/eRKwRU7/0J1m+P08hLkRDBwhu8v8JamS0FRvU4XX0jbZCaq62UybolXEe1t55ostzYKayBut36ks1jN2M97FzX044+mmFPrbjqsr4m0Wvom4FQo36LGM8eAYaOSOsX/iJ/nkHVlMlG+05KIe0s/O5LXKcba0lFZMW/lbQf8l37u/0u7z5ZIJ7hsTyVeK2PytmInoO6p4/5b+oKKnjIAt0m8LtrKgsbUGR9OY3n2rou1uFT15PJO2qjtzCZyTx+VmXwhSCobERDBie4SZD+S1DRjEm2jRoO6Ffo9tX/lyHu30YVHv+p/4aah0l5bmqR9eaM=","originalName":"run_command"}}}', 'XDG_SESSION_TYPE': 'wayland', 'ANTIGRAVITY_AGENTAPI_EXE': '/home/student/Downloads/Antigravity-arm64/resources/bin/language_server', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/mimick_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/student', 'CHROME_DESKTOP': 'antigravity.desktop', 'DISABLE_AUTO_UPDATE': 'true', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1419', 'ANTIGRAVITY_SAFECLIS_SOURCE': '/home/student/.gemini/antigravity/bin/safeclis/src', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '1583', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'ANTIGRAVITY_AGENT': '1', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21565', 'AGY_BROWSER_ACTIVE_PORT_FILE': '/home/student/.config/Antigravity/DevToolsActivePort', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'ZSH_TMUX_AUTOSTARTED': 'true', 'LOGNAME': 'student', 'AGY_BROWSER_WS_URL': 'ws://127.0.0.1:38643/devtools/browser/cfba1742-89d2-4cfb-a08e-a0abdc9df4a4', '_': '/usr/bin/colcon', 'JOURNAL_STREAM': '8:15597', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome\\x2dsession\\x2dmanager.slice/gnome-session-manager@ubuntu.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'student', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'ANTIGRAVITY_LS_VERSION': 'hub-2.5.0', 'PATH': '/home/student/.gemini/antigravity/bin:/home/student/.config/Antigravity/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/student-desktop:@/tmp/.ICE-unix/1583,unix/student-desktop:/tmp/.ICE-unix/1583', 'INVOCATION_ID': '8742af1c72264a92bf65d58cc3a2e674', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'ANTIGRAVITY_CONVERSATION_ID': '70afc0f2-5fe7-4411-b9de-455e062aa5a4', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.6SNGW3', 'LS_COLORS': '', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:/opt/ros/jazzy', 'ANTIGRAVITY_PROJECT_ID': '4c4954c6-7aa6-46d8-b9da-1b356078e122', 'SHELL': '/bin/bash', 'ANTIGRAVITY_LS_ADDRESS': 'localhost:40013', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'ANTIGRAVITY_TRAJECTORY_ID': '7c6e07cd-da54-45de-8278-a2e0d35b651c', 'PWD': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'ZSH_TMUX_AUTOSTART': 'false', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:/opt/ros/jazzy/opt/gz_math_vendor/lib/python:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'ANTIGRAVITY_CSRF_TOKEN': '7e0672cb-5b50-415d-85f7-70246489bfb7', 'CMAKE_PREFIX_PATH': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}), 'shell': False}
+[37.932608] (-) TimerEvent: {}
+[38.034639] (-) TimerEvent: {}
+[38.140088] (-) TimerEvent: {}
+[38.243729] (-) TimerEvent: {}
+[38.344847] (-) TimerEvent: {}
+[38.445809] (-) TimerEvent: {}
+[38.549165] (-) TimerEvent: {}
+[38.655535] (-) TimerEvent: {}
+[38.758563] (-) TimerEvent: {}
+[38.859678] (-) TimerEvent: {}
+[38.961495] (-) TimerEvent: {}
+[39.067331] (-) TimerEvent: {}
+[39.169438] (-) TimerEvent: {}
+[39.278547] (-) TimerEvent: {}
+[39.380991] (-) TimerEvent: {}
+[39.484621] (-) TimerEvent: {}
+[39.585381] (-) TimerEvent: {}
+[39.686572] (-) TimerEvent: {}
+[39.788801] (-) TimerEvent: {}
+[39.890699] (-) TimerEvent: {}
+[39.993754] (-) TimerEvent: {}
+[40.100972] (-) TimerEvent: {}
+[40.202196] (-) TimerEvent: {}
+[40.311986] (-) TimerEvent: {}
+[40.409227] (crack_detection) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/build', '--no-deps', 'symlink_data'], 'cwd': '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CHROME_DEVTOOLS_MCP_JS': '/home/student/Downloads/Antigravity-arm64/resources/app.asar.unpacked/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js', 'USER': 'student', 'ANTIGRAVITY_SOURCE_METADATA': '{"tool":{"conversationId":"70afc0f2-5fe7-4411-b9de-455e062aa5a4","stepIndex":235,"toolCall":{"id":"call_780777","name":"run_command","argumentsJson":"{\\"BypassSandbox\\":true,\\"CommandLine\\":\\"colcon build --symlink-install\\",\\"Cwd\\":\\"/home/student/Desktop/Railway_Inspection_Rover\\",\\"WaitMsBeforeAsync\\":10000,\\"toolAction\\":\\"Building workspace with crack_detection\\",\\"toolSummary\\":\\"Run colcon build --symlink-install\\"}","thinkingSignature":"EoQCCoECAWkUfRNwVkqxPkBeBFZn/eRKwRU7/0J1m+P08hLkRDBwhu8v8JamS0FRvU4XX0jbZCaq62UybolXEe1t55ostzYKayBut36ks1jN2M97FzX044+mmFPrbjqsr4m0Wvom4FQo36LGM8eAYaOSOsX/iJ/nkHVlMlG+05KIe0s/O5LXKcba0lFZMW/lbQf8l37u/0u7z5ZIJ7hsTyVeK2PytmInoO6p4/5b+oKKnjIAt0m8LtrKgsbUGR9OY3n2rou1uFT15PJO2qjtzCZyTx+VmXwhSCobERDBie4SZD+S1DRjEm2jRoO6Ffo9tX/lyHu30YVHv+p/4aah0l5bmqR9eaM=","originalName":"run_command"}}}', 'XDG_SESSION_TYPE': 'wayland', 'ANTIGRAVITY_AGENTAPI_EXE': '/home/student/Downloads/Antigravity-arm64/resources/bin/language_server', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/mimick_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/student', 'CHROME_DESKTOP': 'antigravity.desktop', 'DISABLE_AUTO_UPDATE': 'true', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1419', 'ANTIGRAVITY_SAFECLIS_SOURCE': '/home/student/.gemini/antigravity/bin/safeclis/src', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '1583', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'ANTIGRAVITY_AGENT': '1', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21565', 'AGY_BROWSER_ACTIVE_PORT_FILE': '/home/student/.config/Antigravity/DevToolsActivePort', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'ZSH_TMUX_AUTOSTARTED': 'true', 'LOGNAME': 'student', 'AGY_BROWSER_WS_URL': 'ws://127.0.0.1:38643/devtools/browser/cfba1742-89d2-4cfb-a08e-a0abdc9df4a4', '_': '/usr/bin/colcon', 'JOURNAL_STREAM': '8:15597', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome\\x2dsession\\x2dmanager.slice/gnome-session-manager@ubuntu.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'student', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'ANTIGRAVITY_LS_VERSION': 'hub-2.5.0', 'PATH': '/home/student/.gemini/antigravity/bin:/home/student/.config/Antigravity/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/student-desktop:@/tmp/.ICE-unix/1583,unix/student-desktop:/tmp/.ICE-unix/1583', 'INVOCATION_ID': '8742af1c72264a92bf65d58cc3a2e674', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'ANTIGRAVITY_CONVERSATION_ID': '70afc0f2-5fe7-4411-b9de-455e062aa5a4', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.6SNGW3', 'LS_COLORS': '', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:/opt/ros/jazzy', 'ANTIGRAVITY_PROJECT_ID': '4c4954c6-7aa6-46d8-b9da-1b356078e122', 'SHELL': '/bin/bash', 'ANTIGRAVITY_LS_ADDRESS': 'localhost:40013', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'ANTIGRAVITY_TRAJECTORY_ID': '7c6e07cd-da54-45de-8278-a2e0d35b651c', 'PWD': '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'ZSH_TMUX_AUTOSTART': 'false', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:/opt/ros/jazzy/opt/gz_math_vendor/lib/python:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'ANTIGRAVITY_CSRF_TOKEN': '7e0672cb-5b50-415d-85f7-70246489bfb7', 'CMAKE_PREFIX_PATH': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}), 'shell': False}
+[40.427734] (-) TimerEvent: {}
+[40.532070] (-) TimerEvent: {}
+[40.643097] (-) TimerEvent: {}
+[40.746224] (-) TimerEvent: {}
+[40.849567] (-) TimerEvent: {}
+[40.950764] (-) TimerEvent: {}
+[41.052714] (-) TimerEvent: {}
+[41.153599] (-) TimerEvent: {}
+[41.243040] (rover_control) StdoutLine: {'line': b'running develop\n'}
+[41.259830] (-) TimerEvent: {}
+[41.363249] (-) TimerEvent: {}
+[41.472525] (-) TimerEvent: {}
+[41.575793] (-) TimerEvent: {}
+[41.676536] (-) TimerEvent: {}
+[41.777373] (-) TimerEvent: {}
+[41.878008] (-) TimerEvent: {}
+[41.979204] (-) TimerEvent: {}
+[42.086522] (-) TimerEvent: {}
+[42.191607] (-) TimerEvent: {}
+[42.295798] (-) TimerEvent: {}
+[42.402806] (-) TimerEvent: {}
+[42.505491] (-) TimerEvent: {}
+[42.613175] (-) TimerEvent: {}
+[42.714313] (-) TimerEvent: {}
+[42.819521] (-) TimerEvent: {}
+[42.922501] (-) TimerEvent: {}
+[43.028532] (-) TimerEvent: {}
+[43.131518] (-) TimerEvent: {}
+[43.233698] (-) TimerEvent: {}
+[43.336471] (-) TimerEvent: {}
+[43.439206] (-) TimerEvent: {}
+[43.539969] (-) TimerEvent: {}
+[43.642555] (-) TimerEvent: {}
+[43.747194] (-) TimerEvent: {}
+[43.851904] (-) TimerEvent: {}
+[43.953527] (-) TimerEvent: {}
+[44.055477] (-) TimerEvent: {}
+[44.102510] (crack_detection) StdoutLine: {'line': b'running develop\n'}
+[44.161108] (-) TimerEvent: {}
+[44.266570] (-) TimerEvent: {}
+[44.315714] (rover_control) StdoutLine: {'line': b'running egg_info\n'}
+[44.367977] (-) TimerEvent: {}
+[44.468991] (-) TimerEvent: {}
+[44.571491] (-) TimerEvent: {}
+[44.674490] (-) TimerEvent: {}
+[44.785492] (-) TimerEvent: {}
+[44.809638] (rover_control) StdoutLine: {'line': b'writing rover_control.egg-info/PKG-INFO\n'}
+[44.810233] (rover_control) StdoutLine: {'line': b'writing dependency_links to rover_control.egg-info/dependency_links.txt\n'}
+[44.810555] (rover_control) StdoutLine: {'line': b'writing entry points to rover_control.egg-info/entry_points.txt\n'}
+[44.824786] (rover_control) StdoutLine: {'line': b'writing requirements to rover_control.egg-info/requires.txt\n'}
+[44.825061] (rover_control) StdoutLine: {'line': b'writing top-level names to rover_control.egg-info/top_level.txt\n'}
+[44.891035] (-) TimerEvent: {}
+[44.999431] (-) TimerEvent: {}
+[45.101684] (-) TimerEvent: {}
+[45.202406] (-) TimerEvent: {}
+[45.303029] (-) TimerEvent: {}
+[45.405434] (-) TimerEvent: {}
+[45.485273] (crack_detection) StdoutLine: {'line': b'running egg_info\n'}
+[45.485891] (crack_detection) StdoutLine: {'line': b'creating crack_detection.egg-info\n'}
+[45.507544] (-) TimerEvent: {}
+[45.601216] (crack_detection) StdoutLine: {'line': b'writing crack_detection.egg-info/PKG-INFO\n'}
+[45.606939] (crack_detection) StdoutLine: {'line': b'writing dependency_links to crack_detection.egg-info/dependency_links.txt\n'}
+[45.609000] (-) TimerEvent: {}
+[45.610442] (crack_detection) StdoutLine: {'line': b'writing entry points to crack_detection.egg-info/entry_points.txt\n'}
+[45.610956] (crack_detection) StdoutLine: {'line': b'writing requirements to crack_detection.egg-info/requires.txt\n'}
+[45.611218] (crack_detection) StdoutLine: {'line': b'writing top-level names to crack_detection.egg-info/top_level.txt\n'}
+[45.629045] (crack_detection) StdoutLine: {'line': b"writing manifest file 'crack_detection.egg-info/SOURCES.txt'\n"}
+[45.629444] (rover_control) StdoutLine: {'line': b"reading manifest file 'rover_control.egg-info/SOURCES.txt'\n"}
+[45.645716] (rover_control) StdoutLine: {'line': b"writing manifest file 'rover_control.egg-info/SOURCES.txt'\n"}
+[45.712610] (-) TimerEvent: {}
+[45.820492] (-) TimerEvent: {}
+[45.921212] (-) TimerEvent: {}
+[45.973532] (crack_detection) StdoutLine: {'line': b"reading manifest file 'crack_detection.egg-info/SOURCES.txt'\n"}
+[45.977551] (crack_detection) StdoutLine: {'line': b"writing manifest file 'crack_detection.egg-info/SOURCES.txt'\n"}
+[46.021415] (-) TimerEvent: {}
+[46.023761] (rover_control) StdoutLine: {'line': b'running build_ext\n'}
+[46.027010] (rover_control) StdoutLine: {'line': b'Creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages/rover-control.egg-link (link to .)\n'}
+[46.069536] (rover_control) StdoutLine: {'line': b'Installing motor_controller script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/rover_control\n'}
+[46.081510] (rover_control) StdoutLine: {'line': b'Installing rover_state_manager script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/rover_control\n'}
+[46.093478] (rover_control) StdoutLine: {'line': b'Installing teleop_keyboard script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/rover_control\n'}
+[46.130742] (rover_control) StdoutLine: {'line': b'\n'}
+[46.131459] (-) TimerEvent: {}
+[46.131822] (rover_control) StdoutLine: {'line': b'Installed /home/student/Desktop/Railway_Inspection_Rover/build/rover_control\n'}
+[46.132200] (rover_control) StdoutLine: {'line': b'running symlink_data\n'}
+[46.189531] (crack_detection) StdoutLine: {'line': b'running build_ext\n'}
+[46.207640] (crack_detection) StdoutLine: {'line': b'Creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/python3.12/site-packages/crack-detection.egg-link (link to .)\n'}
+[46.230228] (crack_detection) StdoutLine: {'line': b'Installing crack_detection_node script to /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/crack_detection\n'}
+[46.231713] (-) TimerEvent: {}
+[46.267793] (crack_detection) StdoutLine: {'line': b'\n'}
+[46.269070] (crack_detection) StdoutLine: {'line': b'Installed /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection\n'}
+[46.290550] (crack_detection) StdoutLine: {'line': b'running symlink_data\n'}
+[46.291499] (crack_detection) StdoutLine: {'line': b'creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/ament_index\n'}
+[46.292016] (crack_detection) StdoutLine: {'line': b'creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/ament_index/resource_index\n'}
+[46.292249] (crack_detection) StdoutLine: {'line': b'creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/ament_index/resource_index/packages\n'}
+[46.292540] (crack_detection) StdoutLine: {'line': b'symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/resource/crack_detection -> /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/ament_index/resource_index/packages\n'}
+[46.292816] (crack_detection) StdoutLine: {'line': b'symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/package.xml -> /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection\n'}
+[46.319939] (crack_detection) StdoutLine: {'line': b'creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/config\n'}
+[46.320311] (crack_detection) StdoutLine: {'line': b'symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/config/crack_detection_params.yaml -> /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/config\n'}
+[46.323542] (crack_detection) StdoutLine: {'line': b'creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/launch\n'}
+[46.323804] (crack_detection) StdoutLine: {'line': b'symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection/launch/detection.launch.py -> /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/share/crack_detection/launch\n'}
+[46.332334] (-) TimerEvent: {}
+[46.438568] (-) TimerEvent: {}
+[46.550908] (-) TimerEvent: {}
+[46.659214] (-) TimerEvent: {}
+[46.762954] (-) TimerEvent: {}
+[46.835093] (rover_control) CommandEnded: {'returncode': 0}
+[46.877244] (-) TimerEvent: {}
+[46.961509] (rover_control) JobEnded: {'identifier': 'rover_control', 'rc': 0}
+[46.968151] (rover_bringup) JobStarted: {'identifier': 'rover_bringup'}
+[46.981504] (-) TimerEvent: {}
+[47.064336] (crack_detection) CommandEnded: {'returncode': 0}
+[47.091194] (-) TimerEvent: {}
+[47.201737] (-) TimerEvent: {}
+[47.240831] (crack_detection) JobEnded: {'identifier': 'crack_detection', 'rc': 0}
+[47.304530] (-) TimerEvent: {}
+[47.405215] (-) TimerEvent: {}
+[47.513915] (-) TimerEvent: {}
+[47.615048] (-) TimerEvent: {}
+[47.720616] (-) TimerEvent: {}
+[47.821305] (-) TimerEvent: {}
+[47.922631] (-) TimerEvent: {}
+[48.035498] (-) TimerEvent: {}
+[48.136202] (-) TimerEvent: {}
+[48.242513] (-) TimerEvent: {}
+[48.349581] (-) TimerEvent: {}
+[48.451946] (-) TimerEvent: {}
+[48.552593] (-) TimerEvent: {}
+[48.655184] (-) TimerEvent: {}
+[48.761507] (-) TimerEvent: {}
+[48.862202] (-) TimerEvent: {}
+[48.972507] (-) TimerEvent: {}
+[49.074750] (-) TimerEvent: {}
+[49.178171] (-) TimerEvent: {}
+[49.278857] (-) TimerEvent: {}
+[49.381760] (-) TimerEvent: {}
+[49.495517] (-) TimerEvent: {}
+[49.608457] (-) TimerEvent: {}
+[49.710470] (-) TimerEvent: {}
+[49.819635] (-) TimerEvent: {}
+[49.920772] (-) TimerEvent: {}
+[50.033493] (-) TimerEvent: {}
+[50.137957] (-) TimerEvent: {}
+[50.238589] (-) TimerEvent: {}
+[50.348744] (-) TimerEvent: {}
+[50.453946] (-) TimerEvent: {}
+[50.557517] (-) TimerEvent: {}
+[50.659458] (-) TimerEvent: {}
+[50.760054] (-) TimerEvent: {}
+[50.862553] (-) TimerEvent: {}
+[50.968546] (-) TimerEvent: {}
+[51.074245] (-) TimerEvent: {}
+[51.179972] (-) TimerEvent: {}
+[51.280579] (-) TimerEvent: {}
+[51.382410] (-) TimerEvent: {}
+[51.486112] (-) TimerEvent: {}
+[51.595480] (-) TimerEvent: {}
+[51.697618] (-) TimerEvent: {}
+[51.801861] (-) TimerEvent: {}
+[51.905785] (-) TimerEvent: {}
+[52.006489] (-) TimerEvent: {}
+[52.107203] (-) TimerEvent: {}
+[52.210628] (-) TimerEvent: {}
+[52.316492] (-) TimerEvent: {}
+[52.417166] (-) TimerEvent: {}
+[52.517805] (-) TimerEvent: {}
+[52.629125] (-) TimerEvent: {}
+[52.731694] (-) TimerEvent: {}
+[52.841175] (-) TimerEvent: {}
+[52.945857] (-) TimerEvent: {}
+[53.055622] (-) TimerEvent: {}
+[53.157529] (-) TimerEvent: {}
+[53.259998] (-) TimerEvent: {}
+[53.361442] (-) TimerEvent: {}
+[53.465506] (-) TimerEvent: {}
+[53.566915] (-) TimerEvent: {}
+[53.667935] (-) TimerEvent: {}
+[53.772504] (-) TimerEvent: {}
+[53.873218] (-) TimerEvent: {}
+[53.974223] (-) TimerEvent: {}
+[54.080018] (-) TimerEvent: {}
+[54.181056] (-) TimerEvent: {}
+[54.287713] (-) TimerEvent: {}
+[54.395635] (-) TimerEvent: {}
+[54.498523] (-) TimerEvent: {}
+[54.606039] (-) TimerEvent: {}
+[54.715620] (-) TimerEvent: {}
+[54.817714] (-) TimerEvent: {}
+[54.920473] (-) TimerEvent: {}
+[55.022547] (-) TimerEvent: {}
+[55.124524] (-) TimerEvent: {}
+[55.226554] (-) TimerEvent: {}
+[55.327248] (-) TimerEvent: {}
+[55.428059] (-) TimerEvent: {}
+[55.529503] (-) TimerEvent: {}
+[55.631872] (-) TimerEvent: {}
+[55.732532] (-) TimerEvent: {}
+[55.834505] (-) TimerEvent: {}
+[55.937301] (-) TimerEvent: {}
+[56.043329] (-) TimerEvent: {}
+[56.151502] (-) TimerEvent: {}
+[56.252088] (-) TimerEvent: {}
+[56.356053] (-) TimerEvent: {}
+[56.460664] (-) TimerEvent: {}
+[56.561405] (-) TimerEvent: {}
+[56.662183] (-) TimerEvent: {}
+[56.765526] (-) TimerEvent: {}
+[56.867012] (-) TimerEvent: {}
+[56.969592] (-) TimerEvent: {}
+[57.070425] (-) TimerEvent: {}
+[57.172497] (-) TimerEvent: {}
+[57.275459] (-) TimerEvent: {}
+[57.376958] (-) TimerEvent: {}
+[57.479689] (-) TimerEvent: {}
+[57.581491] (-) TimerEvent: {}
+[57.683427] (-) TimerEvent: {}
+[57.785687] (-) TimerEvent: {}
+[57.886717] (-) TimerEvent: {}
+[57.992653] (-) TimerEvent: {}
+[58.093409] (-) TimerEvent: {}
+[58.196699] (-) TimerEvent: {}
+[58.298699] (-) TimerEvent: {}
+[58.401763] (-) TimerEvent: {}
+[58.489411] (rover_bringup) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/build', '--no-deps', 'symlink_data'], 'cwd': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CHROME_DEVTOOLS_MCP_JS': '/home/student/Downloads/Antigravity-arm64/resources/app.asar.unpacked/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js', 'USER': 'student', 'ANTIGRAVITY_SOURCE_METADATA': '{"tool":{"conversationId":"70afc0f2-5fe7-4411-b9de-455e062aa5a4","stepIndex":235,"toolCall":{"id":"call_780777","name":"run_command","argumentsJson":"{\\"BypassSandbox\\":true,\\"CommandLine\\":\\"colcon build --symlink-install\\",\\"Cwd\\":\\"/home/student/Desktop/Railway_Inspection_Rover\\",\\"WaitMsBeforeAsync\\":10000,\\"toolAction\\":\\"Building workspace with crack_detection\\",\\"toolSummary\\":\\"Run colcon build --symlink-install\\"}","thinkingSignature":"EoQCCoECAWkUfRNwVkqxPkBeBFZn/eRKwRU7/0J1m+P08hLkRDBwhu8v8JamS0FRvU4XX0jbZCaq62UybolXEe1t55ostzYKayBut36ks1jN2M97FzX044+mmFPrbjqsr4m0Wvom4FQo36LGM8eAYaOSOsX/iJ/nkHVlMlG+05KIe0s/O5LXKcba0lFZMW/lbQf8l37u/0u7z5ZIJ7hsTyVeK2PytmInoO6p4/5b+oKKnjIAt0m8LtrKgsbUGR9OY3n2rou1uFT15PJO2qjtzCZyTx+VmXwhSCobERDBie4SZD+S1DRjEm2jRoO6Ffo9tX/lyHu30YVHv+p/4aah0l5bmqR9eaM=","originalName":"run_command"}}}', 'XDG_SESSION_TYPE': 'wayland', 'ANTIGRAVITY_AGENTAPI_EXE': '/home/student/Downloads/Antigravity-arm64/resources/bin/language_server', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/mimick_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/student', 'CHROME_DESKTOP': 'antigravity.desktop', 'DISABLE_AUTO_UPDATE': 'true', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1419', 'ANTIGRAVITY_SAFECLIS_SOURCE': '/home/student/.gemini/antigravity/bin/safeclis/src', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '1583', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'ANTIGRAVITY_AGENT': '1', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21565', 'AGY_BROWSER_ACTIVE_PORT_FILE': '/home/student/.config/Antigravity/DevToolsActivePort', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'ZSH_TMUX_AUTOSTARTED': 'true', 'LOGNAME': 'student', 'AGY_BROWSER_WS_URL': 'ws://127.0.0.1:38643/devtools/browser/cfba1742-89d2-4cfb-a08e-a0abdc9df4a4', '_': '/usr/bin/colcon', 'JOURNAL_STREAM': '8:15597', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome\\x2dsession\\x2dmanager.slice/gnome-session-manager@ubuntu.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'student', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'ANTIGRAVITY_LS_VERSION': 'hub-2.5.0', 'PATH': '/home/student/.gemini/antigravity/bin:/home/student/.config/Antigravity/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/student-desktop:@/tmp/.ICE-unix/1583,unix/student-desktop:/tmp/.ICE-unix/1583', 'INVOCATION_ID': '8742af1c72264a92bf65d58cc3a2e674', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'ANTIGRAVITY_CONVERSATION_ID': '70afc0f2-5fe7-4411-b9de-455e062aa5a4', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.6SNGW3', 'LS_COLORS': '', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_control:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description:/opt/ros/jazzy', 'ANTIGRAVITY_PROJECT_ID': '4c4954c6-7aa6-46d8-b9da-1b356078e122', 'SHELL': '/bin/bash', 'ANTIGRAVITY_LS_ADDRESS': 'localhost:40013', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'ANTIGRAVITY_TRAJECTORY_ID': '7c6e07cd-da54-45de-8278-a2e0d35b651c', 'PWD': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'ZSH_TMUX_AUTOSTART': 'false', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1000/bus,guid=1e18d67bbfe48a529e7e7d1e6ab23519', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/build/rover_control:/home/student/Desktop/Railway_Inspection_Rover/install/rover_control/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/build/rover_description:/home/student/Desktop/Railway_Inspection_Rover/install/rover_description/lib/python3.12/site-packages:/opt/ros/jazzy/opt/gz_math_vendor/lib/python:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'ANTIGRAVITY_CSRF_TOKEN': '7e0672cb-5b50-415d-85f7-70246489bfb7', 'CMAKE_PREFIX_PATH': '/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}), 'shell': False}
+[58.507396] (-) TimerEvent: {}
+[58.615910] (-) TimerEvent: {}
+[58.724499] (-) TimerEvent: {}
+[58.827512] (-) TimerEvent: {}
+[58.929520] (-) TimerEvent: {}
+[59.031675] (-) TimerEvent: {}
+[59.132517] (-) TimerEvent: {}
+[59.241796] (-) TimerEvent: {}
+[59.343648] (-) TimerEvent: {}
+[59.445628] (-) TimerEvent: {}
+[59.559048] (-) TimerEvent: {}
+[59.673796] (-) TimerEvent: {}
+[59.774829] (-) TimerEvent: {}
+[59.881980] (-) TimerEvent: {}
+[59.982864] (-) TimerEvent: {}
+[60.087030] (-) TimerEvent: {}
+[60.190877] (-) TimerEvent: {}
+[60.293508] (-) TimerEvent: {}
+[60.394663] (-) TimerEvent: {}
+[60.470843] (rover_bringup) StdoutLine: {'line': b'running develop\n'}
+[60.501454] (-) TimerEvent: {}
+[60.607500] (-) TimerEvent: {}
+[60.715456] (-) TimerEvent: {}
+[60.816462] (-) TimerEvent: {}
+[60.919541] (-) TimerEvent: {}
+[61.020233] (-) TimerEvent: {}
+[61.122542] (-) TimerEvent: {}
+[61.226474] (-) TimerEvent: {}
+[61.327213] (-) TimerEvent: {}
+[61.429529] (-) TimerEvent: {}
+[61.544077] (-) TimerEvent: {}
+[61.649853] (-) TimerEvent: {}
+[61.751094] (-) TimerEvent: {}
+[61.856077] (-) TimerEvent: {}
+[61.956816] (-) TimerEvent: {}
+[62.060830] (-) TimerEvent: {}
+[62.164085] (-) TimerEvent: {}
+[62.268480] (-) TimerEvent: {}
+[62.376331] (-) TimerEvent: {}
+[62.444649] (rover_bringup) StdoutLine: {'line': b'running egg_info\n'}
+[62.479304] (-) TimerEvent: {}
+[62.584504] (-) TimerEvent: {}
+[62.686427] (-) TimerEvent: {}
+[62.788725] (-) TimerEvent: {}
+[62.816045] (rover_bringup) StdoutLine: {'line': b'writing rover_bringup.egg-info/PKG-INFO\n'}
+[62.817649] (rover_bringup) StdoutLine: {'line': b'writing dependency_links to rover_bringup.egg-info/dependency_links.txt\n'}
+[62.825451] (rover_bringup) StdoutLine: {'line': b'writing requirements to rover_bringup.egg-info/requires.txt\n'}
+[62.827070] (rover_bringup) StdoutLine: {'line': b'writing top-level names to rover_bringup.egg-info/top_level.txt\n'}
+[62.893448] (-) TimerEvent: {}
+[62.999193] (-) TimerEvent: {}
+[63.100752] (-) TimerEvent: {}
+[63.162541] (rover_bringup) StdoutLine: {'line': b"reading manifest file 'rover_bringup.egg-info/SOURCES.txt'\n"}
+[63.175728] (rover_bringup) StdoutLine: {'line': b"writing manifest file 'rover_bringup.egg-info/SOURCES.txt'\n"}
+[63.202537] (-) TimerEvent: {}
+[63.305156] (-) TimerEvent: {}
+[63.336817] (rover_bringup) StdoutLine: {'line': b'running build_ext\n'}
+[63.337573] (rover_bringup) StdoutLine: {'line': b'Creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_bringup/lib/python3.12/site-packages/rover-bringup.egg-link (link to .)\n'}
+[63.394006] (rover_bringup) StdoutLine: {'line': b'\n'}
+[63.397550] (rover_bringup) StdoutLine: {'line': b'Installed /home/student/Desktop/Railway_Inspection_Rover/build/rover_bringup\n'}
+[63.405446] (-) TimerEvent: {}
+[63.423430] (rover_bringup) StdoutLine: {'line': b'running symlink_data\n'}
+[63.506516] (-) TimerEvent: {}
+[63.611913] (-) TimerEvent: {}
+[63.712694] (-) TimerEvent: {}
+[63.777501] (rover_bringup) CommandEnded: {'returncode': 0}
+[63.812842] (-) TimerEvent: {}
+[63.816307] (rover_bringup) JobEnded: {'identifier': 'rover_bringup', 'rc': 0}
+[63.831805] (-) EventReactorShutdown: {}

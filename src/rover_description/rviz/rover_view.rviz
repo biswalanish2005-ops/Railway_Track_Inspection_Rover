@@ -1,0 +1,66 @@
+Panels:
+  - Class: rviz_common/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+        - /RobotModel1
+        - /TF1
+      Splitter Ratio: 0.5
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Value: true
+      Cell Size: 0.5
+      Color: 160; 160; 160
+      Line Style:
+        Value: Lines
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 20
+      Reference Frame: <Fixed Frame>
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Value: true
+      Description Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /robot_description
+      Visual Enabled: true
+      Collision Enabled: false
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Value: true
+      Show Axes: true
+      Show Arrows: false
+      Show Names: true
+      Marker Scale: 0.2
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48 Newark 48
+    Fixed Frame: base_footprint
+    Frame Rate: 30
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 1.5
+      Focal Point:
+        X: 0.1
+        Y: 0.0
+        Z: 0.2
+      Name: Orbit
+      Pitch: 0.4
+      Yaw: 0.6
+      Value: Orbit

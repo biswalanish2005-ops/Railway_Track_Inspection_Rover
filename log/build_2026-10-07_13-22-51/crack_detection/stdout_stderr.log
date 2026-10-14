@@ -1,0 +1,15 @@
+running develop
+running egg_info
+writing crack_detection.egg-info/PKG-INFO
+writing dependency_links to crack_detection.egg-info/dependency_links.txt
+writing entry points to crack_detection.egg-info/entry_points.txt
+writing requirements to crack_detection.egg-info/requires.txt
+writing top-level names to crack_detection.egg-info/top_level.txt
+reading manifest file 'crack_detection.egg-info/SOURCES.txt'
+writing manifest file 'crack_detection.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/python3.12/site-packages/crack-detection.egg-link (link to .)
+Installing crack_detection_node script to /home/student/Desktop/Railway_Inspection_Rover/install/crack_detection/lib/crack_detection
+
+Installed /home/student/Desktop/Railway_Inspection_Rover/build/crack_detection
+running symlink_data

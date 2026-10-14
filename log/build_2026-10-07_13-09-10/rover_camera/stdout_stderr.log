@@ -1,0 +1,29 @@
+running develop
+running egg_info
+creating rover_camera.egg-info
+writing rover_camera.egg-info/PKG-INFO
+writing dependency_links to rover_camera.egg-info/dependency_links.txt
+writing entry points to rover_camera.egg-info/entry_points.txt
+writing requirements to rover_camera.egg-info/requires.txt
+writing top-level names to rover_camera.egg-info/top_level.txt
+writing manifest file 'rover_camera.egg-info/SOURCES.txt'
+reading manifest file 'rover_camera.egg-info/SOURCES.txt'
+writing manifest file 'rover_camera.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/python3.12/site-packages/rover-camera.egg-link (link to .)
+Installing camera_calibration script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/rover_camera
+Installing camera_publisher script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/rover_camera
+Installing image_processor script to /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/lib/rover_camera
+
+Installed /home/student/Desktop/Railway_Inspection_Rover/build/rover_camera
+running symlink_data
+creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/ament_index
+creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/ament_index/resource_index
+creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/ament_index/resource_index/packages
+symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/resource/rover_camera -> /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/ament_index/resource_index/packages
+symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/package.xml -> /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera
+creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/config
+symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/config/camera_info.yaml -> /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/config
+symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/config/camera_params.yaml -> /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/config
+creating /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/launch
+symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/rover_camera/launch/camera.launch.py -> /home/student/Desktop/Railway_Inspection_Rover/install/rover_camera/share/rover_camera/launch

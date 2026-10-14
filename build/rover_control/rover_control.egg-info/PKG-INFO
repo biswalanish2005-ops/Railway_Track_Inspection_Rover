@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: rover-control
+Version: 0.1.0
+Summary: Control and state management nodes for Railway Inspection Rover
+Maintainer: student
+Maintainer-email: student@todo.todo
+License: Apache-2.0

@@ -1,0 +1,8 @@
+msg/CrackDetection.idl
+msg/CrackDetection.msg
+msg/InspectionResult.idl
+msg/InspectionResult.msg
+msg/RoverState.idl
+msg/RoverState.msg
+srv/EmergencyStop.idl
+srv/EmergencyStop.srv

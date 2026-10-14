@@ -1,0 +1,24 @@
+[19.785s] Invoking command in '/home/student/Desktop/Railway_Inspection_Rover/build/data_logger': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/data_logger/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/data_logger/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/data_logger/build --no-deps symlink_data
+[22.744s] running develop
+[26.640s] running egg_info
+[26.641s] creating data_logger.egg-info
+[26.757s] writing data_logger.egg-info/PKG-INFO
+[26.761s] writing dependency_links to data_logger.egg-info/dependency_links.txt
+[26.761s] writing entry points to data_logger.egg-info/entry_points.txt
+[26.765s] writing requirements to data_logger.egg-info/requires.txt
+[26.768s] writing top-level names to data_logger.egg-info/top_level.txt
+[26.769s] writing manifest file 'data_logger.egg-info/SOURCES.txt'
+[27.661s] reading manifest file 'data_logger.egg-info/SOURCES.txt'
+[27.662s] writing manifest file 'data_logger.egg-info/SOURCES.txt'
+[27.937s] running build_ext
+[27.938s] Creating /home/student/Desktop/Railway_Inspection_Rover/install/data_logger/lib/python3.12/site-packages/data-logger.egg-link (link to .)
+[27.947s] Installing data_logger_node script to /home/student/Desktop/Railway_Inspection_Rover/install/data_logger/lib/data_logger
+[27.953s] 
+[27.959s] Installed /home/student/Desktop/Railway_Inspection_Rover/build/data_logger
+[27.960s] running symlink_data
+[27.961s] creating /home/student/Desktop/Railway_Inspection_Rover/install/data_logger/share/ament_index
+[27.965s] creating /home/student/Desktop/Railway_Inspection_Rover/install/data_logger/share/ament_index/resource_index
+[27.968s] creating /home/student/Desktop/Railway_Inspection_Rover/install/data_logger/share/ament_index/resource_index/packages
+[27.980s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/data_logger/resource/data_logger -> /home/student/Desktop/Railway_Inspection_Rover/install/data_logger/share/ament_index/resource_index/packages
+[27.981s] symbolically linking /home/student/Desktop/Railway_Inspection_Rover/build/data_logger/package.xml -> /home/student/Desktop/Railway_Inspection_Rover/install/data_logger/share/data_logger
+[30.747s] Invoked command in '/home/student/Desktop/Railway_Inspection_Rover/build/data_logger' returned '0': AMENT_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/student/Desktop/Railway_Inspection_Rover/build/data_logger/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/Desktop/Railway_Inspection_Rover/install/data_logger/lib/python3.12/site-packages:/home/student/Desktop/Railway_Inspection_Rover/install/rover_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/Desktop/Railway_Inspection_Rover/build/data_logger/build --no-deps symlink_data

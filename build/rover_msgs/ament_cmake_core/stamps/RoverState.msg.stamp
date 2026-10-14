@@ -1,0 +1,8 @@
+builtin_interfaces/Time timestamp
+string current_state
+float32 current_linear_speed
+float32 current_angular_speed
+bool emergency_stop_active
+bool motor_enabled
+bool watchdog_active
+string status_message

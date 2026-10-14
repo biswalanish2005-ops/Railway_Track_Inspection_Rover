@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    rail_physical_width_mm: 70.0      # Known physical rail head width (mm)
+    ipm_output_width: 400             # IPM image pixel width
+    ipm_output_height: 600            # IPM image pixel height
+    storage_directory: "inspection"   # Storage folder for inspection records
+    adaptive_threshold_block_size: 15
+    adaptive_threshold_c: 4
