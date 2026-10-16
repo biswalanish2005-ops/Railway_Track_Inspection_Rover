@@ -154,6 +154,21 @@
         <div id="status-badge" class="badge badge-patrolling">STATE: PATROLLING</div>
     </div>
 
+    <!-- HTTPS Mixed Content Notice for GitHub Pages -->
+    <div id="https-mixed-content-banner" style="display: none; background: #1e1b4b; border: 2px solid #6366f1; border-radius: 8px; padding: 12px 18px; margin-bottom: 16px; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 280px;">
+            <div style="font-weight: 800; color: #a5b4fc; font-size: 14px; margin-bottom: 4px;">
+                ⚠️ VIEWING GITHUB PAGES CLOUD REPOSITORY (HTTPS)
+            </div>
+            <div style="font-size: 12.5px; color: #cbd5e1; line-height: 1.45;">
+                Modern web browsers strictly block direct live camera streaming and hardware API calls from secure cloud HTTPS origins to local HTTP addresses (Mixed Content). To view the <strong>Live Physical Camera Feed</strong> and control the <strong>L298N Motors</strong> directly from your laptop:
+            </div>
+        </div>
+        <a href="http://172.16.61.192:8080/" target="_blank" style="background: #4f46e5; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: 800; font-size: 13.5px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4); white-space: nowrap;">
+            🚀 OPEN LOCAL ROVER DASHBOARD (http://172.16.61.192:8080)
+        </a>
+    </div>
+
     <!-- Rover Connection Configuration Bar -->
     <div class="connection-bar">
         <div class="conn-inputs">
@@ -210,6 +225,7 @@
                     <button class="btn btn-reset" onclick="sendRoverAction('reset')">🔄 RESET CHAINAGE (0.00m)</button>
                     <button class="btn btn-snap" onclick="triggerSnapshot()">📸 SAVE DEFECT SCREENSHOT</button>
                 </div>
+                <div id="control-toast" style="margin-top: 10px; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 13px; text-align: center; display: none;"></div>
             </div>
 
             <div class="card" style="margin-top: 16px;">
@@ -438,24 +454,85 @@
             }
         }
 
+        // Check if hosted over HTTPS (GitHub Pages) to alert about mixed-content blocking
+        if (window.location.protocol === 'https:') {
+            const httpsBanner = document.getElementById('https-mixed-content-banner');
+            if (httpsBanner) httpsBanner.style.display = 'flex';
+        }
+
         // Send Control Command to Physical Rover or Local State
         function sendRoverAction(action) {
-            if (isConnectedToRover) {
-                fetch(roverBaseUrl + '/api/control?action=' + action, { method: 'POST', mode: 'cors' })
-                    .then(r => r.json())
-                    .then(res => console.log('Action response:', res));
-            } else {
-                if (action === 'start') motorEnabled = true;
-                if (action === 'stop') motorEnabled = false;
-                if (action === 'reset') roverLocationX = 0.0;
+            const toast = document.getElementById('control-toast');
+            if (action === 'start') {
+                if (toast) {
+                    toast.innerText = '▶ TRANSMITTING: START PATROL (MOTORS ENGAGED)';
+                    toast.style.background = '#15803d';
+                    toast.style.color = '#ffffff';
+                    toast.style.display = 'block';
+                }
+                document.getElementById('status-badge').innerText = 'STATE: PATROLLING';
+                document.getElementById('status-badge').className = 'badge badge-patrolling';
+                document.getElementById('tele-motor').innerText = 'ENABLED (RUNNING)';
+                motorEnabled = true;
+            } else if (action === 'stop') {
+                if (toast) {
+                    toast.innerText = '⏸ TRANSMITTING: STOP ROVER (MOTORS HALTED)';
+                    toast.style.background = '#b45309';
+                    toast.style.color = '#ffffff';
+                    toast.style.display = 'block';
+                }
+                document.getElementById('status-badge').innerText = 'STATE: PAUSED';
+                document.getElementById('status-badge').className = 'badge badge-paused';
+                document.getElementById('tele-motor').innerText = 'PAUSED';
+                motorEnabled = false;
+            } else if (action === 'reset') {
+                if (toast) {
+                    toast.innerText = '🔄 RESETTING CHAINAGE TO 0.00m';
+                    toast.style.background = '#0369a1';
+                    toast.style.color = '#ffffff';
+                    toast.style.display = 'block';
+                }
+                document.getElementById('tele-chainage').innerText = 'CH 00+00.00m';
+                document.getElementById('chainage-header').innerText = 'CH 00+00.00m';
+                document.getElementById('tele-coords').innerText = 'X: +0.00m, Y: +0.00m';
+                roverLocationX = 0.0;
+            } else if (action === 'snapshot') {
+                if (toast) {
+                    toast.innerText = '📸 DEFECT SCREENSHOT SAVED';
+                    toast.style.background = '#334155';
+                    toast.style.color = '#ffffff';
+                    toast.style.display = 'block';
+                }
             }
+
+            // Always attempt transmission to physical rover
+            fetch(roverBaseUrl + '/api/control?action=' + action, { method: 'POST', mode: 'cors' })
+                .then(r => r.json())
+                .then(res => {
+                    setTimeout(updateTelemetry, 100);
+                    if (toast) setTimeout(() => { toast.style.display = 'none'; }, 2200);
+                })
+                .catch(err => {
+                    // Try GET request fallback
+                    fetch(roverBaseUrl + '/api/control?action=' + action, { method: 'GET', mode: 'no-cors' })
+                        .catch(() => {});
+                    if (toast) {
+                        if (window.location.protocol === 'https:') {
+                            toast.innerHTML = '⚠️ Browser blocked cross-origin request (HTTPS &rarr; HTTP).<br><a href="' + roverBaseUrl + '" target="_blank" style="color:#fff;text-decoration:underline;font-weight:800;">Click to open ' + roverBaseUrl + ' directly</a>';
+                            toast.style.background = '#dc2626';
+                            toast.style.color = '#ffffff';
+                        } else {
+                            toast.innerText = '❌ TRANSMISSION FAILED: ' + err;
+                            toast.style.background = '#dc2626';
+                            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+                        }
+                    }
+                });
         }
 
         function triggerSnapshot() {
-            if (isConnectedToRover) {
-                sendRoverAction('snapshot');
-                alert('📸 Snapshot capture saved on Rover.');
-            } else {
+            sendRoverAction('snapshot');
+            if (!isConnectedToRover) {
                 const link = document.createElement('a');
                 link.download = 'rover_defect_snapshot_' + Date.now() + '.png';
                 link.href = trackCanvas.toDataURL();

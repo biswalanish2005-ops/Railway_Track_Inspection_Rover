@@ -58,22 +58,32 @@ hold_start_time = 0.0
 last_odom_time = time.time()
 camera_roi = "0.0,0.25,1.0,0.75"  # Default sensor ROI: crops upper background clutter
 track_y_min_ratio = 0.08          # Minimum vertical ratio on track
-motor_enabled = True              # Physical motor drive toggle
+motor_enabled = False             # Physical motor drive toggle (DEFAULT: False in STANDBY until START clicked)
 last_alert_cooldown_time = 0.0
 last_defect_info = None
-current_state_str = "IDLE"
+current_state_str = "STANDBY"
 
 # Initialize Physical L298N Motor Driver on Raspberry Pi 5
 hw_motor = None
-try:
-    control_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src/rover_control")
-    if control_path not in sys.path:
-        sys.path.append(control_path)
-    from rover_control.l298n_motor_driver import L298NMotorDriver
-    hw_motor = L298NMotorDriver()
-    print("[*] Physical L298N Motor Driver ACTIVE on RPi 5 GPIO (Pins 12,13,17,27,22,23).")
-except Exception as e:
-    print(f"[!] L298N Motor Driver not available: {e}. Running in simulation motion mode.")
+
+
+def ensure_motor_driver():
+    """Ensure L298N motor driver instance is initialized and connected."""
+    global hw_motor
+    if hw_motor is None:
+        try:
+            control_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src/rover_control")
+            if control_path not in sys.path:
+                sys.path.append(control_path)
+            from rover_control.l298n_motor_driver import L298NMotorDriver
+            hw_motor = L298NMotorDriver()
+            print("[*] Physical L298N Motor Driver ACTIVE on RPi 5 GPIO (Pins 12,13,17,27,22,23).")
+        except Exception as e:
+            print(f"[!] L298N Motor Driver not available: {e}. Running in simulation motion mode.")
+    return hw_motor
+
+
+ensure_motor_driver()
 
 
 HTML_DASHBOARD = """<!DOCTYPE html>
@@ -150,11 +160,12 @@ HTML_DASHBOARD = """<!DOCTYPE html>
             <div class="card">
                 <div class="card-title">REMOTE ROVER CONTROL</div>
                 <div class="btn-group">
-                    <button class="btn btn-start" onclick="sendControl('start')">▶ START / RESUME PATROL</button>
-                    <button class="btn btn-stop" onclick="sendControl('stop')">⏸ PAUSE / STOP ROVER</button>
-                    <button class="btn btn-reset" onclick="sendControl('reset')">🔄 RESET CHAINAGE (0.00m)</button>
-                    <button class="btn btn-snap" onclick="sendControl('snapshot')">📸 SAVE SCREENSHOT</button>
+                    <button id="btn-start" class="btn btn-start" onclick="sendControl('start')">▶ START PATROL</button>
+                    <button id="btn-stop" class="btn btn-stop" onclick="sendControl('stop')">⏸ PAUSE / STOP ROVER</button>
+                    <button id="btn-reset" class="btn btn-reset" onclick="sendControl('reset')">🔄 RESET CHAINAGE (0.00m)</button>
+                    <button id="btn-snap" class="btn btn-snap" onclick="sendControl('snapshot')">📸 SAVE SCREENSHOT</button>
                 </div>
+                <div id="control-toast" style="margin-top: 10px; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 13px; text-align: center; display: none;"></div>
             </div>
 
             <div class="card" style="margin-top: 16px;">
@@ -162,8 +173,8 @@ HTML_DASHBOARD = """<!DOCTYPE html>
                 <div class="stat-row"><span class="stat-label">Metric Chainage:</span><span id="tele-chainage" class="stat-value highlight">CH 00+00.00m</span></div>
                 <div class="stat-row"><span class="stat-label">Local Coordinates (X, Y):</span><span id="tele-coords" class="stat-value">X: +0.00m, Y: +0.00m</span></div>
                 <div class="stat-row"><span class="stat-label">Track Designation:</span><span class="stat-value">LINE-1 (UP-MAIN)</span></div>
-                <div class="stat-row"><span class="stat-label">Crawl Velocity:</span><span id="tele-speed" class="stat-value">0.20 m/s</span></div>
-                <div class="stat-row"><span class="stat-label">Motor State:</span><span id="tele-motor" class="stat-value">ENABLED</span></div>
+                <div class="stat-row"><span class="stat-label">Crawl Velocity:</span><span id="tele-speed" class="stat-value">0.00 m/s</span></div>
+                <div class="stat-row"><span class="stat-label">Motor State:</span><span id="tele-motor" class="stat-value">STANDBY</span></div>
                 <div class="stat-row"><span class="stat-label">Frame Rate:</span><span id="tele-fps" class="stat-value">30.0 FPS</span></div>
             </div>
 
@@ -217,7 +228,7 @@ HTML_DASHBOARD = """<!DOCTYPE html>
                 };
                 nextImg.onerror = function() {
                     setStreamOnline(false);
-                    setTimeout(fetchNextFrame, 600);
+                    setTimeout(fetchNextFrame, 500);
                 };
                 nextImg.src = '/api/frame.jpg?t=' + Date.now();
             }
@@ -240,13 +251,21 @@ HTML_DASHBOARD = """<!DOCTYPE html>
             }
         }
 
-        // Automatic fallback to fast image polling if stream breaks or drops
+        // Automatic fallback to high-speed frame polling if stream drops
         streamImg.onerror = function() {
             console.warn("MJPEG stream dropped or not supported. Falling back to high-speed frame polling.");
             if (feedMode === 'stream') {
                 startPollingMode();
             }
         };
+
+        // Fallback watchdog: if image has not loaded any pixels after 2.5s, switch to polling
+        setTimeout(() => {
+            if (feedMode === 'stream' && (streamImg.naturalWidth === 0 || streamImg.complete === false)) {
+                console.warn("Stream delayed. Auto-initiating high-speed frame polling...");
+                startPollingMode();
+            }
+        }, 2500);
 
         function updateTelemetry() {
             fetch('/api/telemetry')
@@ -256,7 +275,7 @@ HTML_DASHBOARD = """<!DOCTYPE html>
                     document.getElementById('chainage-header').innerText = data.chainage;
                     document.getElementById('tele-coords').innerText = data.coordinates;
                     document.getElementById('tele-speed').innerText = data.speed.toFixed(2) + ' m/s';
-                    document.getElementById('tele-motor').innerText = data.motor_enabled ? 'ENABLED' : 'PAUSED';
+                    document.getElementById('tele-motor').innerText = data.motor_enabled ? 'ENABLED (RUNNING)' : 'PAUSED';
                     document.getElementById('tele-fps').innerText = data.fps.toFixed(1) + ' FPS';
 
                     const badge = document.getElementById('status-badge');
@@ -287,12 +306,49 @@ HTML_DASHBOARD = """<!DOCTYPE html>
         }
 
         function sendControl(action) {
+            const toast = document.getElementById('control-toast');
+            if (action === 'start') {
+                toast.innerText = '▶ TRANSMITTING: START PATROL (MOTORS ENGAGED)';
+                toast.style.background = '#15803d';
+                toast.style.color = '#ffffff';
+                toast.style.display = 'block';
+                document.getElementById('status-badge').innerText = 'STATE: PATROLLING';
+                document.getElementById('status-badge').className = 'badge badge-patrolling';
+                document.getElementById('tele-motor').innerText = 'ENABLED (RUNNING)';
+            } else if (action === 'stop') {
+                toast.innerText = '⏸ TRANSMITTING: STOP ROVER (MOTORS HALTED)';
+                toast.style.background = '#b45309';
+                toast.style.color = '#ffffff';
+                toast.style.display = 'block';
+                document.getElementById('status-badge').innerText = 'STATE: PAUSED';
+                document.getElementById('status-badge').className = 'badge badge-paused';
+                document.getElementById('tele-motor').innerText = 'PAUSED';
+            } else if (action === 'reset') {
+                toast.innerText = '🔄 RESETTING CHAINAGE TO 0.00m';
+                toast.style.background = '#0369a1';
+                toast.style.color = '#ffffff';
+                toast.style.display = 'block';
+                document.getElementById('tele-chainage').innerText = 'CH 00+00.00m';
+                document.getElementById('chainage-header').innerText = 'CH 00+00.00m';
+                document.getElementById('tele-coords').innerText = 'X: +0.00m, Y: +0.00m';
+            } else if (action === 'snapshot') {
+                toast.innerText = '📸 DEFECT SCREENSHOT SAVED';
+                toast.style.background = '#334155';
+                toast.style.color = '#ffffff';
+                toast.style.display = 'block';
+            }
+
             fetch('/api/control?action=' + action, { method: 'POST' })
                 .then(r => r.json())
                 .then(res => {
-                    if (res.message) {
-                        console.log(res.message);
-                    }
+                    setTimeout(updateTelemetry, 100);
+                    setTimeout(() => { toast.style.display = 'none'; }, 2200);
+                })
+                .catch(err => {
+                    toast.innerText = '❌ TRANSMISSION FAILED: ' + err;
+                    toast.style.background = '#dc2626';
+                    toast.style.color = '#ffffff';
+                    setTimeout(() => { toast.style.display = 'none'; }, 3000);
                 });
         }
 
@@ -305,7 +361,7 @@ HTML_DASHBOARD = """<!DOCTYPE html>
 
 class WebDashboardHandler(BaseHTTPRequestHandler):
     """HTTP server serving responsive HTML dashboard, MJPEG stream, single frame snapshots, and remote control API."""
-    protocol_version = "HTTP/1.1"
+    protocol_version = "HTTP/1.0"
 
     def do_OPTIONS(self):
         """Handle CORS pre-flight requests."""
@@ -313,11 +369,69 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
         self.send_header("Access-Control-Allow-Headers", "*")
+        self.send_header("Connection", "close")
         self.end_headers()
 
     def do_HEAD(self):
         """Support HTTP HEAD requests."""
         self.do_GET()
+
+    def handle_control(self):
+        """Unified command handler supporting both GET and POST requests for rover actions."""
+        global motor_enabled, rover_location_x, hw_motor, current_state_str, is_inspecting_hold
+
+        action = "unknown"
+        driver = ensure_motor_driver()
+
+        if "action=start" in self.path:
+            motor_enabled = True
+            is_inspecting_hold = False
+            current_state_str = "PATROLLING"
+            action = "start"
+            if driver:
+                driver.set_velocity(rover_linear_speed, 0.0)
+            print(f"▶ [REMOTE WEB COMMAND] Patrol START commanded from laptop — Motors forward at {rover_linear_speed:.2f} m/s.")
+        elif "action=stop" in self.path:
+            motor_enabled = False
+            is_inspecting_hold = False
+            current_state_str = "PAUSED"
+            action = "stop"
+            if driver:
+                driver.set_velocity(0.0, 0.0)
+            print("⏸ [REMOTE WEB COMMAND] Rover STOP commanded from laptop — Motors halted.")
+        elif "action=reset" in self.path:
+            rover_location_x = 0.0
+            action = "reset"
+            print("🔄 [REMOTE WEB COMMAND] Odometry RESET to CH 00+00.00m.")
+        elif "action=snapshot" in self.path:
+            with annotated_lock:
+                snap = latest_annotated_jpeg
+            if snap is not None:
+                ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+                snap_path = os.path.join(SAVE_DIR, f"remote_capture_{ts}.jpg")
+                with open(snap_path, "wb") as f:
+                    f.write(snap)
+                print(f"📸 [REMOTE WEB COMMAND] Snapshot saved: {snap_path}")
+            action = "snapshot"
+
+        resp = {
+            "success": True,
+            "action": action,
+            "motor_enabled": motor_enabled,
+            "state": current_state_str,
+            "speed": rover_linear_speed if motor_enabled else 0.0,
+            "chainage": f"CH {int(abs(rover_location_x)//1000):02d}+{abs(rover_location_x)%1000:05.2f}m",
+            "coordinates": f"X: {rover_location_x:+.2f}m, Y: +0.00m"
+        }
+        body = json.dumps(resp).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Connection", "close")
+        self.send_header("Cache-Control", "no-cache")
+        self.end_headers()
+        self.wfile.write(body)
 
     def do_GET(self):
         global rover_location_x, rover_linear_speed, motor_enabled, is_inspecting_hold
@@ -326,12 +440,18 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
         clean_path = self.path.split("?")[0]
 
         if clean_path in ("/", "/index.html"):
+            body = HTML_DASHBOARD.encode("utf-8")
             self.send_response(200)
             self.send_header("Access-Control-Allow-Origin", "*")
             self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("Connection", "close")
             self.send_header("Cache-Control", "no-cache")
             self.end_headers()
-            self.wfile.write(HTML_DASHBOARD.encode("utf-8"))
+            self.wfile.write(body)
+
+        elif clean_path.startswith("/api/control"):
+            self.handle_control()
 
         elif clean_path == "/video_feed":
             self.send_response(200)
@@ -374,6 +494,7 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.send_header("Content-Type", "image/jpeg")
                 self.send_header("Content-Length", str(len(jpg)))
+                self.send_header("Connection", "close")
                 self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
                 self.send_header("Pragma", "no-cache")
                 self.send_header("Expires", "0")
@@ -382,15 +503,10 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
             else:
                 self.send_response(503)
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("Connection", "close")
                 self.end_headers()
 
         elif clean_path == "/api/telemetry":
-            self.send_response(200)
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Cache-Control", "no-cache")
-            self.end_headers()
-
             km = int(abs(rover_location_x) // 1000)
             m = abs(rover_location_x) % 1000
             chainage_str = f"CH {km:02d}+{m:05.2f}m"
@@ -406,48 +522,48 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
                 "fps": 30.0,
                 "last_alert": last_defect_info,
             }
-            self.wfile.write(json.dumps(data).encode("utf-8"))
+            body = json.dumps(data).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("Connection", "close")
+            self.send_header("Cache-Control", "no-cache")
+            self.end_headers()
+            self.wfile.write(body)
+
+        elif clean_path.startswith("/images/"):
+            fname = clean_path.replace("/images/", "").strip("/")
+            fpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "images", fname)
+            if os.path.isfile(fpath):
+                with open(fpath, "rb") as f:
+                    img_data = f.read()
+                self.send_response(200)
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("Content-Type", "image/png")
+                self.send_header("Content-Length", str(len(img_data)))
+                self.send_header("Connection", "close")
+                self.end_headers()
+                self.wfile.write(img_data)
+            else:
+                self.send_response(404)
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("Connection", "close")
+                self.end_headers()
 
         else:
             self.send_response(404)
             self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Connection", "close")
             self.end_headers()
 
     def do_POST(self):
-        global motor_enabled, rover_location_x, hw_motor
-
         if self.path.startswith("/api/control"):
-            action = "unknown"
-            if "action=start" in self.path:
-                motor_enabled = True
-                action = "start"
-                print("▶ [REMOTE WEB COMMAND] Patrol START commanded from laptop.")
-            elif "action=stop" in self.path:
-                motor_enabled = False
-                if hw_motor:
-                    hw_motor.set_velocity(0.0, 0.0)
-                action = "stop"
-                print("⏸ [REMOTE WEB COMMAND] Rover STOP commanded from laptop.")
-            elif "action=reset" in self.path:
-                rover_location_x = 0.0
-                action = "reset"
-                print("🔄 [REMOTE WEB COMMAND] Odometry RESET to CH 00+00.00m.")
-            elif "action=snapshot" in self.path:
-                with annotated_lock:
-                    snap = latest_annotated_jpeg
-                if snap is not None:
-                    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-                    snap_path = os.path.join(SAVE_DIR, f"remote_capture_{ts}.jpg")
-                    with open(snap_path, "wb") as f:
-                        f.write(snap)
-                    print(f"📸 [REMOTE WEB COMMAND] Snapshot saved: {snap_path}")
-                action = "snapshot"
-
-            self.send_response(200)
+            self.handle_control()
+        else:
+            self.send_response(404)
             self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(json.dumps({"success": True, "action": action}).encode("utf-8"))
 
     def log_message(self, format, *args):
         pass  # Suppress HTTP access log spam
