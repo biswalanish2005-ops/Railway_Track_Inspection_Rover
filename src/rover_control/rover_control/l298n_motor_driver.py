@@ -26,7 +26,7 @@ class L298NMotorDriver:
         in2_pin: int = 27,
         in3_pin: int = 22,
         in4_pin: int = 23,
-        pwm_freq: int = 1000,
+        pwm_freq: int = 100,
         max_duty_cycle: float = 0.85,
     ) -> None:
         self._logger = get_logger("l298n_motor_driver")
@@ -79,7 +79,7 @@ class L298NMotorDriver:
         v_left = linear_velocity - (angular_velocity * track_width / 2.0)
         v_right = linear_velocity + (angular_velocity * track_width / 2.0)
 
-        max_speed = 0.5
+        max_speed = 0.50
         duty_left = min(1.0, max(-1.0, v_left / max_speed)) * self._max_duty
         duty_right = min(1.0, max(-1.0, v_right / max_speed)) * self._max_duty
 
@@ -87,38 +87,49 @@ class L298NMotorDriver:
         self._set_channel(duty_right, self._in3, self._in4, self._enb)
 
     def _set_channel(self, duty: float, in_a: int, in_b: int, en_pin: int) -> None:
-        """Set direction pins and PWM duty cycle for one L298N channel."""
+        """
+        Set direction pins and PWM duty cycle for one L298N channel.
+        Pulses BOTH the active direction pin (in_a / in_b) AND the enable pin (en_pin)
+        so that speed reduction works regardless of whether the physical L298N board
+        has the factory ENA/ENB 5V jumper installed or removed.
+        """
         if not self._initialized or self._chip is None:
             return
 
         if abs(duty) > 0.001:
-            # Map normalized duty to PWM percentage with starting torque floor
-            # Scaled down by 70% to enable gentle, steady crawl speed along track (~20% PWM at 0.06 m/s)
-            speed_pct = 15.0 + abs(duty) * 50.0
+            # Scaled down by 70% to produce a very gentle, steady crawl along the rail (~16% PWM at 0.06 m/s)
+            speed_pct = 12.0 + abs(duty) * 45.0
             speed_pct = min(100.0, max(0.0, speed_pct))
         else:
             speed_pct = 0.0
 
         if duty > 0.001:
-            lgpio.gpio_write(self._chip, in_a, 1)
+            # Forward: hold opposite input at 0, pulse forward input + enable pin
+            lgpio.tx_pwm(self._chip, in_b, self._pwm_freq, 0.0)
             lgpio.gpio_write(self._chip, in_b, 0)
+            lgpio.tx_pwm(self._chip, in_a, self._pwm_freq, speed_pct)
             lgpio.tx_pwm(self._chip, en_pin, self._pwm_freq, speed_pct)
         elif duty < -0.001:
+            # Backward: hold opposite input at 0, pulse reverse input + enable pin
+            lgpio.tx_pwm(self._chip, in_a, self._pwm_freq, 0.0)
             lgpio.gpio_write(self._chip, in_a, 0)
-            lgpio.gpio_write(self._chip, in_b, 1)
+            lgpio.tx_pwm(self._chip, in_b, self._pwm_freq, speed_pct)
             lgpio.tx_pwm(self._chip, en_pin, self._pwm_freq, speed_pct)
         else:
-            lgpio.gpio_write(self._chip, in_a, 0)
-            lgpio.gpio_write(self._chip, in_b, 0)
-            lgpio.tx_pwm(self._chip, en_pin, self._pwm_freq, 0.0)
+            # Halt / Coast
+            for p in (in_a, in_b, en_pin):
+                lgpio.tx_pwm(self._chip, p, self._pwm_freq, 0.0)
+                lgpio.gpio_write(self._chip, p, 0)
 
     def stop(self) -> None:
         """Immediately stop all motor outputs."""
         if self._initialized and self._chip is not None:
-            for pin in [self._in1, self._in2, self._in3, self._in4]:
-                lgpio.gpio_write(self._chip, pin, 0)
-            lgpio.tx_pwm(self._chip, self._ena, self._pwm_freq, 0.0)
-            lgpio.tx_pwm(self._chip, self._enb, self._pwm_freq, 0.0)
+            for pin in [self._in1, self._in2, self._in3, self._in4, self._ena, self._enb]:
+                try:
+                    lgpio.tx_pwm(self._chip, pin, self._pwm_freq, 0.0)
+                    lgpio.gpio_write(self._chip, pin, 0)
+                except Exception:
+                    pass
         self._logger.info("L298N motor output stopped.")
 
     def cleanup(self) -> None:

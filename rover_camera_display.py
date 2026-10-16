@@ -73,8 +73,9 @@ def ensure_motor_driver():
     if hw_motor is None:
         try:
             control_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src/rover_control")
-            if control_path not in sys.path:
-                sys.path.append(control_path)
+            if control_path in sys.path:
+                sys.path.remove(control_path)
+            sys.path.insert(0, control_path)
             from rover_control.l298n_motor_driver import L298NMotorDriver
             hw_motor = L298NMotorDriver()
             print("[*] Physical L298N Motor Driver ACTIVE on RPi 5 GPIO (Pins 12,13,17,27,22,23).")
@@ -164,6 +165,17 @@ HTML_DASHBOARD = """<!DOCTYPE html>
                     <button id="btn-stop" class="btn btn-stop" onclick="sendControl('stop')">⏸ PAUSE / STOP ROVER</button>
                     <button id="btn-reset" class="btn btn-reset" onclick="sendControl('reset')">🔄 RESET CHAINAGE (0.00m)</button>
                     <button id="btn-snap" class="btn btn-snap" onclick="sendControl('snapshot')">📸 SAVE SCREENSHOT</button>
+                </div>
+                <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid #222f42;">
+                    <div style="font-size: 11.5px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; display: flex; justify-content: space-between;">
+                        <span>PATROL SPEED PRESETS:</span>
+                        <span id="current-speed-label" style="color: #38bdf8;">0.06 m/s (CRAWL)</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+                        <button onclick="setPatrolSpeed(0.03)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px;">🐢 0.03 m/s</button>
+                        <button onclick="setPatrolSpeed(0.06)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px; border: 1px solid #38bdf8; color: #38bdf8;">🎯 0.06 m/s</button>
+                        <button onclick="setPatrolSpeed(0.10)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px;">🐇 0.10 m/s</button>
+                    </div>
                 </div>
                 <div id="control-toast" style="margin-top: 10px; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 13px; text-align: center; display: none;"></div>
             </div>
@@ -352,6 +364,28 @@ HTML_DASHBOARD = """<!DOCTYPE html>
                 });
         }
 
+        function setPatrolSpeed(val) {
+            const toast = document.getElementById('control-toast');
+            toast.innerText = '⚡ TRANSMITTING: SPEED -> ' + val.toFixed(2) + ' m/s';
+            toast.style.background = '#0284c7';
+            toast.style.color = '#ffffff';
+            toast.style.display = 'block';
+
+            fetch('/api/control?action=setspeed&val=' + val, { method: 'POST' })
+                .then(r => r.json())
+                .then(res => {
+                    const label = document.getElementById('current-speed-label');
+                    if (label) label.innerText = val.toFixed(2) + ' m/s';
+                    setTimeout(updateTelemetry, 100);
+                    setTimeout(() => { toast.style.display = 'none'; }, 2000);
+                })
+                .catch(err => {
+                    toast.innerText = '❌ SPEED UPDATE FAILED: ' + err;
+                    toast.style.background = '#dc2626';
+                    setTimeout(() => { toast.style.display = 'none'; }, 3000);
+                });
+        }
+
         setInterval(updateTelemetry, 400);
     </script>
 </body>
@@ -378,12 +412,27 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
 
     def handle_control(self):
         """Unified command handler supporting both GET and POST requests for rover actions."""
-        global motor_enabled, rover_location_x, hw_motor, current_state_str, is_inspecting_hold
+        global motor_enabled, rover_location_x, hw_motor, current_state_str, is_inspecting_hold, rover_linear_speed
 
         action = "unknown"
         driver = ensure_motor_driver()
 
-        if "action=start" in self.path:
+        if "action=setspeed" in self.path:
+            try:
+                import urllib.parse
+                qs = urllib.parse.urlparse(self.path).query
+                params = urllib.parse.parse_qs(qs)
+                if "val" in params:
+                    rover_linear_speed = float(params["val"][0])
+                elif "speed" in params:
+                    rover_linear_speed = float(params["speed"][0])
+                action = f"setspeed_{rover_linear_speed:.2f}"
+                if driver and motor_enabled:
+                    driver.set_velocity(rover_linear_speed, 0.0)
+                print(f"⚡ [REMOTE WEB COMMAND] Rover patrol speed updated to {rover_linear_speed:.2f} m/s.")
+            except Exception as e:
+                print(f"[!] Error updating speed: {e}")
+        elif "action=start" in self.path:
             motor_enabled = True
             is_inspecting_hold = False
             current_state_str = "PATROLLING"
@@ -570,12 +619,18 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
 
 
 def parse_args():
-    global camera_roi, track_y_min_ratio, is_headless, web_port
+    global camera_roi, track_y_min_ratio, is_headless, web_port, rover_linear_speed
     parser = argparse.ArgumentParser(description="Railway Inspection Rover Headless Remote Controller")
     parser.add_argument(
         "--headless",
         action="store_true",
         help="Run headless without opening OpenCV window (for remote SSH usage without display)."
+    )
+    parser.add_argument(
+        "--speed",
+        type=float,
+        default=0.06,
+        help="Rover patrol crawl velocity in m/s (default: 0.06 m/s, reduced by 70%% from 0.20 m/s)."
     )
     parser.add_argument(
         "--port",
@@ -603,6 +658,7 @@ def parse_args():
         is_headless = False
 
     web_port = args.port
+    rover_linear_speed = args.speed
 
     if args.no_roi:
         camera_roi = None

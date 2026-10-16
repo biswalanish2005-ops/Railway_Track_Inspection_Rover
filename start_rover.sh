@@ -41,7 +41,7 @@ echo "========================================================================"
 # Check for background daemon flag (-d / --daemon / --background)
 if [[ "$1" == "-d" || "$1" == "--daemon" || "$1" == "--background" ]]; then
     echo "[*] Starting Rover in BACKGROUND DAEMON mode..."
-    setsid python3 -u rover_camera_display.py --headless < /dev/null > "$LOG_FILE" 2>&1 &
+    setsid python3 -u rover_camera_display.py --headless --speed 0.06 < /dev/null > "$LOG_FILE" 2>&1 &
     ROVER_PID=$!
     echo "$ROVER_PID" > "$PID_FILE"
     sleep 2.5
@@ -66,5 +66,5 @@ else
     echo "[*] Starting Rover in INTERACTIVE SSH mode..."
     echo "[*] Press Ctrl+C at any time to safely halt motors and exit."
     echo ""
-    python3 rover_camera_display.py --headless
+    python3 rover_camera_display.py --headless --speed 0.06
 fi

@@ -225,6 +225,17 @@
                     <button class="btn btn-reset" onclick="sendRoverAction('reset')">🔄 RESET CHAINAGE (0.00m)</button>
                     <button class="btn btn-snap" onclick="triggerSnapshot()">📸 SAVE DEFECT SCREENSHOT</button>
                 </div>
+                <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border);">
+                    <div style="font-size: 11.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; display: flex; justify-content: space-between;">
+                        <span>PATROL SPEED PRESETS:</span>
+                        <span id="current-speed-label" style="color: var(--accent-glow);">0.06 m/s (CRAWL)</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+                        <button onclick="setPatrolSpeed(0.03)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px;">🐢 0.03 m/s</button>
+                        <button onclick="setPatrolSpeed(0.06)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px; border: 1px solid var(--accent-glow); color: var(--accent-glow);">🎯 0.06 m/s</button>
+                        <button onclick="setPatrolSpeed(0.10)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px;">🐇 0.10 m/s</button>
+                    </div>
+                </div>
                 <div id="control-toast" style="margin-top: 10px; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 13px; text-align: center; display: none;"></div>
             </div>
 
@@ -527,6 +538,30 @@
                             setTimeout(() => { toast.style.display = 'none'; }, 3000);
                         }
                     }
+                });
+        }
+
+        function setPatrolSpeed(val) {
+            speed = val;
+            const toast = document.getElementById('control-toast');
+            if (toast) {
+                toast.innerText = '⚡ TRANSMITTING: SPEED -> ' + val.toFixed(2) + ' m/s';
+                toast.style.background = '#0284c7';
+                toast.style.color = '#ffffff';
+                toast.style.display = 'block';
+            }
+            const label = document.getElementById('current-speed-label');
+            if (label) label.innerText = val.toFixed(2) + ' m/s';
+
+            fetch(roverBaseUrl + '/api/control?action=setspeed&val=' + val, { method: 'POST', mode: 'cors' })
+                .then(r => r.json())
+                .then(() => {
+                    setTimeout(updateTelemetry, 100);
+                    if (toast) setTimeout(() => { toast.style.display = 'none'; }, 2000);
+                })
+                .catch(err => {
+                    fetch(roverBaseUrl + '/api/control?action=setspeed&val=' + val, { method: 'GET', mode: 'no-cors' }).catch(() => {});
+                    if (toast) setTimeout(() => { toast.style.display = 'none'; }, 2000);
                 });
         }
 
