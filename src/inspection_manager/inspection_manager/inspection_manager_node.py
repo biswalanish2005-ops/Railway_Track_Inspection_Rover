@@ -23,7 +23,7 @@ class InspectionManagerNode(Node):
         # Declare Parameters
         self.declare_parameter("inspection_hold_duration_sec", 5.0)
         self.declare_parameter("auto_resume_after_inspection", True)
-        self.declare_parameter("inspection_speed", 0.20)
+        self.declare_parameter("inspection_speed", 0.06)
         self.declare_parameter("detection_cooldown_sec", 5.0)
 
         # Retrieve Parameters

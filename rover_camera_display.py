@@ -51,7 +51,7 @@ is_headless = False
 web_port = 8080
 
 # Railway Chainage Odometry & Physical Motor Control
-rover_linear_speed = 0.20  # m/s crawl patrol speed
+rover_linear_speed = 0.06  # m/s crawl patrol speed (decreased by 70% from 0.20 m/s)
 rover_location_x = 0.0     # meters along track
 is_inspecting_hold = False
 hold_start_time = 0.0

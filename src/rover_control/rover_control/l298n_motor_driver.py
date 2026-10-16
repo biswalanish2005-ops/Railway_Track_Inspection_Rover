@@ -92,8 +92,9 @@ class L298NMotorDriver:
             return
 
         if abs(duty) > 0.001:
-            # Map normalized duty to PWM percentage with starting torque floor (45% - 100%)
-            speed_pct = 45.0 + abs(duty) * 55.0
+            # Map normalized duty to PWM percentage with starting torque floor
+            # Scaled down by 70% to enable gentle, steady crawl speed along track (~20% PWM at 0.06 m/s)
+            speed_pct = 15.0 + abs(duty) * 50.0
             speed_pct = min(100.0, max(0.0, speed_pct))
         else:
             speed_pct = 0.0

@@ -34,7 +34,7 @@ echo "  Web Dashboard:         http://$IP_ADDR:8080/"
 echo "  Motor Controller:      L298N (GPIO Pins 12, 13, 17, 27, 22, 23)"
 echo "  Camera:                Raspberry Pi Camera Module 3 (IMX708)"
 echo "  Sensor ROI:            0.0,0.25,1.0,0.75 (Track Lateral Band)"
-echo "  Patrol Speed:          0.20 m/s crawl speed"
+echo "  Patrol Speed:          0.06 m/s crawl speed (reduced by 70%)"
 echo "  Crack Response:        5.0s stationary hold, remote dispatch, auto-resume"
 echo "========================================================================"
 
