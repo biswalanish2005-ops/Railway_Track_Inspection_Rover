@@ -97,8 +97,8 @@ class L298NMotorDriver:
             return
 
         if abs(duty) > 0.001:
-            # Scaled down by 70% to produce a very gentle, steady crawl along the rail (~16% PWM at 0.06 m/s)
-            speed_pct = 12.0 + abs(duty) * 45.0
+            # Scaled to produce steady, smooth crawl along rail (~22.5% PWM at 0.08 m/s, +35% increase from 0.06 m/s)
+            speed_pct = 15.0 + abs(duty) * 55.0
             speed_pct = min(100.0, max(0.0, speed_pct))
         else:
             speed_pct = 0.0

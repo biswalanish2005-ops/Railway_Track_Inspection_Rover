@@ -34,14 +34,14 @@ echo "  Web Dashboard:         http://$IP_ADDR:8080/"
 echo "  Motor Controller:      L298N (GPIO Pins 12, 13, 17, 27, 22, 23)"
 echo "  Camera:                Raspberry Pi Camera Module 3 (IMX708)"
 echo "  Sensor ROI:            0.0,0.25,1.0,0.75 (Track Lateral Band)"
-echo "  Patrol Speed:          0.06 m/s crawl speed (reduced by 70%)"
+echo "  Patrol Speed:          0.08 m/s crawl speed (+35% increase from 0.06 m/s)"
 echo "  Crack Response:        5.0s stationary hold, remote dispatch, auto-resume"
 echo "========================================================================"
 
 # Check for background daemon flag (-d / --daemon / --background)
 if [[ "$1" == "-d" || "$1" == "--daemon" || "$1" == "--background" ]]; then
     echo "[*] Starting Rover in BACKGROUND DAEMON mode..."
-    setsid python3 -u rover_camera_display.py --headless --speed 0.06 < /dev/null > "$LOG_FILE" 2>&1 &
+    setsid python3 -u rover_camera_display.py --headless --speed 0.08 < /dev/null > "$LOG_FILE" 2>&1 &
     ROVER_PID=$!
     echo "$ROVER_PID" > "$PID_FILE"
     sleep 2.5
@@ -66,5 +66,5 @@ else
     echo "[*] Starting Rover in INTERACTIVE SSH mode..."
     echo "[*] Press Ctrl+C at any time to safely halt motors and exit."
     echo ""
-    python3 rover_camera_display.py --headless --speed 0.06
+    python3 rover_camera_display.py --headless --speed 0.08
 fi

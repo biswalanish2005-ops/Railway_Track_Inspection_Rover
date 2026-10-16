@@ -2,4 +2,4 @@
   ros__parameters:
     inspection_hold_duration_sec: 5.0   # Time rover remains stationary during inspection (5.0s hold)
     auto_resume_after_inspection: true   # Resume movement after inspection completes
-    inspection_speed: 0.06              # Normal inspection crawling speed (m/s) (reduced by 70%)
+    inspection_speed: 0.08              # Normal inspection crawling speed (m/s) (+35% increase from 0.06 m/s)

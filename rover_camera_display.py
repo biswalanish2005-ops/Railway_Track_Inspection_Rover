@@ -51,7 +51,7 @@ is_headless = False
 web_port = 8080
 
 # Railway Chainage Odometry & Physical Motor Control
-rover_linear_speed = 0.06  # m/s crawl patrol speed (decreased by 70% from 0.20 m/s)
+rover_linear_speed = 0.08  # m/s crawl patrol speed (increased by ~35% from 0.06 m/s)
 rover_location_x = 0.0     # meters along track
 is_inspecting_hold = False
 hold_start_time = 0.0
@@ -169,12 +169,12 @@ HTML_DASHBOARD = """<!DOCTYPE html>
                 <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid #222f42;">
                     <div style="font-size: 11.5px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; display: flex; justify-content: space-between;">
                         <span>PATROL SPEED PRESETS:</span>
-                        <span id="current-speed-label" style="color: #38bdf8;">0.06 m/s (CRAWL)</span>
+                        <span id="current-speed-label" style="color: #38bdf8;">0.08 m/s (PATROL)</span>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
-                        <button onclick="setPatrolSpeed(0.03)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px;">🐢 0.03 m/s</button>
-                        <button onclick="setPatrolSpeed(0.06)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px; border: 1px solid #38bdf8; color: #38bdf8;">🎯 0.06 m/s</button>
-                        <button onclick="setPatrolSpeed(0.10)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px;">🐇 0.10 m/s</button>
+                        <button onclick="setPatrolSpeed(0.06)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px;">🐢 0.06 m/s</button>
+                        <button onclick="setPatrolSpeed(0.08)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px; border: 1px solid #38bdf8; color: #38bdf8;">🎯 0.08 m/s</button>
+                        <button onclick="setPatrolSpeed(0.12)" class="btn btn-snap" style="padding: 6px 4px; font-size: 11.5px;">🐇 0.12 m/s</button>
                     </div>
                 </div>
                 <div id="control-toast" style="margin-top: 10px; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 13px; text-align: center; display: none;"></div>
@@ -629,8 +629,8 @@ def parse_args():
     parser.add_argument(
         "--speed",
         type=float,
-        default=0.06,
-        help="Rover patrol crawl velocity in m/s (default: 0.06 m/s, reduced by 70%% from 0.20 m/s)."
+        default=0.08,
+        help="Rover patrol crawl velocity in m/s (default: 0.08 m/s, increased by ~35%% from 0.06 m/s)."
     )
     parser.add_argument(
         "--port",
