@@ -252,14 +252,49 @@ class CrackDetectionNode(Node):
             x1, y1, x2, y2 = bx, by, bx + bw, by + bh_box
             cx, cy = x1 + bw // 2, y1 + bh_box // 2
 
-            # ─── CONSTRAINT 1: Valid Track Range (Exclude upper background) ───
-            if cy < self._track_y_min_ratio * h or cy > 0.95 * h:
+            # ─── CONSTRAINT 1: Field of View (Center or Little Bit Off-Center, Not Very Edge) ───
+            if cx < 0.10 * w or cx > 0.90 * w:
+                continue
+            if x1 < 0.04 * w or x2 > 0.96 * w:
                 continue
 
-            # ─── CONSTRAINT 2: Valid Steel Rail Lateral Bands ───
-            on_left_rail = (self._left_rail_x_min * w <= cx <= self._left_rail_x_max * w)
-            on_right_rail = (self._right_rail_x_min * w <= cx <= self._right_rail_x_max * w)
-            if not (on_left_rail or on_right_rail):
+            # Reject distant background / horizon at top, and bumper edge at bottom
+            min_y_ratio = 0.20 if h > 300 else 0.05
+            max_y_ratio = 0.86 if h > 300 else 0.95
+            if cy < min_y_ratio * h or cy > max_y_ratio * h:
+                continue
+
+            # ─── CONSTRAINT 2: Reject Middle of the Track (Between the Two Rails) ───
+            # The central zone between the rails (0.33*w to 0.67*w) is the floor, NOT the rails.
+            is_in_middle_span = (0.33 * w <= cx <= 0.67 * w)
+
+            # ─── CONSTRAINT 3: Strictly On The Black Lines (Railway Tracks) Only ───
+            # Calculate baseline floor brightness in the middle zone (between the rails)
+            mid_floor = gray[int(0.20 * h):int(0.85 * h), int(0.38 * w):int(0.62 * w)]
+            floor_median = float(np.median(mid_floor)) if mid_floor.size > 0 else 180.0
+            dark_rail_thresh = min(105.0, max(50.0, floor_median - 35.0))
+
+            # Check track surface darkness adjacent to the cut (above and below the slit):
+            pad_y = max(6, int((y2 - y1) * 0.7))
+            top_rail = gray[max(0, y1 - pad_y):y1, x1:x2]
+            bot_rail = gray[y2:min(h, y2 + pad_y), x1:x2]
+
+            top_mean = float(top_rail.mean()) if top_rail.size > 0 else 255.0
+            bot_mean = float(bot_rail.mean()) if bot_rail.size > 0 else 255.0
+
+            # In the middle span between rails, reject if not on a verified dark rail
+            if is_in_middle_span:
+                if top_mean > dark_rail_thresh or bot_mean > dark_rail_thresh:
+                    continue
+
+            # Reject if adjacent surface is bright floor rather than a dark black rail line
+            if top_mean > dark_rail_thresh and bot_mean > dark_rail_thresh:
+                continue
+
+            # Check longitudinal track rail continuity along the defect column (Y axis)
+            col_span = gray[max(0, cy - int(0.20 * h)):min(h, cy + int(0.20 * h)), cx]
+            dark_col_ratio = float(np.mean(col_span <= dark_rail_thresh))
+            if dark_col_ratio < 0.12:
                 continue
 
             # ─── CONSTRAINT 3: Transverse Slit Orientation (dx >> dy) ───
