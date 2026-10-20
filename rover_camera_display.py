@@ -649,6 +649,11 @@ def parse_args():
         action="store_true",
         help="Disable camera sensor ROI (captures full sensor). Track ROI filtering will still reject background."
     )
+    parser.add_argument(
+        "--autostart", "--start",
+        action="store_true",
+        help="Immediately start rover patrolling upon launch without waiting for web button or keypress."
+    )
     args, _ = parser.parse_known_args()
 
     # Auto-detect headless mode if no DISPLAY environment variable
@@ -659,6 +664,12 @@ def parse_args():
 
     web_port = args.port
     rover_linear_speed = args.speed
+
+    if args.autostart:
+        global motor_enabled, current_state_str
+        motor_enabled = True
+        current_state_str = "PATROLLING"
+
 
     if args.no_roi:
         camera_roi = None
@@ -1093,9 +1104,8 @@ def main():
     print("=" * 72)
     print(f"  Mode:              {'HEADLESS (NO MONITOR NEEDED)' if is_headless else 'DESKTOP WINDOW + WEB'}")
     print(f"  Camera:            Raspberry Pi Camera Module 3 (IMX708)")
-    print(f"  Sensor ROI:        {camera_roi or 'FULL SENSOR'}")
-    print(f"  Motor Controller:  L298N on RPi 5 GPIO (Pins 12,13,17,27,22,23)")
-    print(f"  Speed:             0.20 m/s patrol crawl speed")
+    print(f"  Speed:             {rover_linear_speed:.2f} m/s patrol crawl speed")
+    print(f"  Initial State:     {'PATROLLING (ACTIVE)' if motor_enabled else 'STANDBY (WAITING FOR START)'}")
     print(f"  Crack Response:    5.0s stationary hold, coordinate dispatch, auto-resume")
     print("-" * 72)
     print(f"  🌐 Remote Web URL:  http://{local_ip}:{web_port}/")

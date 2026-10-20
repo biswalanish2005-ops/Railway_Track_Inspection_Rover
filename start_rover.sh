@@ -39,9 +39,20 @@ echo "  Crack Response:        5.0s stationary hold, remote dispatch, auto-resum
 echo "========================================================================"
 
 # Check for background daemon flag (-d / --daemon / --background)
-if [[ "$1" == "-d" || "$1" == "--daemon" || "$1" == "--background" ]]; then
+DAEMON_MODE=false
+EXTRA_ARGS=()
+
+for arg in "$@"; do
+    if [[ "$arg" == "-d" || "$arg" == "--daemon" || "$arg" == "--background" ]]; then
+        DAEMON_MODE=true
+    else
+        EXTRA_ARGS+=("$arg")
+    fi
+done
+
+if [ "$DAEMON_MODE" = true ]; then
     echo "[*] Starting Rover in BACKGROUND DAEMON mode..."
-    setsid python3 -u rover_camera_display.py --headless --speed 0.08 < /dev/null > "$LOG_FILE" 2>&1 &
+    setsid python3 -u rover_camera_display.py --headless --speed 0.08 "${EXTRA_ARGS[@]}" < /dev/null > "$LOG_FILE" 2>&1 &
     ROVER_PID=$!
     echo "$ROVER_PID" > "$PID_FILE"
     sleep 2.5
@@ -66,5 +77,5 @@ else
     echo "[*] Starting Rover in INTERACTIVE SSH mode..."
     echo "[*] Press Ctrl+C at any time to safely halt motors and exit."
     echo ""
-    python3 rover_camera_display.py --headless --speed 0.08
+    python3 rover_camera_display.py --headless --speed 0.08 "${EXTRA_ARGS[@]}"
 fi
