@@ -60,6 +60,10 @@ camera_roi = "0.0,0.25,1.0,0.75"  # Default sensor ROI: crops upper background c
 track_y_min_ratio = 0.08          # Minimum vertical ratio on track
 motor_enabled = False             # Physical motor drive toggle (DEFAULT: False in STANDBY until START clicked)
 last_alert_cooldown_time = 0.0
+last_inspected_x = -999.0         # Metric position (m) where the last defect was stopped and inspected
+resume_patrol_time = 0.0          # Timestamp when rover resumed moving after inspection hold
+MIN_CLEARING_DISTANCE = 0.70      # Forward travel distance (m) required to clear inspected defect
+MIN_CLEARING_TIME = 10.0          # Active travel seconds required to clear inspected defect from FOV
 last_defect_info = None
 current_state_str = "STANDBY"
 
@@ -413,6 +417,7 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
     def handle_control(self):
         """Unified command handler supporting both GET and POST requests for rover actions."""
         global motor_enabled, rover_location_x, hw_motor, current_state_str, is_inspecting_hold, rover_linear_speed
+        global last_inspected_x, resume_patrol_time
 
         action = "unknown"
         driver = ensure_motor_driver()
@@ -450,6 +455,8 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
             print("⏸ [REMOTE WEB COMMAND] Rover STOP commanded from laptop — Motors halted.")
         elif "action=reset" in self.path:
             rover_location_x = 0.0
+            last_inspected_x = -999.0
+            resume_patrol_time = 0.0
             action = "reset"
             print("🔄 [REMOTE WEB COMMAND] Odometry RESET to CH 00+00.00m.")
         elif "action=snapshot" in self.path:
@@ -725,166 +732,127 @@ def stream_reader():
 
 def detect_slits_and_cracks(gray_frame: np.ndarray) -> list[dict]:
     """
-    Calibrated detection engine for slits, notches, and cracks in railway track plates.
-    Specifically tuned to detect img3.png-style transverse rail plate slits and reject
-    non-track background clutter (matching img1.png POV and avoiding img2.png false positives).
+    High-accuracy calibrated detector for genuine physical slits on black railway track rails.
+    Strictly detects transverse slits cut across the black rail lines and rejects non-rail clutter.
     """
-    global track_y_min_ratio
     h, w = gray_frame.shape[:2]
 
     filtered = cv2.bilateralFilter(gray_frame, 7, 75, 75)
-    canny = cv2.Canny(filtered, 30, 115)
+    canny = cv2.Canny(filtered, 40, 120)
 
-    # 1. Parallel Edge-Pair Slit Detector (Detects physical cuts & notches)
-    lines = cv2.HoughLinesP(canny, 1, np.pi / 180, threshold=25, minLineLength=25, maxLineGap=12)
+    # Detect horizontal line segments (rail slits are cut transversely across rails)
+    lines = cv2.HoughLinesP(canny, 1, np.pi / 180, threshold=30, minLineLength=30, maxLineGap=10)
 
     candidates = []
     if lines is not None and len(lines) > 0:
         segs = []
         for l in lines:
             x1, y1, x2, y2 = l[0]
-            length = np.hypot(x2 - x1, y2 - y1)
-            angle = np.arctan2(y2 - y1, x2 - x1) % np.pi
-            segs.append((x1, y1, x2, y2, length, angle))
+            dx = abs(x2 - x1)
+            dy = abs(y2 - y1)
+            # Slits across railway tracks are transverse (strongly horizontal)
+            if dx >= 2.0 * dy:
+                length = np.hypot(x2 - x1, y2 - y1)
+                angle = np.arctan2(y2 - y1, x2 - x1) % np.pi
+                segs.append((x1, y1, x2, y2, length, angle))
 
         for i in range(len(segs)):
             x1a, y1a, x2a, y2a, lena, ana = segs[i]
-            for j in range(i + 1, min(len(segs), i + 35)):
+            for j in range(i + 1, min(len(segs), i + 25)):
                 x1b, y1b, x2b, y2b, lenb, anb = segs[j]
-                angle_diff = abs(ana - anb)
-                if angle_diff > np.pi / 2:
-                    angle_diff = np.pi - angle_diff
-                if angle_diff > np.radians(14):
+                if abs(ana - anb) > np.radians(10):
                     continue
-
-                mxa, mya = (x1a + x2a) / 2, (y1a + y2a) / 2
-                mxb, myb = (x1b + x2b) / 2, (y1b + y2b) / 2
-                dist = np.hypot(mxa - mxb, mya - myb)
-
-                if 3 <= dist <= 55:
+                mya = (y1a + y2a) / 2
+                myb = (y1b + y2b) / 2
+                gap = abs(mya - myb)
+                if 2 <= gap <= 30:  # Physical slit gap width: 0.7mm to 10.5mm
                     xmin = int(min(x1a, x2a, x1b, x2b))
                     xmax = int(max(x1a, x2a, x1b, x2b))
                     ymin = int(min(y1a, y2a, y1b, y2b))
                     ymax = int(max(y1a, y2a, y1b, y2b))
-                    slen = max(xmax - xmin, ymax - ymin)
-                    swid = min(xmax - xmin, ymax - ymin)
-
-                    if 20 <= slen <= 450 and 2 <= swid <= 45 and (slen / max(1.0, swid)) >= 1.8:
-                        candidates.append([xmin, ymin, xmax - xmin, ymax - ymin, slen])
-
-    # 2. Black-Hat Morphological Filter (Detects surface cracks, fissures, joints)
-    kernel_bh = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
-    blackhat = cv2.morphologyEx(gray_frame, cv2.MORPH_BLACKHAT, kernel_bh)
-    _, bh_thresh = cv2.threshold(blackhat, 22, 255, cv2.THRESH_BINARY)
-    bh_contours, _ = cv2.findContours(bh_thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    for c in bh_contours:
-        bx, by, bw, bh_box = cv2.boundingRect(c)
-        blen = max(bw, bh_box)
-        bwid = min(bw, bh_box)
-        if 20 <= blen <= 450 and 2 <= bwid <= 45 and (blen / max(1.0, bwid)) >= 1.8:
-            candidates.append([bx, by, bw, bh_box, blen])
+                    slen = xmax - xmin
+                    swid = max(1, ymax - ymin)
+                    if slen >= 25 and (slen / swid) >= 2.2:
+                        candidates.append([xmin, ymin, slen, swid, float(slen)])
 
     if not candidates:
         return []
 
-    # Non-Maximum Suppression to consolidate raw candidate boxes
     cv_boxes = [[b[0], b[1], b[2], b[3]] for b in candidates]
     scores = [float(b[4]) for b in candidates]
-    indices = cv2.dnn.NMSBoxes(cv_boxes, scores, 20.0, 0.30)
+    indices = cv2.dnn.NMSBoxes(cv_boxes, scores, 25.0, 0.30)
 
-    detections = []
+    dets = []
     for idx in indices:
         i = idx[0] if isinstance(idx, (list, np.ndarray)) else idx
         bx, by, bw, bh_box = cv_boxes[i]
         x1, y1, x2, y2 = bx, by, bx + bw, by + bh_box
         cx, cy = x1 + bw // 2, y1 + bh_box // 2
 
-        # ─── CONSTRAINT 1: Field of View (Center or Little Bit Off-Center, Not Very Edge) ───
-        # Reject the extreme horizontal margins (outer 10% of frame width)
+        # ─── 1. FOV BOUNDS: Reject frame edges & distant horizon ───
         if cx < 0.10 * w or cx > 0.90 * w:
             continue
         if x1 < 0.04 * w or x2 > 0.96 * w:
             continue
-
-        # Reject distant background / horizon at top, and bumper edge at bottom
-        min_y_ratio = 0.20 if h > 300 else 0.05
-        max_y_ratio = 0.86 if h > 300 else 0.95
-        if cy < min_y_ratio * h or cy > max_y_ratio * h:
+        min_y = 0.20 * h if h > 300 else 0.05 * h
+        max_y = 0.86 * h if h > 300 else 0.95 * h
+        if cy < min_y or cy > max_y:
             continue
 
-        # ─── CONSTRAINT 2: Reject Middle of the Track (Between the Two Rails) ───
-        # The central zone between the rails (0.33*w to 0.67*w) is the floor, NOT the rails.
-        # Enforce strict rejection of anything in this central floor zone.
-        is_in_middle_span = (0.33 * w <= cx <= 0.67 * w)
+        # ─── 2. REJECT MIDDLE OF TRACK & NON-RAIL REGIONS ───
+        # In the camera view, the two black rails are located on the left and right bands
+        on_left_rail = (0.10 * w <= cx <= 0.35 * w)
+        on_right_rail = (0.65 * w <= cx <= 0.90 * w)
+        if not (on_left_rail or on_right_rail):
+            continue
 
-        # ─── CONSTRAINT 3: Strictly On The Black Lines (Railway Tracks) Only ───
-        # Calculate baseline floor brightness in the middle zone (between the rails)
-        mid_floor = gray_frame[int(0.20 * h):int(0.85 * h), int(0.38 * w):int(0.62 * w)]
-        floor_median = float(np.median(mid_floor)) if mid_floor.size > 0 else 180.0
-        dark_rail_thresh = min(105.0, max(50.0, floor_median - 35.0))
-
-        # Check track surface darkness adjacent to the cut (above and below the slit):
-        pad_y = max(6, int((y2 - y1) * 0.7))
+        # ─── 3. SURFACE DARKNESS: Must be physically on a black line ───
+        pad_y = max(6, int(bh_box * 0.8))
         top_rail = gray_frame[max(0, y1 - pad_y):y1, x1:x2]
         bot_rail = gray_frame[y2:min(h, y2 + pad_y), x1:x2]
+        top_m = float(top_rail.mean()) if top_rail.size > 0 else 255.0
+        bot_m = float(bot_rail.mean()) if bot_rail.size > 0 else 255.0
 
-        top_mean = float(top_rail.mean()) if top_rail.size > 0 else 255.0
-        bot_mean = float(bot_rail.mean()) if bot_rail.size > 0 else 255.0
-
-        # In the middle span between rails, reject if not on a verified dark rail
-        if is_in_middle_span:
-            if top_mean > dark_rail_thresh or bot_mean > dark_rail_thresh:
-                continue
-
-        # Reject if adjacent surface is bright floor rather than a dark black rail line
-        if top_mean > dark_rail_thresh and bot_mean > dark_rail_thresh:
+        if top_m > 95.0 and bot_m > 95.0:
+            continue
+        if top_m > 115.0 or bot_m > 115.0:
             continue
 
-        # Check longitudinal track rail continuity along the defect column (Y axis)
-        col_span = gray_frame[max(0, cy - int(0.20 * h)):min(h, cy + int(0.20 * h)), cx]
-        dark_col_ratio = float(np.mean(col_span <= dark_rail_thresh))
-        if dark_col_ratio < 0.12:
-            continue
-
-        # ─── CONSTRAINT 3: Transverse Slit Orientation (dx >> dy) ───
-        if bw < 1.6 * bh_box:
-            continue
-
-        # Evaluate Gradient Opposite Sign Score (Confirms physical gap/slot)
-        margin = 6
+        # ─── 4. PHYSICAL SLIT OPPOSITE GRADIENTS & HIGH CONTRAST ───
+        margin = 4
         roi = gray_frame[max(0, y1 - margin):min(h, y2 + margin), max(0, x1 - margin):min(w, x2 + margin)]
         if roi.size == 0:
             continue
-
         gy = cv2.Sobel(roi, cv2.CV_32F, 0, 1, ksize=3)
         tg = np.mean(gy[:max(1, gy.shape[0] // 3), :])
         bg = np.mean(gy[2 * gy.shape[0] // 3:, :])
         opp_score = float(-(tg * bg))
-        contrast = float(roi.std())
+        sobel_std = float(gy.std())
 
-        conf = min(0.99, max(0.68, 0.72 + min(0.18, max(0.0, opp_score) * 0.003) + min(0.09, contrast * 0.002)))
+        if opp_score < 250.0 or sobel_std < 35.0:
+            continue
 
+        conf = min(0.99, max(0.70, 0.75 + min(0.15, opp_score * 0.0001) + min(0.09, sobel_std * 0.001)))
         length_px = float(bw)
         width_px = float(bh_box)
         length_mm = length_px * MM_PER_PIXEL
         width_mm = width_px * MM_PER_PIXEL
-        apparent_depth_mm = max(0.5, min(8.0, contrast * 0.075))
+        apparent_depth_mm = max(0.5, min(8.0, sobel_std * 0.05))
 
-        # Risk Classification (matching img1.png / img3.png calibration)
         if length_mm > 35.0 or width_mm > 2.8:
             risk = "CRITICAL"
-            color = (0, 0, 255)  # Red
+            color = (0, 0, 255)
         elif length_mm > 18.0 or width_mm > 1.2:
             risk = "HIGH"
-            color = (0, 69, 255)  # Orange-Red
+            color = (0, 69, 255)
         elif length_mm > 8.0 or width_mm > 0.6:
             risk = "MODERATE"
-            color = (0, 165, 255)  # Orange
+            color = (0, 165, 255)
         else:
             risk = "MINOR"
-            color = (0, 255, 255)  # Yellow
+            color = (0, 255, 255)
 
-        detections.append({
+        dets.append({
             "bbox": (x1, y1, x2, y2),
             "center": (cx, cy),
             "length_px": length_px,
@@ -896,12 +864,13 @@ def detect_slits_and_cracks(gray_frame: np.ndarray) -> list[dict]:
             "risk": risk,
             "color": color,
             "opp_score": opp_score,
+            "rail": "LEFT" if on_left_rail else "RIGHT",
         })
 
-    # ─── CONSTRAINT 5: Merge Nearby Horizontal Boxes Belonging to Same Slit ───
+    # ─── 5. MERGE NEARBY OVERLAPPING BOXES OF THE SAME PHYSICAL SLIT ───
     merged = []
-    sorted_dets = sorted(detections, key=lambda d: (d["opp_score"] * d["conf"]), reverse=True)
-    for d in sorted_dets:
+    dets.sort(key=lambda d: d["opp_score"], reverse=True)
+    for d in dets:
         dx1, dy1, dx2, dy2 = d["bbox"]
         matched = False
         for m in merged:
@@ -936,7 +905,6 @@ def detect_slits_and_cracks(gray_frame: np.ndarray) -> list[dict]:
             m["risk"] = "HIGH"
             m["color"] = (0, 69, 255)
 
-    merged.sort(key=lambda d: (d.get("opp_score", 0.0) * d["conf"]), reverse=True)
     return merged
 
 
@@ -944,12 +912,21 @@ def render_display(frame_bgr: np.ndarray, detections: list[dict], fps: float, co
     """Renders the full annotated camera feed with bounding boxes, risk labels, and railway coordinates."""
     global rover_location_x, rover_linear_speed, is_inspecting_hold, hold_start_time, last_odom_time
     global hw_motor, motor_enabled, last_alert_cooldown_time, last_defect_info, current_state_str
+    global last_inspected_x, resume_patrol_time, MIN_CLEARING_DISTANCE, MIN_CLEARING_TIME
 
     now = time.time()
     dt = now - last_odom_time
     last_odom_time = now
 
     h, w = frame_bgr.shape[:2]
+
+    # Calculate distance traveled and active patrol time since the last defect was inspected
+    dist_since_inspection = abs(rover_location_x - last_inspected_x)
+    time_since_resume = (now - resume_patrol_time) if resume_patrol_time > 0 else 999.0
+
+    # Are we currently rolling past the previously-inspected defect?
+    # Enforces that the rover MUST move at least MIN_CLEARING_DISTANCE (0.70m) and 10s past the crack
+    is_clearing_inspected = (dist_since_inspection < MIN_CLEARING_DISTANCE) or (time_since_resume < MIN_CLEARING_TIME)
 
     # Check for risk > MODERATE (HIGH or CRITICAL)
     has_high_risk = any(d["risk"] in ("HIGH", "CRITICAL") for d in detections)
@@ -961,11 +938,35 @@ def render_display(frame_bgr: np.ndarray, detections: list[dict], fps: float, co
     coord_str = f"X: {rover_location_x:+.2f}m, Y: +0.00m"
 
     # Rover motion behavior state machine:
-    # Stops when risk > MODERATE, transmits location to remote inspector, holds 5.0s, resumes patrol
-    if has_high_risk and not is_inspecting_hold and (now - last_alert_cooldown_time) > 6.0:
+    # 1. Stationary Hold at Defect (5.0s countdown)
+    if is_inspecting_hold:
+        elapsed = now - hold_start_time
+        if elapsed < 5.0:
+            remaining = 5.0 - elapsed
+            if hw_motor and motor_enabled:
+                hw_motor.set_velocity(0.0, 0.0)
+            state_label = f"HOLDING AT DEFECT [{remaining:.1f}s] — ALERT SENT TO INSPECTOR"
+            current_state_str = f"HOLDING [{remaining:.1f}s]"
+            state_color = (0, 0, 255)
+        else:
+            # 5.0s hold finished: immediately resume moving forward to clear past the crack
+            is_inspecting_hold = False
+            resume_patrol_time = now
+            state_label = "INSPECTION COMPLETE — RESUMING PATROL PAST CRACK"
+            current_state_str = "CLEARING_DEFECT"
+            state_color = (0, 255, 120)
+            if last_defect_info:
+                last_defect_info["active"] = False
+            if hw_motor and motor_enabled:
+                hw_motor.set_velocity(rover_linear_speed, 0.0)
+            print(f"⏩ [PATROL RESUMED] 5.0s hold complete. Rover driving forward past documented defect at {rover_linear_speed:.2f} m/s...")
+
+    # 2. Trigger Inspection for a NEW crack (Only if NOT clearing previously-inspected crack)
+    elif has_high_risk and not is_clearing_inspected:
         is_inspecting_hold = True
         hold_start_time = now
-        last_alert_cooldown_time = now
+        last_inspected_x = rover_location_x
+        resume_patrol_time = 0.0
         if hw_motor and motor_enabled:
             hw_motor.set_velocity(0.0, 0.0)
 
@@ -995,35 +996,22 @@ def render_display(frame_bgr: np.ndarray, detections: list[dict], fps: float, co
         print(f"    Confidence:        {d0['conf']*100:.1f}%")
         print(f"    Action:            Rover stopped. Holding stationary for 5.0s during inspection...\n")
 
-    elif is_inspecting_hold:
-        elapsed = now - hold_start_time
-        if elapsed < 5.0:
-            remaining = 5.0 - elapsed
-            if hw_motor and motor_enabled:
-                hw_motor.set_velocity(0.0, 0.0)
-            state_label = f"HOLDING AT DEFECT [{remaining:.1f}s] — ALERT SENT TO INSPECTOR"
-            current_state_str = f"HOLDING [{remaining:.1f}s]"
-            state_color = (0, 0, 255)
-        else:
-            is_inspecting_hold = False
-            last_alert_cooldown_time = now
-            state_label = "TRANSMISSION COMPLETE — RESUMING PATROL"
-            current_state_str = "RESUMING_PATROL"
-            state_color = (0, 255, 120)
-            if last_defect_info:
-                last_defect_info["active"] = False
-            if hw_motor and motor_enabled:
-                hw_motor.set_velocity(rover_linear_speed, 0.0)
-            print(f"⏩ [PATROL RESUMED] 5.0s inspection hold complete. Rover resuming crawl patrol at {rover_linear_speed:.2f} m/s.")
+    # 3. Active Patrolling / Clearing Mode
     else:
         if motor_enabled:
             # Advance location along track and drive physical motors
             rover_location_x += rover_linear_speed * dt
             if hw_motor:
                 hw_motor.set_velocity(rover_linear_speed, 0.0)
-            state_label = f"PATROLLING TRACK (SPEED: {rover_linear_speed:.2f} m/s)"
-            current_state_str = "PATROLLING"
-            state_color = (0, 255, 0)
+
+            if is_clearing_inspected:
+                state_label = f"CLEARING DOCUMENTED DEFECT (+{dist_since_inspection:.2f}m / {MIN_CLEARING_DISTANCE:.2f}m) — PATROLLING"
+                current_state_str = "CLEARING_DEFECT"
+                state_color = (0, 255, 120)
+            else:
+                state_label = f"PATROLLING TRACK (SPEED: {rover_linear_speed:.2f} m/s)"
+                current_state_str = "PATROLLING"
+                state_color = (0, 255, 0)
         else:
             if hw_motor:
                 hw_motor.set_velocity(0.0, 0.0)
@@ -1036,18 +1024,23 @@ def render_display(frame_bgr: np.ndarray, detections: list[dict], fps: float, co
     # Draw Defect Bounding Boxes (matching img1.png / img3.png)
     for d in detections[:3]:
         x1, y1, x2, y2 = d["bbox"]
-        color = d["color"]
 
-        cv2.rectangle(vis, (x1, y1), (x2, y2), color, 3)
+        # If this defect is already documented and being cleared, display in cyan/green
+        if is_clearing_inspected and not is_inspecting_hold:
+            box_color = (0, 255, 120)
+            label = f"DOCUMENTED SLIT | Conf: {d['conf']*100:.1f}%"
+            dims = f"CLEARING (+{dist_since_inspection:.2f}m / {MIN_CLEARING_DISTANCE:.2f}m)"
+        else:
+            box_color = d["color"]
+            label = f"{d['risk']} DEFECT | Conf: {d['conf']*100:.1f}%"
+            dims = f"L: {d['length_mm']:.1f}mm | W: {d['width_mm']:.1f}mm | D: {d['depth_mm']:.1f}mm"
+
+        cv2.rectangle(vis, (x1, y1), (x2, y2), box_color, 3)
         cv2.circle(vis, d["center"], 5, (0, 255, 255), -1)
-
-        # Label tag matching user's reference
-        label = f"{d['risk']} DEFECT | Conf: {d['conf']*100:.1f}%"
-        dims = f"L: {d['length_mm']:.1f}mm | W: {d['width_mm']:.1f}mm | D: {d['depth_mm']:.1f}mm"
 
         box_w = 330
         cv2.rectangle(vis, (x1, max(0, y1 - 48)), (x1 + box_w, max(48, y1)), (15, 20, 28), -1)
-        cv2.putText(vis, label, (x1 + 6, max(18, y1 - 28)), cv2.FONT_HERSHEY_SIMPLEX, 0.52, color, 2)
+        cv2.putText(vis, label, (x1 + 6, max(18, y1 - 28)), cv2.FONT_HERSHEY_SIMPLEX, 0.52, box_color, 2)
         cv2.putText(vis, dims, (x1 + 6, max(38, y1 - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.44, (255, 255, 255), 1)
 
     # Top HUD Banner (Railway Engineering Telemetry)
@@ -1248,6 +1241,8 @@ def main():
                     show_edges = not show_edges
                 elif key == ord("r"):
                     rover_location_x = 0.0
+                    last_inspected_x = -999.0
+                    resume_patrol_time = 0.0
                     print("🔄 Rover chainage reset to CH 00+00.00m")
             else:
                 time.sleep(0.005)

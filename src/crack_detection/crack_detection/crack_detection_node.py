@@ -175,168 +175,127 @@ class CrackDetectionNode(Node):
 
     def _detect_slits_and_cracks(self, bgr_img: np.ndarray) -> list[dict]:
         """
-        Calibrated detector for metal track plate slits, notches, and cracks.
-        Matches img3.png standard: enforces transverse horizontal slits (dx >> dy)
-        strictly on steel rails and rejects non-track background clutter.
+        High-accuracy calibrated detector for genuine physical slits on black railway track rails.
+        Strictly detects transverse slits cut across the black rail lines and rejects non-rail clutter.
         """
         h, w = bgr_img.shape[:2]
         gray = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2GRAY)
 
-        # Bilateral filter preserves sharp slit cut edges while smoothing metal grain
         filtered = cv2.bilateralFilter(gray, 7, 75, 75)
-        canny = cv2.Canny(filtered, 30, 115)
+        canny = cv2.Canny(filtered, 40, 120)
 
-        # 1. Parallel Edge-Pair Slit Detector (Detects physical cuts & notches)
-        lines = cv2.HoughLinesP(canny, 1, np.pi / 180, threshold=25, minLineLength=25, maxLineGap=12)
+        # Detect horizontal line segments (rail slits are cut transversely across rails)
+        lines = cv2.HoughLinesP(canny, 1, np.pi / 180, threshold=30, minLineLength=30, maxLineGap=10)
 
         candidates = []
         if lines is not None and len(lines) > 0:
             segs = []
             for l in lines:
                 x1, y1, x2, y2 = l[0]
-                length = np.hypot(x2 - x1, y2 - y1)
-                angle = np.arctan2(y2 - y1, x2 - x1) % np.pi
-                segs.append((x1, y1, x2, y2, length, angle))
+                dx = abs(x2 - x1)
+                dy = abs(y2 - y1)
+                # Slits across railway tracks are transverse (strongly horizontal)
+                if dx >= 2.0 * dy:
+                    length = np.hypot(x2 - x1, y2 - y1)
+                    angle = np.arctan2(y2 - y1, x2 - x1) % np.pi
+                    segs.append((x1, y1, x2, y2, length, angle))
 
-            # Find parallel line pairs with appropriate slot spacing
             for i in range(len(segs)):
                 x1a, y1a, x2a, y2a, lena, ana = segs[i]
-                for j in range(i + 1, min(len(segs), i + 35)):
+                for j in range(i + 1, min(len(segs), i + 25)):
                     x1b, y1b, x2b, y2b, lenb, anb = segs[j]
-                    angle_diff = abs(ana - anb)
-                    if angle_diff > np.pi / 2:
-                        angle_diff = np.pi - angle_diff
-                    if angle_diff > np.radians(14):
+                    if abs(ana - anb) > np.radians(10):
                         continue
-
-                    # Midpoint separation
-                    mxa, mya = (x1a + x2a) / 2, (y1a + y2a) / 2
-                    mxb, myb = (x1b + x2b) / 2, (y1b + y2b) / 2
-                    dist = np.hypot(mxa - mxb, mya - myb)
-
-                    if 3 <= dist <= 55:
+                    mya = (y1a + y2a) / 2
+                    myb = (y1b + y2b) / 2
+                    gap = abs(mya - myb)
+                    if 2 <= gap <= 30:  # Physical slit gap width: 0.7mm to 10.5mm
                         xmin = int(min(x1a, x2a, x1b, x2b))
                         xmax = int(max(x1a, x2a, x1b, x2b))
                         ymin = int(min(y1a, y2a, y1b, y2b))
                         ymax = int(max(y1a, y2a, y1b, y2b))
-                        slen = max(xmax - xmin, ymax - ymin)
-                        swid = min(xmax - xmin, ymax - ymin)
-
-                        if 20 <= slen <= 450 and 2 <= swid <= 45 and (slen / max(1.0, swid)) >= 1.8:
-                            candidates.append([xmin, ymin, xmax - xmin, ymax - ymin, slen])
-
-        # 2. Black-Hat Morphological Filter (Detects surface cracks, fissures, joints)
-        kernel_bh = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
-        blackhat = cv2.morphologyEx(gray, cv2.MORPH_BLACKHAT, kernel_bh)
-        _, bh_thresh = cv2.threshold(blackhat, 22, 255, cv2.THRESH_BINARY)
-        bh_contours, _ = cv2.findContours(bh_thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        for c in bh_contours:
-            bx, by, bw, bh_box = cv2.boundingRect(c)
-            blen = max(bw, bh_box)
-            bwid = min(bw, bh_box)
-            if 20 <= blen <= 450 and 2 <= bwid <= 45 and (blen / max(1.0, bwid)) >= 1.8:
-                candidates.append([bx, by, bw, bh_box, blen])
+                        slen = xmax - xmin
+                        swid = max(1, ymax - ymin)
+                        if slen >= 25 and (slen / swid) >= 2.2:
+                            candidates.append([xmin, ymin, slen, swid, float(slen)])
 
         if not candidates:
             return []
 
-        # Non-Maximum Suppression to consolidate raw candidate boxes
         cv_boxes = [[b[0], b[1], b[2], b[3]] for b in candidates]
         scores = [float(b[4]) for b in candidates]
-        indices = cv2.dnn.NMSBoxes(cv_boxes, scores, 20.0, 0.30)
+        indices = cv2.dnn.NMSBoxes(cv_boxes, scores, 25.0, 0.30)
 
-        detections = []
+        dets = []
         for idx in indices:
             i = idx[0] if isinstance(idx, (list, np.ndarray)) else idx
             bx, by, bw, bh_box = cv_boxes[i]
             x1, y1, x2, y2 = bx, by, bx + bw, by + bh_box
             cx, cy = x1 + bw // 2, y1 + bh_box // 2
 
-            # ─── CONSTRAINT 1: Field of View (Center or Little Bit Off-Center, Not Very Edge) ───
+            # ─── 1. FOV BOUNDS: Reject frame edges & distant horizon ───
             if cx < 0.10 * w or cx > 0.90 * w:
                 continue
             if x1 < 0.04 * w or x2 > 0.96 * w:
                 continue
-
-            # Reject distant background / horizon at top, and bumper edge at bottom
-            min_y_ratio = 0.20 if h > 300 else 0.05
-            max_y_ratio = 0.86 if h > 300 else 0.95
-            if cy < min_y_ratio * h or cy > max_y_ratio * h:
+            min_y = 0.20 * h if h > 300 else 0.05 * h
+            max_y = 0.86 * h if h > 300 else 0.95 * h
+            if cy < min_y or cy > max_y:
                 continue
 
-            # ─── CONSTRAINT 2: Reject Middle of the Track (Between the Two Rails) ───
-            # The central zone between the rails (0.33*w to 0.67*w) is the floor, NOT the rails.
-            is_in_middle_span = (0.33 * w <= cx <= 0.67 * w)
+            # ─── 2. REJECT MIDDLE OF TRACK & NON-RAIL REGIONS ───
+            on_left_rail = (0.10 * w <= cx <= 0.35 * w)
+            on_right_rail = (0.65 * w <= cx <= 0.90 * w)
+            if not (on_left_rail or on_right_rail):
+                continue
 
-            # ─── CONSTRAINT 3: Strictly On The Black Lines (Railway Tracks) Only ───
-            # Calculate baseline floor brightness in the middle zone (between the rails)
-            mid_floor = gray[int(0.20 * h):int(0.85 * h), int(0.38 * w):int(0.62 * w)]
-            floor_median = float(np.median(mid_floor)) if mid_floor.size > 0 else 180.0
-            dark_rail_thresh = min(105.0, max(50.0, floor_median - 35.0))
-
-            # Check track surface darkness adjacent to the cut (above and below the slit):
-            pad_y = max(6, int((y2 - y1) * 0.7))
+            # ─── 3. SURFACE DARKNESS: Must be physically on a black line ───
+            pad_y = max(6, int(bh_box * 0.8))
             top_rail = gray[max(0, y1 - pad_y):y1, x1:x2]
             bot_rail = gray[y2:min(h, y2 + pad_y), x1:x2]
+            top_m = float(top_rail.mean()) if top_rail.size > 0 else 255.0
+            bot_m = float(bot_rail.mean()) if bot_rail.size > 0 else 255.0
 
-            top_mean = float(top_rail.mean()) if top_rail.size > 0 else 255.0
-            bot_mean = float(bot_rail.mean()) if bot_rail.size > 0 else 255.0
-
-            # In the middle span between rails, reject if not on a verified dark rail
-            if is_in_middle_span:
-                if top_mean > dark_rail_thresh or bot_mean > dark_rail_thresh:
-                    continue
-
-            # Reject if adjacent surface is bright floor rather than a dark black rail line
-            if top_mean > dark_rail_thresh and bot_mean > dark_rail_thresh:
+            if top_m > 95.0 and bot_m > 95.0:
+                continue
+            if top_m > 115.0 or bot_m > 115.0:
                 continue
 
-            # Check longitudinal track rail continuity along the defect column (Y axis)
-            col_span = gray[max(0, cy - int(0.20 * h)):min(h, cy + int(0.20 * h)), cx]
-            dark_col_ratio = float(np.mean(col_span <= dark_rail_thresh))
-            if dark_col_ratio < 0.12:
-                continue
-
-            # ─── CONSTRAINT 3: Transverse Slit Orientation (dx >> dy) ───
-            if bw < 1.6 * bh_box:
-                continue
-
-            # Evaluate Gradient Opposite Sign Score (Confirms genuine slot/gap)
-            margin = 6
+            # ─── 4. PHYSICAL SLIT OPPOSITE GRADIENTS & HIGH CONTRAST ───
+            margin = 4
             roi = gray[max(0, y1 - margin):min(h, y2 + margin), max(0, x1 - margin):min(w, x2 + margin)]
             if roi.size == 0:
                 continue
-
             gy = cv2.Sobel(roi, cv2.CV_32F, 0, 1, ksize=3)
             tg = np.mean(gy[:max(1, gy.shape[0] // 3), :])
             bg = np.mean(gy[2 * gy.shape[0] // 3:, :])
             opp_score = float(-(tg * bg))
-            contrast = float(roi.std())
+            sobel_std = float(gy.std())
 
-            # Calibrate confidence score
-            conf = min(0.99, max(0.68, 0.72 + min(0.18, max(0.0, opp_score) * 0.003) + min(0.09, contrast * 0.002)))
+            if opp_score < 250.0 or sobel_std < 35.0:
+                continue
 
+            conf = min(0.99, max(0.70, 0.75 + min(0.15, opp_score * 0.0001) + min(0.09, sobel_std * 0.001)))
             length_px = float(bw)
             width_px = float(bh_box)
             length_mm = length_px * self._mm_per_pixel
             width_mm = width_px * self._mm_per_pixel
-            apparent_depth_mm = max(0.5, min(8.0, contrast * 0.075))
+            apparent_depth_mm = max(0.5, min(8.0, sobel_std * 0.05))
 
-            # Risk Classification (matching img1.png / img3.png calibration)
             if length_mm > 35.0 or width_mm > 2.8:
                 risk = "CRITICAL"
-                color = (0, 0, 255)  # Red
+                color = (0, 0, 255)
             elif length_mm > 18.0 or width_mm > 1.2:
                 risk = "HIGH"
-                color = (0, 69, 255)  # Orange-Red
+                color = (0, 69, 255)
             elif length_mm > 8.0 or width_mm > 0.6:
                 risk = "MODERATE"
-                color = (0, 165, 255)  # Orange
+                color = (0, 165, 255)
             else:
                 risk = "MINOR"
-                color = (0, 255, 255)  # Yellow
+                color = (0, 255, 255)
 
-            detections.append({
+            dets.append({
                 "bbox": (x1, y1, x2, y2),
                 "center": (cx, cy),
                 "length_px": length_px,
@@ -348,12 +307,13 @@ class CrackDetectionNode(Node):
                 "risk": risk,
                 "color": color,
                 "opp_score": opp_score,
+                "rail": "LEFT" if on_left_rail else "RIGHT",
             })
 
-        # ─── CONSTRAINT 5: Merge Nearby Horizontal Boxes Belonging to Same Slit ───
+        # ─── 5. MERGE NEARBY OVERLAPPING BOXES OF THE SAME PHYSICAL SLIT ───
         merged = []
-        sorted_dets = sorted(detections, key=lambda d: (d["opp_score"] * d["conf"]), reverse=True)
-        for d in sorted_dets:
+        dets.sort(key=lambda d: d["opp_score"], reverse=True)
+        for d in dets:
             dx1, dy1, dx2, dy2 = d["bbox"]
             matched = False
             for m in merged:
@@ -380,7 +340,6 @@ class CrackDetectionNode(Node):
             if not matched:
                 merged.append(d.copy())
 
-        # Update risk for merged bounding boxes
         for m in merged:
             if m["length_mm"] > 35.0 or m["width_mm"] > 2.8:
                 m["risk"] = "CRITICAL"
@@ -389,7 +348,6 @@ class CrackDetectionNode(Node):
                 m["risk"] = "HIGH"
                 m["color"] = (0, 69, 255)
 
-        merged.sort(key=lambda d: (d.get("opp_score", 0.0) * d["conf"]), reverse=True)
         return merged
 
     def _render_hud_overlay(self, frame: np.ndarray, detections: list[dict]) -> np.ndarray:

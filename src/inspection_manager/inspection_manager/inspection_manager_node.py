@@ -49,6 +49,10 @@ class InspectionManagerNode(Node):
         self._current_location_y = 0.0
         self._current_chainage = "CH 00+00.00m"
         self._pending_alert = None
+        self._last_inspected_location_x = -999.0
+        self._resume_patrol_time = 0.0
+        self._min_clearing_dist = 0.70
+        self._min_clearing_time = 10.0
 
         # Subscribers
         self._rover_state_sub = self.create_subscription(
@@ -85,7 +89,12 @@ class InspectionManagerNode(Node):
             return
 
         now = time.time()
-        # Cooldown guard to avoid repeated stops on the same physical crack
+        # Cooldown & spatial clearing guard to avoid repeated stops on the same physical crack
+        dist_since_last = abs(self._current_location_x - self._last_inspected_location_x)
+        time_since_resume = (now - self._resume_patrol_time) if self._resume_patrol_time > 0 else 999.0
+        if dist_since_last < self._min_clearing_dist or time_since_resume < self._min_clearing_time:
+            return
+
         if (now - self._last_alert_time) < self._cooldown_duration:
             return
 
@@ -104,6 +113,7 @@ class InspectionManagerNode(Node):
                     self._manager_state = "SLOWING"
                     self._inspection_start_time = now
                     self._last_alert_time = now
+                    self._last_inspected_location_x = self._current_location_x
                     self._pending_alert = {
                         "severity": msg.severity_label,
                         "conf": msg.confidence,
@@ -172,8 +182,9 @@ class InspectionManagerNode(Node):
             if (now - self._inspection_start_time) >= (1.0 + self._hold_duration):
                 if self._auto_resume:
                     self._manager_state = "RESUMING"
+                    self._resume_patrol_time = now
                     self.get_logger().info(
-                        "⏩ [PATROL RESUMED] Remote transmission complete. Rover resuming track patrol..."
+                        "⏩ [PATROL RESUMED] Remote transmission complete. Rover resuming track patrol past documented crack..."
                     )
                 else:
                     self._manager_state = "HOLD"
