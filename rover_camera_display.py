@@ -1129,14 +1129,21 @@ def main():
     web_server = start_web_server(web_port)
     local_ip = get_local_ip()
 
-    # Automatically publish live IP to GitHub Pages in background
+    # Automatically publish live IP to GitHub Pages in background and monitor for changes
     def _ip_publisher_worker():
-        try:
-            pub_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "publish_ip.py")
-            if os.path.isfile(pub_script):
-                subprocess.Popen([sys.executable, pub_script], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        except Exception:
-            pass
+        last_published_ip = None
+        while running:
+            try:
+                curr_ip = get_local_ip()
+                if curr_ip and not curr_ip.startswith("127.") and curr_ip != last_published_ip:
+                    pub_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "publish_ip.py")
+                    if os.path.isfile(pub_script):
+                        res = subprocess.run([sys.executable, pub_script], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                        if res.returncode == 0:
+                            last_published_ip = curr_ip
+            except Exception:
+                pass
+            time.sleep(30.0)
 
     threading.Thread(target=_ip_publisher_worker, daemon=True).start()
 

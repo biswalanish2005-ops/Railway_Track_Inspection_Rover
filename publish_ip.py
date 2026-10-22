@@ -50,7 +50,9 @@ def main():
 
     # Check if IP has already been recorded
     needs_update = True
-    if os.path.isfile(IP_JSON_DOCS):
+    if "--force" in sys.argv:
+        needs_update = True
+    elif os.path.isfile(IP_JSON_DOCS):
         try:
             with open(IP_JSON_DOCS, "r") as f:
                 data = json.load(f)
