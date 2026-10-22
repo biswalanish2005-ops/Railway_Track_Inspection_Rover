@@ -1,9 +1,9 @@
 {
-  "ip": "172.16.61.157",
+  "ip": "10.49.148.170",
   "port": 8080,
-  "dashboard_url": "http://172.16.61.157:8080/",
-  "ssh_command": "ssh student@172.16.61.157",
+  "dashboard_url": "http://10.49.148.170:8080/",
+  "ssh_command": "ssh student@10.49.148.170",
   "mac_address": "88:a2:9e:04:33:ab",
   "hostname": "student-desktop",
-  "updated_at": "2026-10-22 15:38:33 IST"
+  "updated_at": "2026-10-22 18:23:21 IST"
 }
