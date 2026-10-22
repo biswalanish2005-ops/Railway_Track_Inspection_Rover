@@ -1129,6 +1129,17 @@ def main():
     web_server = start_web_server(web_port)
     local_ip = get_local_ip()
 
+    # Automatically publish live IP to GitHub Pages in background
+    def _ip_publisher_worker():
+        try:
+            pub_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "publish_ip.py")
+            if os.path.isfile(pub_script):
+                subprocess.Popen([sys.executable, pub_script], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        except Exception:
+            pass
+
+    threading.Thread(target=_ip_publisher_worker, daemon=True).start()
+
     print("=" * 72)
     print("  AUTONOMOUS RAILWAY TRACK INSPECTION ROVER — REMOTE CONTROLLER")
     print("=" * 72)

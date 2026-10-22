@@ -25,6 +25,9 @@ if [ -z "$IP_ADDR" ]; then
 fi
 HOSTNAME=$(hostname 2>/dev/null || echo "student-desktop")
 
+# Auto-publish live IP to GitHub in background
+python3 "$SCRIPT_DIR/publish_ip.py" > /dev/null 2>&1 &
+
 echo "========================================================================"
 echo "  🚆 AUTONOMOUS RAILWAY TRACK INSPECTION ROVER — HEADLESS MODE"
 echo "========================================================================"
