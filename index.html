@@ -503,36 +503,62 @@
             });
         }
 
-        // Auto-fetch rover_ip.json published by the Raspberry Pi
+        // Auto-fetch live rover IP directly from GitHub repository API (no cache delays!)
         function syncRoverIP() {
-            fetch('./rover_ip.json?t=' + Date.now())
+            const apiEndpoint = 'https://api.github.com/repos/biswalanish2005-ops/Railway_Track_Inspection_Rover/contents/rover_ip.json?ref=main&t=' + Date.now();
+            const rawEndpoint = 'https://raw.githubusercontent.com/biswalanish2005-ops/Railway_Track_Inspection_Rover/main/rover_ip.json?t=' + Date.now();
+
+            function applyIPData(data) {
+                if (!data || !data.ip) return;
+                const ip = data.ip;
+                const url = data.dashboard_url || ('http://' + ip + ':8080/');
+                const ssh = data.ssh_command || ('ssh student@' + ip);
+                
+                document.getElementById('beacon-ip').innerText = ip;
+                document.getElementById('beacon-ssh').innerText = ssh;
+                if (data.updated_at) {
+                    document.getElementById('beacon-time').innerText = 'Updated: ' + data.updated_at;
+                }
+                const dashBtn = document.getElementById('beacon-dashboard-btn');
+                if (dashBtn) {
+                    dashBtn.href = url;
+                    dashBtn.innerText = '🚀 OPEN LIVE ROVER DASHBOARD (' + ip + ')';
+                }
+                const roverInput = document.getElementById('rover-url');
+                if (roverInput && (!roverInput.value.includes(':8080') || roverInput.value.includes('172.16.61') || roverInput.value.includes('192.168'))) {
+                    roverInput.value = url.replace(/\/+$/, '');
+                }
+            }
+
+            // 1. Try GitHub Contents API (Instant Real-Time directly from repository, zero CDN delay)
+            fetch(apiEndpoint, { cache: 'no-store' })
                 .then(r => r.json())
-                .then(data => {
-                    if (data && data.ip) {
-                        const ip = data.ip;
-                        const url = data.dashboard_url || ('http://' + ip + ':8080/');
-                        const ssh = data.ssh_command || ('ssh student@' + ip);
-                        
-                        document.getElementById('beacon-ip').innerText = ip;
-                        document.getElementById('beacon-ssh').innerText = ssh;
-                        if (data.updated_at) {
-                            document.getElementById('beacon-time').innerText = 'Updated: ' + data.updated_at;
-                        }
-                        const dashBtn = document.getElementById('beacon-dashboard-btn');
-                        if (dashBtn) {
-                            dashBtn.href = url;
-                            dashBtn.innerText = '🚀 OPEN LIVE ROVER DASHBOARD (' + ip + ')';
-                        }
-                        const roverInput = document.getElementById('rover-url');
-                        if (roverInput && (!roverInput.value.includes(':8080') || roverInput.value.includes('172.16.61.192'))) {
-                            roverInput.value = url.replace(/\/+$/, '');
-                        }
+                .then(res => {
+                    if (res && res.content) {
+                        try {
+                            const decoded = decodeURIComponent(escape(atob(res.content.replace(/\s/g, ''))));
+                            applyIPData(JSON.parse(decoded));
+                            return;
+                        } catch (e) { }
                     }
+                    throw new Error('API format fallback');
                 })
-                .catch(e => console.log('Offline / local mode:', e));
+                .catch(() => {
+                    // 2. Fallback to raw.githubusercontent.com
+                    fetch(rawEndpoint, { cache: 'no-store' })
+                        .then(r => r.json())
+                        .then(applyIPData)
+                        .catch(() => {
+                            // 3. Fallback to local relative rover_ip.json
+                            fetch('./rover_ip.json?t=' + Date.now(), { cache: 'no-store' })
+                                .then(r => r.json())
+                                .then(applyIPData)
+                                .catch(e => console.log('Offline / local mode:', e));
+                        });
+                });
         }
         syncRoverIP();
-        setInterval(syncRoverIP, 15000);
+        setInterval(syncRoverIP, 10000);
 
         // Send Control Command to Physical Rover or Local State
         function sendRoverAction(action) {
