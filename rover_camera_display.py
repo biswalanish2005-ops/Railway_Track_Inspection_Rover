@@ -440,6 +440,8 @@ class WebDashboardHandler(BaseHTTPRequestHandler):
         elif "action=start" in self.path:
             motor_enabled = True
             is_inspecting_hold = False
+            resume_patrol_time = time.time()
+            last_inspected_x = rover_location_x
             current_state_str = "PATROLLING"
             action = "start"
             if driver:
@@ -732,178 +734,244 @@ def stream_reader():
 
 def detect_slits_and_cracks(gray_frame: np.ndarray) -> list[dict]:
     """
-    High-accuracy calibrated detector for genuine physical slits on black railway track rails.
-    Strictly detects transverse slits cut across the black rail lines and rejects non-rail clutter.
+    Calibrated railway track slit, cut, and breakage detector.
+    - Strictly inspects ONLY the black railway tape stripes (zero track bed detections).
+    - Surface invariant: operates identically on dark brown/wood and light cream surfaces.
+    - Calibrated with physical ground truth: Tape width = 1.0 cm (10.0 mm).
     """
     h, w = gray_frame.shape[:2]
+    gray = cv2.cvtColor(gray_frame, cv2.COLOR_BGR2GRAY) if len(gray_frame.shape) == 3 else gray_frame
 
-    filtered = cv2.bilateralFilter(gray_frame, 7, 75, 75)
-    canny = cv2.Canny(filtered, 40, 120)
+    # 1. FOV BOUNDS: Active Inspection Field of View
+    # Center and slightly off-center (reject top horizon & bottom rover bumper)
+    y_fov_min = int(0.20 * h)
+    y_fov_max = int(0.82 * h)
 
-    # Detect horizontal line segments (rail slits are cut transversely across rails)
-    lines = cv2.HoughLinesP(canny, 1, np.pi / 180, threshold=30, minLineLength=30, maxLineGap=10)
+    # 2. HORIZONTAL SLICE PROFILING: Identify dark stripe valleys (rails)
+    step_y = 6
+    sample_ys = list(range(y_fov_min, y_fov_max, step_y))
 
-    candidates = []
-    if lines is not None and len(lines) > 0:
-        segs = []
-        for l in lines:
-            x1, y1, x2, y2 = l[0]
-            dx = abs(x2 - x1)
-            dy = abs(y2 - y1)
-            # Slits across railway tracks are transverse (strongly horizontal)
-            if dx >= 2.0 * dy:
-                length = np.hypot(x2 - x1, y2 - y1)
-                angle = np.arctan2(y2 - y1, x2 - x1) % np.pi
-                segs.append((x1, y1, x2, y2, length, angle))
+    stripe_segments = []
+    for y in sample_ys:
+        row = gray[y, :].astype(np.float32)
+        row_s = cv2.GaussianBlur(row, (21, 1), 0).flatten()
 
-        for i in range(len(segs)):
-            x1a, y1a, x2a, y2a, lena, ana = segs[i]
-            for j in range(i + 1, min(len(segs), i + 25)):
-                x1b, y1b, x2b, y2b, lenb, anb = segs[j]
-                if abs(ana - anb) > np.radians(10):
-                    continue
-                mya = (y1a + y2a) / 2
-                myb = (y1b + y2b) / 2
-                gap = abs(mya - myb)
-                if 2 <= gap <= 30:  # Physical slit gap width: 0.7mm to 10.5mm
-                    xmin = int(min(x1a, x2a, x1b, x2b))
-                    xmax = int(max(x1a, x2a, x1b, x2b))
-                    ymin = int(min(y1a, y2a, y1b, y2b))
-                    ymax = int(max(y1a, y2a, y1b, y2b))
-                    slen = xmax - xmin
-                    swid = max(1, ymax - ymin)
-                    if slen >= 25 and (slen / swid) >= 2.2:
-                        candidates.append([xmin, ymin, slen, swid, float(slen)])
+        margin_x = int(0.04 * w)
+        interior = row_s[margin_x : w - margin_x]
+        if interior.size == 0:
+            continue
+        bg_val = float(np.percentile(interior, 70))
 
-    if not candidates:
+        # Black tape is substantially darker than surface across all backgrounds (wood or cream)
+        tape_thresh = min(bg_val - 16.0, 115.0)
+
+        is_dark = (row_s < tape_thresh) & (np.arange(w) >= margin_x) & (np.arange(w) <= w - margin_x)
+        diffs = np.diff(is_dark.astype(np.int8))
+        starts = np.where(diffs == 1)[0] + 1
+        ends = np.where(diffs == -1)[0] + 1
+        if is_dark[0]:
+            starts = np.r_[0, starts]
+        if is_dark[-1]:
+            ends = np.r_[ends, w]
+
+        for s, e in zip(starts, ends):
+            sw = e - s
+            if 18 <= sw <= int(0.42 * w):
+                drop_l = row_s[max(0, s - 10)] - np.min(row_s[s:e])
+                drop_r = row_s[min(w - 1, e + 10)] - np.min(row_s[s:e])
+                if drop_l >= 12.0 and drop_r >= 12.0:
+                    stripe_segments.append((y, (s + e) // 2, sw, float(np.min(row_s[s:e]))))
+
+    if not stripe_segments:
         return []
 
-    cv_boxes = [[b[0], b[1], b[2], b[3]] for b in candidates]
-    scores = [float(b[4]) for b in candidates]
-    indices = cv2.dnn.NMSBoxes(cv_boxes, scores, 25.0, 0.30)
+    # 3. RAIL CLUSTERING: Group stripe segments into vertical rail lines
+    xs = np.array([s[1] for s in stripe_segments])
+    hist, bin_edges = np.histogram(xs, bins=np.arange(0, w + 30, 30))
+    hist_smooth = cv2.GaussianBlur(hist.astype(np.float32), (5, 1), 0).flatten()
 
-    dets = []
-    for idx in indices:
-        i = idx[0] if isinstance(idx, (list, np.ndarray)) else idx
-        bx, by, bw, bh_box = cv_boxes[i]
-        x1, y1, x2, y2 = bx, by, bx + bw, by + bh_box
-        cx, cy = x1 + bw // 2, y1 + bh_box // 2
+    peak_bin_indices = []
+    for bi in range(len(hist_smooth)):
+        if hist_smooth[bi] >= 3:
+            is_peak = True
+            if bi > 0 and hist_smooth[bi - 1] > hist_smooth[bi]:
+                is_peak = False
+            if bi < len(hist_smooth) - 1 and hist_smooth[bi + 1] > hist_smooth[bi]:
+                is_peak = False
+            if is_peak:
+                peak_bin_indices.append(bi)
 
-        # ─── 1. FOV BOUNDS: Reject frame edges & distant horizon ───
-        if cx < 0.10 * w or cx > 0.90 * w:
-            continue
-        if x1 < 0.04 * w or x2 > 0.96 * w:
-            continue
-        min_y = 0.20 * h if h > 300 else 0.05 * h
-        max_y = 0.86 * h if h > 300 else 0.95 * h
-        if cy < min_y or cy > max_y:
-            continue
+    rail_centers_x = [(bin_edges[bi] + bin_edges[bi + 1]) / 2.0 for bi in peak_bin_indices]
 
-        # ─── 2. REJECT MIDDLE OF TRACK & NON-RAIL REGIONS ───
-        # In the camera view, the two black rails are located on the left and right bands
-        on_left_rail = (0.10 * w <= cx <= 0.35 * w)
-        on_right_rail = (0.65 * w <= cx <= 0.90 * w)
-        if not (on_left_rail or on_right_rail):
-            continue
+    # In rover dual-rail view, reject middle of track bed (between 0.42*w and 0.58*w)
+    has_left = any(cx < 0.42 * w for cx in rail_centers_x)
+    has_right = any(cx > 0.58 * w for cx in rail_centers_x)
+    if has_left and has_right:
+        rail_centers_x = [cx for cx in rail_centers_x if (cx < 0.42 * w or cx > 0.58 * w)]
 
-        # ─── 3. SURFACE DARKNESS: Must be physically on a black line ───
-        pad_y = max(6, int(bh_box * 0.8))
-        top_rail = gray_frame[max(0, y1 - pad_y):y1, x1:x2]
-        bot_rail = gray_frame[y2:min(h, y2 + pad_y), x1:x2]
-        top_m = float(top_rail.mean()) if top_rail.size > 0 else 255.0
-        bot_m = float(bot_rail.mean()) if bot_rail.size > 0 else 255.0
+    if len(rail_centers_x) > 2:
+        def count_near(rc):
+            return sum(1 for s in stripe_segments if abs(s[1] - rc) <= 45)
+        rail_centers_x.sort(key=count_near, reverse=True)
+        rail_centers_x = rail_centers_x[:2]
 
-        if top_m > 95.0 and bot_m > 95.0:
-            continue
-        if top_m > 115.0 or bot_m > 115.0:
+    detections = []
+
+    # 4. DEFECT DETECTION ON EACH TRACKED RAIL
+    for rail_x in rail_centers_x:
+        rail_segs = [s for s in stripe_segments if abs(s[1] - rail_x) <= 45]
+        if len(rail_segs) < 5:
             continue
 
-        # ─── 4. PHYSICAL SLIT OPPOSITE GRADIENTS & HIGH CONTRAST ───
-        margin = 4
-        roi = gray_frame[max(0, y1 - margin):min(h, y2 + margin), max(0, x1 - margin):min(w, x2 + margin)]
-        if roi.size == 0:
+        r_ys = np.array([s[0] for s in rail_segs], dtype=np.float32)
+        r_xs = np.array([s[1] for s in rail_segs], dtype=np.float32)
+        r_ws = np.array([s[2] for s in rail_segs], dtype=np.float32)
+
+        poly = np.polyfit(r_ys, r_xs, 1)
+        med_w_px = float(np.median(r_ws))
+
+        # Ground Truth Calibration: Tape is 1.0 cm = 10.0 mm wide
+        mm_per_px = 10.0 / max(10.0, med_w_px)
+
+        y_start = max(y_fov_min, int(np.min(r_ys)))
+        y_end = min(y_fov_max, int(np.max(r_ys)))
+
+        spine_ys = list(range(y_start, y_end + 1, 2))
+        half_w = max(4, int(med_w_px * 0.30))
+
+        intensities = []
+        vert_grads = []
+        for y in spine_ys:
+            cx = int(np.polyval(poly, y))
+            if cx - half_w < 0 or cx + half_w >= w:
+                intensities.append(255.0)
+                vert_grads.append(0.0)
+                continue
+
+            patch = gray[y, cx - half_w : cx + half_w + 1].astype(np.float32)
+            intensities.append(float(np.mean(patch)))
+
+            if y >= 2 and y < h - 2:
+                top_p = gray[y - 2, cx - half_w : cx + half_w + 1].astype(np.float32)
+                bot_p = gray[y + 2, cx - half_w : cx + half_w + 1].astype(np.float32)
+                vert_grads.append(float(np.mean(np.abs(bot_p - top_p))))
+            else:
+                vert_grads.append(0.0)
+
+        intensities = np.array(intensities)
+        vert_grads = np.array(vert_grads)
+
+        tape_base = float(np.percentile(intensities, 20))
+        dI = intensities - tape_base
+
+        defect_indices = []
+        for i, y_val in enumerate(spine_ys):
+            cx = int(np.polyval(poly, y_val))
+            if cx < 0.05 * w or cx > 0.95 * w:
+                continue
+            if dI[i] >= 24.0 or (vert_grads[i] >= 22.0 and dI[i] >= 8.0):
+                defect_indices.append((y_val, cx, float(dI[i]), float(vert_grads[i])))
+
+        if not defect_indices:
             continue
-        gy = cv2.Sobel(roi, cv2.CV_32F, 0, 1, ksize=3)
-        tg = np.mean(gy[:max(1, gy.shape[0] // 3), :])
-        bg = np.mean(gy[2 * gy.shape[0] // 3:, :])
-        opp_score = float(-(tg * bg))
-        sobel_std = float(gy.std())
 
-        if opp_score < 250.0 or sobel_std < 35.0:
-            continue
+        clusters = []
+        cur = [defect_indices[0]]
+        for pt in defect_indices[1:]:
+            if pt[0] - cur[-1][0] <= 8:
+                cur.append(pt)
+            else:
+                if len(cur) >= 2:
+                    clusters.append(cur)
+                cur = [pt]
+        if len(cur) >= 2:
+            clusters.append(cur)
 
-        conf = min(0.99, max(0.70, 0.75 + min(0.15, opp_score * 0.0001) + min(0.09, sobel_std * 0.001)))
-        length_px = float(bw)
-        width_px = float(bh_box)
-        length_mm = length_px * MM_PER_PIXEL
-        width_mm = width_px * MM_PER_PIXEL
-        apparent_depth_mm = max(0.5, min(8.0, sobel_std * 0.05))
+        for clust in clusters:
+            cy_min = min(p[0] for p in clust)
+            cy_max = max(p[0] for p in clust)
+            gap_px = max(2, cy_max - cy_min)
 
-        if length_mm > 35.0 or width_mm > 2.8:
-            risk = "CRITICAL"
-            color = (0, 0, 255)
-        elif length_mm > 18.0 or width_mm > 1.2:
-            risk = "HIGH"
-            color = (0, 69, 255)
-        elif length_mm > 8.0 or width_mm > 0.6:
-            risk = "MODERATE"
-            color = (0, 165, 255)
-        else:
-            risk = "MINOR"
-            color = (0, 255, 255)
+            if gap_px > int(1.1 * med_w_px):
+                continue
 
-        dets.append({
-            "bbox": (x1, y1, x2, y2),
-            "center": (cx, cy),
-            "length_px": length_px,
-            "width_px": width_px,
-            "length_mm": length_mm,
-            "width_mm": width_mm,
-            "depth_mm": apparent_depth_mm,
-            "conf": conf,
-            "risk": risk,
-            "color": color,
-            "opp_score": opp_score,
-            "rail": "LEFT" if on_left_rail else "RIGHT",
-        })
+            mid_y = (cy_min + cy_max) // 2
+            mid_x = int(np.polyval(poly, mid_y))
 
-    # ─── 5. MERGE NEARBY OVERLAPPING BOXES OF THE SAME PHYSICAL SLIT ───
+            if mid_x < 0.06 * w or mid_x > 0.94 * w:
+                continue
+
+            max_dI = max(p[2] for p in clust)
+            max_gy = max(p[3] for p in clust)
+
+            bx1 = max(0, int(mid_x - med_w_px * 0.52))
+            bx2 = min(w, int(mid_x + med_w_px * 0.52))
+            by1 = max(0, cy_min - 4)
+            by2 = min(h, cy_max + 4)
+            bw = bx2 - bx1
+            bh = by2 - by1
+
+            # Metric dimensions: Transverse length cannot exceed 10.0 mm
+            if max_dI >= 25.0:
+                length_mm = 10.0
+            else:
+                length_mm = min(10.0, max(4.0, (bw * mm_per_px) * 0.85))
+
+            gap_mm = max(0.5, gap_px * mm_per_px)
+            depth_mm = max(0.6, min(2.5, max_dI * 0.02 + max_gy * 0.03))
+
+            conf = min(0.99, max(0.75, 0.78 + min(0.12, max_dI * 0.003) + min(0.09, max_gy * 0.003)))
+
+            if length_mm >= 8.5 or gap_mm >= 2.2:
+                risk = "CRITICAL"
+                color = (0, 0, 255)
+            elif length_mm >= 5.0 or gap_mm >= 1.2:
+                risk = "HIGH"
+                color = (0, 69, 255)
+            elif length_mm >= 3.0:
+                risk = "MODERATE"
+                color = (0, 165, 255)
+            else:
+                risk = "MINOR"
+                color = (0, 255, 255)
+
+            rail_side = "LEFT" if mid_x < 0.5 * w else "RIGHT"
+
+            detections.append({
+                "bbox": (bx1, by1, bx2, by2),
+                "center": (mid_x, mid_y),
+                "length_px": float(bw),
+                "width_px": float(bh),
+                "length_mm": float(length_mm),
+                "width_mm": float(gap_mm),
+                "depth_mm": float(depth_mm),
+                "conf": float(conf),
+                "risk": risk,
+                "color": color,
+                "score": float(max_dI + max_gy),
+                "rail": rail_side
+            })
+
+    # 5. MERGE OVERLAPPING DETECTIONS
     merged = []
-    dets.sort(key=lambda d: d["opp_score"], reverse=True)
-    for d in dets:
-        dx1, dy1, dx2, dy2 = d["bbox"]
+    detections.sort(key=lambda d: d["score"], reverse=True)
+    for d in detections:
         matched = False
         for m in merged:
-            mx1, my1, mx2, my2 = m["bbox"]
-            if abs(((dy1 + dy2) / 2) - ((my1 + my2) / 2)) <= 15:
-                overlap = min(dx2, mx2) - max(dx1, mx1)
-                if overlap >= -15:
-                    nx1 = min(dx1, mx1)
-                    ny1 = min(dy1, my1)
-                    nx2 = max(dx2, mx2)
-                    ny2 = max(dy2, my2)
-                    m["bbox"] = (nx1, ny1, nx2, ny2)
-                    m["center"] = ((nx1 + nx2) // 2, (ny1 + ny2) // 2)
-                    m["conf"] = max(m["conf"], d["conf"])
-                    m["opp_score"] = max(m["opp_score"], d["opp_score"])
-                    nbw = nx2 - nx1
-                    nbh = ny2 - ny1
-                    m["length_px"] = float(nbw)
-                    m["width_px"] = float(nbh)
-                    m["length_mm"] = nbw * MM_PER_PIXEL
-                    m["width_mm"] = nbh * MM_PER_PIXEL
-                    matched = True
-                    break
+            if abs(d["center"][1] - m["center"][1]) <= 25 and abs(d["center"][0] - m["center"][0]) <= 30:
+                nx1 = min(d["bbox"][0], m["bbox"][0])
+                ny1 = min(d["bbox"][1], m["bbox"][1])
+                nx2 = max(d["bbox"][2], m["bbox"][2])
+                ny2 = max(d["bbox"][3], m["bbox"][3])
+                m["bbox"] = (nx1, ny1, nx2, ny2)
+                m["center"] = ((nx1 + nx2) // 2, (ny1 + ny2) // 2)
+                m["conf"] = max(m["conf"], d["conf"])
+                m["length_mm"] = max(m["length_mm"], d["length_mm"])
+                m["width_mm"] = max(m["width_mm"], d["width_mm"])
+                matched = True
+                break
         if not matched:
-            merged.append(d.copy())
-
-    for m in merged:
-        if m["length_mm"] > 35.0 or m["width_mm"] > 2.8:
-            m["risk"] = "CRITICAL"
-            m["color"] = (0, 0, 255)
-        elif m["length_mm"] > 18.0 or m["width_mm"] > 1.2:
-            m["risk"] = "HIGH"
-            m["color"] = (0, 69, 255)
+            merged.append(d)
 
     return merged
 

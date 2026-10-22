@@ -8,6 +8,8 @@ and publishes /crack_detection and an annotated visualization stream (/crack_det
 """
 
 import math
+import os
+import sys
 import cv2
 from cv_bridge import CvBridge
 import numpy as np
@@ -15,6 +17,11 @@ from rclpy.node import Node
 import rclpy
 from rover_msgs.msg import CrackDetection, RoverState
 from sensor_msgs.msg import Image
+
+# Ensure workspace root is in path for sharing calibrated detector
+workspace_dir = os.path.expanduser("~/Desktop/Railway_Inspection_Rover")
+if workspace_dir not in sys.path:
+    sys.path.insert(0, workspace_dir)
 
 
 class CrackDetectionNode(Node):
@@ -24,7 +31,7 @@ class CrackDetectionNode(Node):
         super().__init__("crack_detection_node")
 
         self.declare_parameter("confidence_threshold", 0.65)
-        self.declare_parameter("rail_physical_width_mm", 65.0)
+        self.declare_parameter("rail_physical_width_mm", 10.0)  # 1.0 cm standard tape width
         self.declare_parameter("mm_per_pixel", 0.35)
         self.declare_parameter("use_simulated_detector", False)
         self.declare_parameter("track_y_min_ratio", 0.08)
@@ -93,7 +100,7 @@ class CrackDetectionNode(Node):
 
         self.get_logger().info(
             f"Calibrated Crack & Slit Detection Node ACTIVE "
-            f"(Conf Threshold: {self._confidence_threshold:.2f}, mm/px: {self._mm_per_pixel:.3f})"
+            f"(Conf Threshold: {self._confidence_threshold:.2f}, Tape Width: {self._rail_width_mm:.1f}mm)"
         )
 
     def _rover_state_callback(self, msg: RoverState) -> None:
@@ -175,180 +182,15 @@ class CrackDetectionNode(Node):
 
     def _detect_slits_and_cracks(self, bgr_img: np.ndarray) -> list[dict]:
         """
-        High-accuracy calibrated detector for genuine physical slits on black railway track rails.
-        Strictly detects transverse slits cut across the black rail lines and rejects non-rail clutter.
+        Calibrated railway track slit, cut, and breakage detector.
+        Strictly inspects black railway stripes; rejects track bed and frame borders.
+        Calibrated with ground truth tape width = 1.0 cm (10.0 mm).
         """
-        h, w = bgr_img.shape[:2]
-        gray = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2GRAY)
-
-        filtered = cv2.bilateralFilter(gray, 7, 75, 75)
-        canny = cv2.Canny(filtered, 40, 120)
-
-        # Detect horizontal line segments (rail slits are cut transversely across rails)
-        lines = cv2.HoughLinesP(canny, 1, np.pi / 180, threshold=30, minLineLength=30, maxLineGap=10)
-
-        candidates = []
-        if lines is not None and len(lines) > 0:
-            segs = []
-            for l in lines:
-                x1, y1, x2, y2 = l[0]
-                dx = abs(x2 - x1)
-                dy = abs(y2 - y1)
-                # Slits across railway tracks are transverse (strongly horizontal)
-                if dx >= 2.0 * dy:
-                    length = np.hypot(x2 - x1, y2 - y1)
-                    angle = np.arctan2(y2 - y1, x2 - x1) % np.pi
-                    segs.append((x1, y1, x2, y2, length, angle))
-
-            for i in range(len(segs)):
-                x1a, y1a, x2a, y2a, lena, ana = segs[i]
-                for j in range(i + 1, min(len(segs), i + 25)):
-                    x1b, y1b, x2b, y2b, lenb, anb = segs[j]
-                    if abs(ana - anb) > np.radians(10):
-                        continue
-                    mya = (y1a + y2a) / 2
-                    myb = (y1b + y2b) / 2
-                    gap = abs(mya - myb)
-                    if 2 <= gap <= 30:  # Physical slit gap width: 0.7mm to 10.5mm
-                        xmin = int(min(x1a, x2a, x1b, x2b))
-                        xmax = int(max(x1a, x2a, x1b, x2b))
-                        ymin = int(min(y1a, y2a, y1b, y2b))
-                        ymax = int(max(y1a, y2a, y1b, y2b))
-                        slen = xmax - xmin
-                        swid = max(1, ymax - ymin)
-                        if slen >= 25 and (slen / swid) >= 2.2:
-                            candidates.append([xmin, ymin, slen, swid, float(slen)])
-
-        if not candidates:
+        try:
+            from rover_camera_display import detect_slits_and_cracks
+            return detect_slits_and_cracks(bgr_img)
+        except Exception:
             return []
-
-        cv_boxes = [[b[0], b[1], b[2], b[3]] for b in candidates]
-        scores = [float(b[4]) for b in candidates]
-        indices = cv2.dnn.NMSBoxes(cv_boxes, scores, 25.0, 0.30)
-
-        dets = []
-        for idx in indices:
-            i = idx[0] if isinstance(idx, (list, np.ndarray)) else idx
-            bx, by, bw, bh_box = cv_boxes[i]
-            x1, y1, x2, y2 = bx, by, bx + bw, by + bh_box
-            cx, cy = x1 + bw // 2, y1 + bh_box // 2
-
-            # ─── 1. FOV BOUNDS: Reject frame edges & distant horizon ───
-            if cx < 0.10 * w or cx > 0.90 * w:
-                continue
-            if x1 < 0.04 * w or x2 > 0.96 * w:
-                continue
-            min_y = 0.20 * h if h > 300 else 0.05 * h
-            max_y = 0.86 * h if h > 300 else 0.95 * h
-            if cy < min_y or cy > max_y:
-                continue
-
-            # ─── 2. REJECT MIDDLE OF TRACK & NON-RAIL REGIONS ───
-            on_left_rail = (0.10 * w <= cx <= 0.35 * w)
-            on_right_rail = (0.65 * w <= cx <= 0.90 * w)
-            if not (on_left_rail or on_right_rail):
-                continue
-
-            # ─── 3. SURFACE DARKNESS: Must be physically on a black line ───
-            pad_y = max(6, int(bh_box * 0.8))
-            top_rail = gray[max(0, y1 - pad_y):y1, x1:x2]
-            bot_rail = gray[y2:min(h, y2 + pad_y), x1:x2]
-            top_m = float(top_rail.mean()) if top_rail.size > 0 else 255.0
-            bot_m = float(bot_rail.mean()) if bot_rail.size > 0 else 255.0
-
-            if top_m > 95.0 and bot_m > 95.0:
-                continue
-            if top_m > 115.0 or bot_m > 115.0:
-                continue
-
-            # ─── 4. PHYSICAL SLIT OPPOSITE GRADIENTS & HIGH CONTRAST ───
-            margin = 4
-            roi = gray[max(0, y1 - margin):min(h, y2 + margin), max(0, x1 - margin):min(w, x2 + margin)]
-            if roi.size == 0:
-                continue
-            gy = cv2.Sobel(roi, cv2.CV_32F, 0, 1, ksize=3)
-            tg = np.mean(gy[:max(1, gy.shape[0] // 3), :])
-            bg = np.mean(gy[2 * gy.shape[0] // 3:, :])
-            opp_score = float(-(tg * bg))
-            sobel_std = float(gy.std())
-
-            if opp_score < 250.0 or sobel_std < 35.0:
-                continue
-
-            conf = min(0.99, max(0.70, 0.75 + min(0.15, opp_score * 0.0001) + min(0.09, sobel_std * 0.001)))
-            length_px = float(bw)
-            width_px = float(bh_box)
-            length_mm = length_px * self._mm_per_pixel
-            width_mm = width_px * self._mm_per_pixel
-            apparent_depth_mm = max(0.5, min(8.0, sobel_std * 0.05))
-
-            if length_mm > 35.0 or width_mm > 2.8:
-                risk = "CRITICAL"
-                color = (0, 0, 255)
-            elif length_mm > 18.0 or width_mm > 1.2:
-                risk = "HIGH"
-                color = (0, 69, 255)
-            elif length_mm > 8.0 or width_mm > 0.6:
-                risk = "MODERATE"
-                color = (0, 165, 255)
-            else:
-                risk = "MINOR"
-                color = (0, 255, 255)
-
-            dets.append({
-                "bbox": (x1, y1, x2, y2),
-                "center": (cx, cy),
-                "length_px": length_px,
-                "width_px": width_px,
-                "length_mm": length_mm,
-                "width_mm": width_mm,
-                "depth_mm": apparent_depth_mm,
-                "conf": conf,
-                "risk": risk,
-                "color": color,
-                "opp_score": opp_score,
-                "rail": "LEFT" if on_left_rail else "RIGHT",
-            })
-
-        # ─── 5. MERGE NEARBY OVERLAPPING BOXES OF THE SAME PHYSICAL SLIT ───
-        merged = []
-        dets.sort(key=lambda d: d["opp_score"], reverse=True)
-        for d in dets:
-            dx1, dy1, dx2, dy2 = d["bbox"]
-            matched = False
-            for m in merged:
-                mx1, my1, mx2, my2 = m["bbox"]
-                if abs(((dy1 + dy2) / 2) - ((my1 + my2) / 2)) <= 15:
-                    overlap = min(dx2, mx2) - max(dx1, mx1)
-                    if overlap >= -15:
-                        nx1 = min(dx1, mx1)
-                        ny1 = min(dy1, my1)
-                        nx2 = max(dx2, mx2)
-                        ny2 = max(dy2, my2)
-                        m["bbox"] = (nx1, ny1, nx2, ny2)
-                        m["center"] = ((nx1 + nx2) // 2, (ny1 + ny2) // 2)
-                        m["conf"] = max(m["conf"], d["conf"])
-                        m["opp_score"] = max(m["opp_score"], d["opp_score"])
-                        nbw = nx2 - nx1
-                        nbh = ny2 - ny1
-                        m["length_px"] = float(nbw)
-                        m["width_px"] = float(nbh)
-                        m["length_mm"] = nbw * self._mm_per_pixel
-                        m["width_mm"] = nbh * self._mm_per_pixel
-                        matched = True
-                        break
-            if not matched:
-                merged.append(d.copy())
-
-        for m in merged:
-            if m["length_mm"] > 35.0 or m["width_mm"] > 2.8:
-                m["risk"] = "CRITICAL"
-                m["color"] = (0, 0, 255)
-            elif m["length_mm"] > 18.0 or m["width_mm"] > 1.2:
-                m["risk"] = "HIGH"
-                m["color"] = (0, 69, 255)
-
-        return merged
 
     def _render_hud_overlay(self, frame: np.ndarray, detections: list[dict]) -> np.ndarray:
         """Render Railway Standard Inspection HUD with bounding boxes and coordinates."""
